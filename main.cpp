@@ -2,12 +2,13 @@
 #include <sys/types.h>
 #include <poll.h>
 #include <vector>
+#include <stdlib.h>
 #include <netinet/in.h>
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
 
-int main(char *ac, int av)
+int main(int ac, char **av)
 {
     int fds[1024];
     int fdcount = 1;
@@ -16,28 +17,25 @@ int main(char *ac, int av)
     pollfd pfd[1024] = {0};
     int ret = 0;
     int tmp;
+    int port = atoi(av[1]);
 
-    ip6laddr.sin6_family = AF_INET6;
-    ip6laddr.sin6_port = htons(5000);
-    memcpy(&ip6laddr.sin6_addr, &in6addr_any, sizeof(ip6laddr.sin6_addr));
     ip4laddr.sin_family = AF_INET;
-    ip4laddr.sin_port = htons(5000);
+    ip4laddr.sin_port = htons(port);
     ip4laddr.sin_addr.s_addr = INADDR_ANY;
-    fds[0] = socket(AF_INET6, SOCK_STREAM, 0);
-    //fds[1] = socket(AF_INET, SOCK_STREAM, 0);
+    fds[0] = socket(AF_INET, SOCK_STREAM, 0);
 
     ret |= fds[0];// | fds[1];
-    ret |= bind(fds[0], (sockaddr*)&ip6laddr, sizeof(ip6laddr));// | bind(fds[1], (sockaddr*)&ip4laddr, sizeof(ip4laddr));
+    ret |= bind(fds[0], (sockaddr*)&ip4laddr, sizeof(ip4laddr));// | bind(fds[1], (sockaddr*)&ip4laddr, sizeof(ip4laddr));
     ret |= listen(fds[0], 5);// | listen(fds[1], 5);
     if(ret < 0) {
-        perror("Ur gay lmao");
+        perror("Ur julen lmao");
         return 1;  
     }
     pfd[0].fd = fds[0];
     pfd[0].events = POLLIN;
     // pfd[1].events = POLLIN;
     // pfd[1].fd = fds[1];
-    while ("FUCK ALGERIA") { 
+    while ("FUCK MEXICO") { 
         tmp = fdcount;
 
         pfd[0].revents = 0;
@@ -46,10 +44,9 @@ int main(char *ac, int av)
             pfd[i].events = POLLIN;
             pfd[0].revents = 0;
         }
-        
 
         poll(pfd, tmp, 10000);
-        
+
         for (int i = 0; i < tmp; i++) {
             if(pfd[i].revents & POLLIN) {
                 if (pfd[i].fd == fds[0]) {
@@ -71,9 +68,9 @@ int main(char *ac, int av)
                                 fdcount--;
                                 break;
                             }
-                            
+
                         }
-                        
+
                     }
                     else {
                         write(1, buff, ret);
