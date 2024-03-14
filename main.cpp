@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
+#include "UserManager.h"
 
 int main(int ac, char **av)
 {
@@ -16,8 +17,9 @@ int main(int ac, char **av)
     sockaddr_in  ip4laddr = {0};
     pollfd pfd[1024] = {0};
     int ret = 0;
-    int tmp;
+    int pollfdcount;
     int port = atoi(av[1]);
+    UserManager users;
 
     ip4laddr.sin_family = AF_INET;
     ip4laddr.sin_port = htons(port);
@@ -39,7 +41,7 @@ int main(int ac, char **av)
         pollfdcount = fdcount;
 
         pfd[0].revents = 0;
-        for (int i = 1; i < tmp; i++) {
+        for (int i = 1; i < pollfdcount; i++) {
             pfd[i].fd = fds[i];
             pfd[i].events = POLLIN;
             pfd[0].revents = 0;
@@ -50,16 +52,28 @@ int main(int ac, char **av)
         for (int i = 0; i < pollfdcount; i++) {
             if(pfd[i].revents & POLLIN) {
                 if (pfd[i].fd == fds[0]) {
-                    socklen_t a = 0;
+                    sockaddr b;
+                    socklen_t a = sizeof(b);
                     printf("Nouvelle connexion recu\n");
-
-                    fds[fdcount] = accept(fds[0], (sockaddr*)0x01, &a);
+                    fds[fdcount] = accept(fds[0], (sockaddr*)&b, &a);
+                    users.create_user(fds[fdcount]);
                     fdcount++;
                 }
                 else {
-                    int ret;
+                        users[i] = *users.get_user(pfd[i].fd);
+                        user.recvu();
+                    /*
+                    user = get)user()
+                    user.recvu()
+                    while (user.hasbuffermdg)
+                    {
+                        handle_messsage_from_user(user)
+                    }
+                    */
+                    /*int ret;
                     char buff[256] = {0};
                     ret = read(pfd[i].fd, buff, 256);
+                    fflush(stdout);
                     if(ret <= 0) {
                         close(pfd[i].fd);
                         memmove(fds + i, fds + i + 1, fdcount - i - 1);
@@ -67,7 +81,7 @@ int main(int ac, char **av)
                     }
                     else {
                         write(1, buff, ret);
-                    }
+                    }*/
                 }
             }
         }

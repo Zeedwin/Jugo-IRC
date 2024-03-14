@@ -41,7 +41,7 @@ class User
     public:
         User(int fd);
 
-        int operator==(const User &rhs) const;
+        User operator=(const User &rhs) const;
 
         /*  tu peux aussi rajouter une surcharge de l'opérateur ==,
             mais j'aime pas trop
