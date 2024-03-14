@@ -22,26 +22,26 @@ class User
         } user_state_t;
 
     private:
-        int fd;
-        std::string nickname;
-        std::string username;
-		std::string hostname;
-		std::string servername;
-		std::string realname;
-		std::string prefix;
-        std::string buffer;
-        user_state_t  state;
-        int flags;
-		time_t last_ping;
-		time_t last_pong;
-		time_t idle;
+        int _fd;
+        std::string _nickname;
+        std::string _username;
+		std::string _hostname;
+		std::string _servername;
+		std::string _realname;
+		std::string _prefix;
+        std::string _buffer;
+        user_state_t  _state;
+        int _flags;
+		time_t _last_ping;
+		time_t _last_pong;
+		time_t _idle;
 
 		void update_prefix(void);
     
     public:
         User(int fd);
 
-        int operator==(User const &user) const;
+        int operator==(const User &rhs) const;
 
         /*  tu peux aussi rajouter une surcharge de l'opérateur ==,
             mais j'aime pas trop

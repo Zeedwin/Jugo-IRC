@@ -36,7 +36,7 @@ int main(int ac, char **av)
     // pfd[1].events = POLLIN;
     // pfd[1].fd = fds[1];
     while ("FUCK MEXICO") { 
-        tmp = fdcount;
+        pollfdcount = fdcount;
 
         pfd[0].revents = 0;
         for (int i = 1; i < tmp; i++) {
@@ -45,13 +45,14 @@ int main(int ac, char **av)
             pfd[0].revents = 0;
         }
 
-        poll(pfd, tmp, 10000);
+        poll(pfd, pollfdcount, 10000);
 
-        for (int i = 0; i < tmp; i++) {
+        for (int i = 0; i < pollfdcount; i++) {
             if(pfd[i].revents & POLLIN) {
                 if (pfd[i].fd == fds[0]) {
                     socklen_t a = 0;
                     printf("Nouvelle connexion recu\n");
+
                     fds[fdcount] = accept(fds[0], (sockaddr*)0x01, &a);
                     fdcount++;
                 }
@@ -61,16 +62,8 @@ int main(int ac, char **av)
                     ret = read(pfd[i].fd, buff, 256);
                     if(ret <= 0) {
                         close(pfd[i].fd);
-                        for (int y = 0; y < fdcount; y++)
-                        {
-                            if (fds[y] == pfd[i].fd) {
-                                memmove(fds + y, fds + y + 1, fdcount - y - 1);
-                                fdcount--;
-                                break;
-                            }
-
-                        }
-
+                        memmove(fds + i, fds + i + 1, fdcount - i - 1);
+                        fdcount--;
                     }
                     else {
                         write(1, buff, ret);
