@@ -1,3 +1,4 @@
+#include "Message.h"
 
 Message::Message(void){}
 

@@ -14,17 +14,6 @@
 
 int main(int ac, char **av)
 {
-    ServerCore *sv;
-    int port = atoi(av[1]);
-    if (port > 65,535 || port < 1){
-        perror("Bad Port");
-        return (1);
-    }
-    sv->loop(port);
-    return ;
-}
-
-void ServerCore::loop(int listen_port) {
   int fds[1024];
     int fdcount = 1;
     sockaddr_in6 ip6laddr = {0};
@@ -37,7 +26,7 @@ void ServerCore::loop(int listen_port) {
 
     int pollfdcount;
     ip4laddr.sin_family = AF_INET;
-    ip4laddr.sin_port = htons(listen_port);
+    ip4laddr.sin_port = htons(port);
     ip4laddr.sin_addr.s_addr = INADDR_ANY;
     fds[0] = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -71,15 +60,17 @@ void ServerCore::loop(int listen_port) {
                     socklen_t a = sizeof(b);
                     printf("Nouvelle connexion recu\n");
                     fds[fdcount] = accept(fds[0], (sockaddr*)&b, &a);
-                    users.create_user(fds[fdcount]);
-                    fds[fdcount] = accept(fds[0], (sockaddr*)0x01, &a);
-                 
+                    users.create_user(fds[fdcount]);                 
                     fdcount++;
             
                 }
                 else {
-                        users[i] = *users.get_user(pfd[i].fd);
-                        user.recvu();
+                        User *user = users.get_user(pfd[i].fd);
+                        user->recvu();
+                        while (user->is_message_buffered() != 0)
+                        {
+                            
+                        }
                     /*
                     user = get)user()
                     user.recvu()
@@ -98,8 +89,8 @@ void ServerCore::loop(int listen_port) {
                         fdcount--;
                     }
                     else {
-                        write(1, buff, ret);
-                    }*/
+                        write(1, buff, ret);*/
+                    }
                 }
             }
         }
