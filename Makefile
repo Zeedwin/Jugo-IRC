@@ -5,6 +5,7 @@ SRCS  = Channel.cpp \
 		ChannelManager.cpp \
 	    Message.cpp \
 	    ServerCore.cpp\
+		commands/commands.cpp \
 	    User.cpp \
 	    UserManager.cpp \
 	    command_handler.cpp \
@@ -18,7 +19,7 @@ ${NAME}: ${OBJS}
 	${CC} ${FLAGS} ${OBJS} -o ${NAME}
 
 ./build/%.o: %.cpp
-	mkdir -p ./build
+	mkdir -p $(shell dirname $@)
 	${CC} ${FLAGS} -c $< -o $@
 
 clean:

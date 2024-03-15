@@ -14,6 +14,10 @@ ServerCore::ServerCore(std::string const &password) : _password(password)
 {
 }
 
+const std::string &ServerCore::get_password(void) const
+{
+    return this->_password;
+}
 void ServerCore::loop(int port)
 {
     std::vector<pollfd_t> pfds;

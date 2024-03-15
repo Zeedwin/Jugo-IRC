@@ -2,6 +2,7 @@
 #include <sys/socket.h>
 #include <string.h>
 #include "User.h"
+#include "message_builder.h"
 
 User::User(int fd) : _fd(fd){}
 
@@ -39,7 +40,7 @@ void	User::set_flag(int flag, int set_to){}
 void    User::set_state(user_state_t state){
     this->_state = state;
 }
-
+#include <iostream>
 void    User::set_nickname(std::string const &nickname){
     this->_nickname = nickname;
 }
@@ -90,7 +91,9 @@ time_t             User::get_last_ping(void)   const{
 
 //time_t             User::get_delta(void)       const{}
 
-//int     User::send_messsage(std::string const &message, bool throw_exception=true){}
+int     User::send_messsage(std::string const &message, bool throw_exception){
+    return(send(this->_fd, message.c_str(), message.size(), MSG_DONTWAIT | MSG_NOSIGNAL));
+}
 
 void    User::recvu(void){
     char buff[513];
