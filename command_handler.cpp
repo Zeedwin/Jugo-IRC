@@ -1,34 +1,42 @@
 #include <iostream>
+#include <string>
 #include "command_handler.h"
+#include "commands/commands.h"
 
 struct {
     std::string cmd;
     User::user_state_t state_needed;
     int min_arg;
     int max_arg;
-    void *handle;
+    void (*handle)(User &, Message const &, ServerCore &);
+
 }  command_table[] = {
-    // {.cmd = "PASS", .state_needed = User::WAITING_FOR_PASS, .min_arg = 1, .max_arg = 1, .handle = handle_pass},
-    // {.cmd = "NICK", .state_needed = User::WAITING_FOR_PASS, .min_arg = 1, .max_arg = 1, .handle = handle_nick},
-    // {.cmd = "USER", .state_needed = User::WAITING_FOR_PASS, .min_arg = 1, .max_arg = 1, .handle = handle_user},
+     {.cmd = "PASS", .state_needed = User::WAITING_FOR_PASS, .min_arg = 1, .max_arg = 1, .handle = pass_handler},
+     {.cmd = "NICK", .state_needed = User::WAITING_FOR_CONN_1, .min_arg = 1, .max_arg = 1, .handle = nick_handler},
+     {.cmd = "USER", .state_needed = User::WAITING_FOR_CONN_2, .min_arg = 1, .max_arg = 1, .handle = user_handler},
 
 };
 
-int check_command(User &user, Message &message) {
+int check_command(User &user, Message const &message, int i, ServerCore &core) {
+    std::vector<std::string> const &vector = message.get_params();
 
+    if (user.is_state(command_table[i].state_needed))
+        return(0);
+    if (vector.size() < command_table[i].min_arg)
+        return (0);
+    if (vector.size() > command_table[i].max_arg)
+        return (0);
+    return(1);
 
 }
 
 void handle_command(User &user, Message const &message, ServerCore &core)
 {
-    const std::vector<std::string> & para = message.get_params();
-
-    //std::cout << "raw=" 
-    std::cout << "LEN=" << para.size() << std::endl;
-    std::cout << message.get_command() << "|";
-    for (int i = 0; i < para.size(); i++)
+    for (int index = 0; index < sizeof(command_table) / sizeof(command_table[0]); index++)
     {
-        std::cout << para[i] << "|"; 
+        if (message.get_command() == command_table[index].cmd && check_command(user, message, index, core))
+        {
+            command_table[index].handle(user, message, core);
+        }
     }
-    std::cout << std::endl;
 }
