@@ -20,7 +20,7 @@ struct {
 int check_command(User &user, Message const &message, int i, ServerCore &core) {
     std::vector<std::string> const &vector = message.get_params();
 
-    if (user.is_state(command_table[i].state_needed))
+    if (!user.is_state(command_table[i].state_needed))
         return(0);
     if (vector.size() < command_table[i].min_arg)
         return (0);

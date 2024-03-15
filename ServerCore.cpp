@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdio.h>
+#include <cstdlib>
 
 #include <poll.h>
 #include <sys/socket.h>
@@ -9,37 +10,42 @@
 #include "ServerCore.h"
 #include "command_handler.h"
 
-ServerCore::ServerCore(std::string const &password): _password(password){
-
+ServerCore::ServerCore(std::string const &password) : _password(password)
+{
 }
 
-void    ServerCore::loop(int port)
+void ServerCore::loop(int port)
 {
     std::vector<pollfd_t> pfds;
     sockaddr_in ipv4 = {0};
     int fd = 0;
     int ret = 0;
+    int setsock = 1;
     ipv4.sin_family = AF_INET;
     ipv4.sin_port = htons(port);
     ipv4.sin_addr.s_addr = INADDR_ANY;
     ret = fd = socket(AF_INET, SOCK_STREAM, 0);
-    ret |= bind(fd, (sockaddr*)&ipv4, sizeof(ipv4));
+    ret |= setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &setsock, sizeof(setsock));
+    ret |= bind(fd, (sockaddr *)&ipv4, sizeof(ipv4));
     ret |= listen(fd, SOMAXCONN);
-    if(ret < 0)
+    if (ret < 0)
     {
         perror("Ethanol said menfou");
         exit(1);
     }
     {
-      pollfd    tmpfd = {0};
-      tmpfd.fd = fd;
-      tmpfd.events = POLLIN;
-      pfds.push_back(tmpfd);
+        pollfd tmpfd = {0};
+        tmpfd.fd = fd;
+        tmpfd.events = POLLIN;
+        //pfds.push_back(tmpfd);
+        pfds.push_back(*(pollfd[]){{.events=POLLIN, .fd=fd}});
+
     }
-    while ("fisabil al-etan") {
+    while ("fisabil al-etan")
+    {
         poll(pfds.data(), pfds.size(), 10000);
 
-        for (int i = 0; i < pfds.size(); i++)
+        for (size_t i = 0; i < pfds.size(); i++)
         {
             if ((pfds[i].revents & POLLIN) == 0)
             {
@@ -49,7 +55,7 @@ void    ServerCore::loop(int port)
             {
                 pollfd tmpfd = {0};
                 socklen_t a = 0;
-                tmpfd.fd = accept(pfds[i].fd, (sockaddr*)0x01, &a);
+                tmpfd.fd = accept(pfds[i].fd, (sockaddr *)0x01, &a);
                 tmpfd.events = POLLIN;
                 pfds.push_back(tmpfd);
                 this->_user_manager.create_user(tmpfd.fd);
@@ -69,16 +75,11 @@ void    ServerCore::loop(int port)
                         handle_command(*client, msg, *this);
                     }
                 }
-                catch(const std::exception& e)
+                catch (const std::exception &e)
                 {
                     std::cerr << e.what() << '\n';
                 }
-                
             }
-            
         }
-        
     }
-    
-
 }
