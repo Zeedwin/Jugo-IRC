@@ -69,7 +69,8 @@ int main(int ac, char **av)
                         user->recvu();
                         while (user->is_message_buffered() != 0)
                         {
-                            
+                            Message message();
+                            user->get_message(&message);
                         }
                     /*
                     user = get)user()

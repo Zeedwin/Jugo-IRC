@@ -1,4 +1,7 @@
-#include "User.h" 
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <string.h>
+#include "User.h"
 
 User::User(int fd) : _fd(fd){}
 
@@ -90,13 +93,27 @@ time_t             User::get_last_ping(void)   const{
 //int     User::send_messsage(std::string const &message, bool throw_exception=true){}
 
 void    User::recvu(void){
-    int ret = read(this->user.fd)
+    ssize_t ret = recv(this->_fd, &this->_buffer, 512, MSG_DONTWAIT | MSG_NOSIGNAL);
+
 }
 
-//int     User::is_message_buffered(void){}
+int     User::is_message_buffered(void){
+    for (int i = 0; i <= this->_buffer.size(); i++)
+    {
+        if (this->_buffer[i] == '\r' && this->_buffer[i + 1] == '\n')
+        {
+            return(1);
+        }
+    }
+    return(0);
+}
 
 void    User::get_message(Message &msg){
-
+    size_t oc = this->_buffer.find("\r\n");
+    std::string str;
+    str = this->_buffer.substr(0, oc);
+    this->_buffer.erase(0, oc + 2);
+    msg.update(str);
 }
 
 void    User::send_ping(void){}
