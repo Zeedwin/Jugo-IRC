@@ -29,6 +29,7 @@ class Channel
         int quit(User &user);
         int kick(User &kicker, User &kicked, std::string const &reason);
 
+        void set_channel();
         void set_topic(std::string const &topic);
         void set_topic_changer(const User &user);
 

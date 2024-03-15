@@ -95,14 +95,20 @@ void    User::recvu(void){
 
 //int     User::is_message_buffered(void){}
 
-void    User::get_message(Message &msg){}
+void    User::get_message(Message &msg){
+
+}
 
 void    User::send_ping(void){}
 
-void	User::set_idle(void){}
+void	User::set_idle(void){
+
+}
 
 //time_t	User::get_idle(void) const {}
 
 void	User::close_connection(void){}
 
-User::~User(void){}
+User::~User(void){
+    
+}

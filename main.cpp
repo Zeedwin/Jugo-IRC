@@ -7,11 +7,25 @@
 #include <string.h>
 #include <stdio.h>
 #include <unistd.h>
+#include "User.h"
+#include "UserManager.h"
+#include "ServerCore.h"
 #include "UserManager.h"
 
 int main(int ac, char **av)
 {
-    int fds[1024];
+    ServerCore *sv;
+    int port = atoi(av[1]);
+    if (port > 65,535 || port < 1){
+        perror("Bad Port");
+        return (1);
+    }
+    sv->loop(port);
+    return ;
+}
+
+void ServerCore::loop(int listen_port) {
+  int fds[1024];
     int fdcount = 1;
     sockaddr_in6 ip6laddr = {0};
     sockaddr_in  ip4laddr = {0};
@@ -21,8 +35,9 @@ int main(int ac, char **av)
     int port = atoi(av[1]);
     UserManager users;
 
+    int pollfdcount;
     ip4laddr.sin_family = AF_INET;
-    ip4laddr.sin_port = htons(port);
+    ip4laddr.sin_port = htons(listen_port);
     ip4laddr.sin_addr.s_addr = INADDR_ANY;
     fds[0] = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -31,7 +46,7 @@ int main(int ac, char **av)
     ret |= listen(fds[0], 5);// | listen(fds[1], 5);
     if(ret < 0) {
         perror("Ur julen lmao");
-        return 1;  
+        exit(1);
     }
     pfd[0].fd = fds[0];
     pfd[0].events = POLLIN;
@@ -42,11 +57,11 @@ int main(int ac, char **av)
 
         pfd[0].revents = 0;
         for (int i = 1; i < pollfdcount; i++) {
+        for (int i = 1; i < pollfdcount; i++) {
             pfd[i].fd = fds[i];
             pfd[i].events = POLLIN;
             pfd[0].revents = 0;
         }
-
         poll(pfd, pollfdcount, 10000);
 
         for (int i = 0; i < pollfdcount; i++) {
@@ -57,7 +72,10 @@ int main(int ac, char **av)
                     printf("Nouvelle connexion recu\n");
                     fds[fdcount] = accept(fds[0], (sockaddr*)&b, &a);
                     users.create_user(fds[fdcount]);
+                    fds[fdcount] = accept(fds[0], (sockaddr*)0x01, &a);
+                 
                     fdcount++;
+            
                 }
                 else {
                         users[i] = *users.get_user(pfd[i].fd);
@@ -87,5 +105,4 @@ int main(int ac, char **av)
         }
     }
     
-
 }
