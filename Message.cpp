@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "Message.h"
 
 Message::Message(void){}
@@ -6,28 +8,30 @@ Message::Message(std::string const &raw_message){
 }
 
 void Message::update(const std::string &raw_message){
+    std::cout << "raw=" << raw_message << std::endl;
     int i = 0;
     if (raw_message[i] == ':')
     {
-        i = raw_message.find(' ');
+        i = raw_message.find(' ', i);
     }
-    this->command = raw_message.substr(++i, raw_message.find(' '));
-    i = raw_message.find(' ');
-    i++;
-    int j = 0;
+    this->command = raw_message.substr(i, raw_message.find(' ', i) -i);
+    i = raw_message.find(' ', i);
     while (i < raw_message.size())
     {
-        if(raw_message[i] != ':')
+
+        if(raw_message[i + 1] != ':')
         {
-            this->params[j] = raw_message.substr(++i, raw_message.find(' '));
-            i = raw_message.find(' ');
+            i++;
+            this->params.push_back(raw_message.substr(i, raw_message.find(' ', i) -i));
+            i = raw_message.find(' ', i);
+            std::cout << i << std::endl; 
         }
         else
         {
-            this->params[j] = raw_message.substr(++i + 1, raw_message.size());
-            i = raw_message.size();
+            i++;
+            this->params.push_back(raw_message.substr(i + 1, raw_message.size()));
+            break;
         }
-        j++;
     }
 }
 

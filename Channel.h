@@ -49,7 +49,9 @@ class Channel
 		size_t members_count(void) const;
 		const std::string get_username_list(void) const;
 
-        ~Channel(void);
+        ~Channel(void){
+            
+        };
 };
 
 #endif

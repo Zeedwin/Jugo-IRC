@@ -1,15 +1,17 @@
 #ifndef NETWORK_MANAGER_H_
 #define NETWORK_MANAGER_H_
 
+#include <string>
+
 #include "ChannelManager.h"
 #include "UserManager.h"
 
 class ServerCore
 {
     private:
-        std::string const   password;
-        ChannelManager      channel_manager;
-        UserManager         user_manager;
+        std::string const   _password;
+        ChannelManager      _channel_manager;
+        UserManager         _user_manager;
 
 		void				disconnect_clients(std::vector<pollfd_t> &poll_fds);
 
@@ -22,7 +24,9 @@ class ServerCore
 
         void    loop(int listen_port); /* methode utilisée pour lancer le serveur (là où y'a le poll (2)) */
 
-        ~ServerCore(void);
+        ~ServerCore(void){
+            
+        };
 };
 
 #endif

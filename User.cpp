@@ -93,8 +93,14 @@ time_t             User::get_last_ping(void)   const{
 //int     User::send_messsage(std::string const &message, bool throw_exception=true){}
 
 void    User::recvu(void){
-    ssize_t ret = recv(this->_fd, &this->_buffer, 512, MSG_DONTWAIT | MSG_NOSIGNAL);
-
+    char buff[513];
+    ssize_t ret = recv(this->_fd, buff, 512, MSG_DONTWAIT | MSG_NOSIGNAL);
+    if (ret <= 0) {
+        // TODO:
+    } else {
+        buff[ret] = 0;
+        this->_buffer += buff;
+    }
 }
 
 int     User::is_message_buffered(void){
