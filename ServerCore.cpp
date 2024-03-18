@@ -47,9 +47,8 @@ void ServerCore::loop(int port)
         pollfd tmpfd = {0};
         tmpfd.fd = fd;
         tmpfd.events = POLLIN;
-        //pfds.push_back(tmpfd);
-        pfds.push_back(*(pollfd[]){{.events=POLLIN, .fd=fd}});
-
+        // pfds.push_back(tmpfd);
+        pfds.push_back(*(pollfd[]){{.events = POLLIN, .fd = fd}});
     }
     while ("fisabil al-etan")
     {
@@ -80,7 +79,7 @@ void ServerCore::loop(int port)
                     {
                         Message msg;
                         client->get_message(msg);
-                        std::cout << "Ramcho 2" << msg.get_params()[0] << std::endl;
+                        // std::cout << "Ramcho 2" << msg.get_params()[0] << std::endl;
                         handle_command(*client, msg, *this);
                     }
                 }
@@ -90,5 +89,28 @@ void ServerCore::loop(int port)
                 }
             }
         }
+        _user_manager.check_pings();
+        this->disconnect_clients(pfds);
+    }
+}
+
+void	ServerCore::disconnect_clients(std::vector<pollfd_t> &pfd)
+{
+    std::vector<User>::iterator it = this->_user_manager.begin();
+    while (1)
+    {
+        if(it == this->_user_manager.end())
+        {
+            break;
+        }
+        if ((*it).is_state(User::WAITING_FOR_QUIT))
+        {
+            (*it).close_connection();
+            this->_channel_manager.leave(*it);
+            pfd.erase(pfd.begin() + std::distance(this->_user_manager.begin(), it) + 1);
+            it = this->_user_manager.erase(it);
+            continue;
+        }
+        it++;
     }
 }

@@ -1,10 +1,14 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <string.h>
+#include <unistd.h>
+
 #include "User.h"
 #include "message_builder.h"
 
-User::User(int fd) : _fd(fd){}
+User::User(int fd) : _fd(fd), _last_ping(time(NULL)), _last_pong(time(NULL)){
+
+}
 
 User User::operator=(const User &rhs) const {
     return(*this);
@@ -46,16 +50,21 @@ void    User::set_nickname(std::string const &nickname){
 }
 
 void    User::set_user(std::string const &username, std::string const &hostname, std::string const &servername, std::string const &realname){
-    this->_username = username;
-    this->_hostname = hostname;
+    this->_username   = username;
+    this->_hostname   = hostname;
     this->_servername = servername;
-    this->_realname = realname;
+    this->_realname   = realname;
     this->_prefix = this->_nickname + "!" + this->_username + "@" + this->_hostname;
 }
 
-void     User::set_last_pong(void){}
+void     User::set_last_pong(void){
+    this->_last_pong = time(NULL);
+}
 
-void     User::set_last_ping(void){}
+void     User::set_last_ping(void){
+    this->_last_ping = time(NULL);
+}
+
 
 const std::string & User::get_nickname(void)   const{
     return(this->_nickname);
@@ -89,7 +98,16 @@ time_t             User::get_last_ping(void)   const{
     return(this->_last_ping);
 }
 
-//time_t             User::get_delta(void)       const{}
+time_t             User::get_delta(void)       const{
+    std::cout << "last ping" << this->_last_ping << " last pong" << this->_last_pong << "\n";
+    if (this->_last_ping <= this->_last_pong)
+    {
+        return this->_last_pong - this->_last_ping;
+    }
+    else
+        return this->_last_ping - this->_last_pong;
+    
+}
 
 int     User::send_messsage(std::string const &message, bool throw_exception){
     return(send(this->_fd, message.c_str(), message.size(), MSG_DONTWAIT | MSG_NOSIGNAL));
@@ -125,7 +143,10 @@ void    User::get_message(Message &msg){
     msg.update(str);
 }
 
-void    User::send_ping(void){}
+void    User::send_ping(void){
+    this->send_messsage("PING :" + get_nickname() + "\r\n", false);
+    this->_last_ping = time(NULL); 
+}
 
 void	User::set_idle(void){
 
@@ -133,7 +154,10 @@ void	User::set_idle(void){
 
 //time_t	User::get_idle(void) const {}
 
-void	User::close_connection(void){}
+void	User::close_connection(void){
+    std::cout << "User " << this->get_nickname() << "got disconected (Reason: Timeout)\n";
+    close(this->_fd);
+}
 
 User::~User(void){
     

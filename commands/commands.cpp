@@ -2,6 +2,8 @@
 #include <iostream>
 #include "../message_builder.h"
 #include "../Channel.h"
+#include "../User.h"
+
 void cap_handler(User &user, Message const &message, ServerCore &core){}
 void pass_handler(User &user, Message const &message, ServerCore &core)
 {
@@ -12,6 +14,8 @@ void pass_handler(User &user, Message const &message, ServerCore &core)
     else
         user.set_state(User::WAITING_FOR_CONN_1);
 }
+
+
 void nick_handler(User &user, Message const &message, ServerCore &core)
 {
     user.set_nickname(message.get_params()[0]);
@@ -22,7 +26,7 @@ void user_handler(User &user, Message const &message, ServerCore &core)
 {
     user.set_user(message.get_params()[0], message.get_params()[1], message.get_params()[2], message.get_params()[3]);
     user.set_state(User::CONNECTED);
-    user.send_messsage(bld_rpl_welcome(user), true);
+    user.send_messsage(bld_rpl_welcome(user) + "\r\n", true);
 }
 void join_handler(User &user, Message const &message, ServerCore &core){
     ChannelManager *_chanel_manager = &core.get_channelManager();
@@ -49,8 +53,13 @@ void join_handler(User &user, Message const &message, ServerCore &core){
 void mode_handler(User &user, Message const &message, ServerCore &core){}
 void part_handler(User &user, Message const &message, ServerCore &core){}
 void quit_handler(User &user, Message const &message, ServerCore &core){}
-void pong_handler(User &user, Message const &message, ServerCore &core){}
-void ping_handler(User &user, Message const &message, ServerCore &core){}
+void pong_handler(User &user, Message const &message, ServerCore &core){
+    std::cout << "Pong HANDLED" << std::endl;
+    user.set_last_pong();
+}
+void ping_handler(User &user, Message const &message, ServerCore &core){
+    user.send_messsage("PONG :" + message.get_params()[0] + "\r\n", false);
+}
 void kick_handler(User &user, Message const &message, ServerCore &core){}
 void topic_handler(User &user, Message const &message, ServerCore &core){}
 void whois_handler(User &user, Message const &message, ServerCore &core){}
