@@ -14,6 +14,9 @@ struct {
      {.cmd = "PASS", .state_needed = User::WAITING_FOR_PASS, .min_arg = 1, .max_arg = 1, .handle = pass_handler},
      {.cmd = "NICK", .state_needed = User::WAITING_FOR_CONN_1, .min_arg = 1, .max_arg = 1, .handle = nick_handler},
      {.cmd = "USER", .state_needed = User::WAITING_FOR_CONN_2, .min_arg = 4, .max_arg = 4, .handle = user_handler},
+     {.cmd = "NICK", .state_needed = User::CONNECTED, .min_arg = 1, .max_arg = 1, .handle = nick_handler},
+     {.cmd = "JOIN", .state_needed = User::CONNECTED, .min_arg = 1, .max_arg = 1, .handle = join_handler},
+     {.cmd = "PART", .state_needed = User::CONNECTED, .min_arg = 1, .max_arg = 1, .handle = part_handler},
 
 };
 
@@ -39,5 +42,5 @@ void handle_command(User &user, Message const &message, ServerCore &core)
             command_table[index].handle(user, message, core);
         }
     }
-    std::cout << "user = " << user.get_username() << std::endl;
+    //std::cout << "user = " << user.get_username() << std::endl;
 }

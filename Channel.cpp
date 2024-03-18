@@ -1,6 +1,6 @@
 #include "Channel.h"
 
-Channel::Channel(std::string const &channel_name){
+Channel::Channel(std::string const &channel_name) : channel_name(channel_name) {
 
 }
 
@@ -22,6 +22,7 @@ std::string const &Channel::get_topic(void) const{
 }
 
 int Channel::join(User &user){
+    this->members.push_back(user);
     return 0;
 }
 
@@ -46,6 +47,7 @@ void Channel::set_topic_changer(const User &user){
 }
 
 int Channel::add_OP(User &user){
+    this->OPs.push_back(user);
     return 0;
 }
 
