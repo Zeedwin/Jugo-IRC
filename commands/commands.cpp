@@ -1,6 +1,7 @@
 #include "commands.h"
 #include <iostream>
 #include "../message_builder.h"
+#include "../Channel.h"
 void cap_handler(User &user, Message const &message, ServerCore &core){}
 void pass_handler(User &user, Message const &message, ServerCore &core)
 {
@@ -14,7 +15,7 @@ void pass_handler(User &user, Message const &message, ServerCore &core)
 void nick_handler(User &user, Message const &message, ServerCore &core)
 {
     user.set_nickname(message.get_params()[0]);
-    if (user.get_state() == User::WAITING_FOR_CONN_1)
+    if (user.is_state(User::WAITING_FOR_CONN_1))
         user.set_state(User::WAITING_FOR_CONN_2);
 }
 void user_handler(User &user, Message const &message, ServerCore &core)
@@ -53,4 +54,16 @@ void ping_handler(User &user, Message const &message, ServerCore &core){}
 void kick_handler(User &user, Message const &message, ServerCore &core){}
 void topic_handler(User &user, Message const &message, ServerCore &core){}
 void whois_handler(User &user, Message const &message, ServerCore &core){}
-void privmsg_handler(User &user, Message const &message, ServerCore &core){}
+void privmsg_handler(User &user, Message const &message, ServerCore &core){
+    ChannelManager *_chanel_man = &core.get_channelManager();
+    if (message.get_params()[0][0] == '#' || message.get_params()[0][0] == '&')
+    {
+            Channel *channel = _chanel_man->get_channel(message.get_params()[0]);
+            std::string message_;
+            for (int i = 1; i < message.get_params().size(); i++)
+            {
+                message_ += message.get_params()[i]; 
+            }
+            channel->broardcast(message_, &user);
+    }
+}

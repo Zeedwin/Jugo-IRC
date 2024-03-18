@@ -10,7 +10,7 @@
 #define NOPASS "NO PASSWORD WTF VRO"
 
 const std::string bld_privmsg_msg(const User &usr, const Channel &chn, const std::string &msg) {
-    return "Hello brothers";
+    return( ":" + usr.get_prefix() + " PRIVMSG " + chn.get_name() + " :" + msg + "\r\n");
 }
 const std::string bld_privmsg_msg(const User &usr, const User &target, const std::string &msg) {
     return "Hello brother";
@@ -51,7 +51,7 @@ const std::string bld_rpl_topic_msg(const User &user, const Channel &chan){
     return "lmao";
 }
 const std::string bld_join_msg(const User &user, const Channel &chan){
-    return "lmao";
+    return ("Welcome to channel " + chan.get_name() + "\r\n");
 }
 
 const std::string bld_part_msg(const User &user, const Channel &chan, const std::string &message){

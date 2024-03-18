@@ -1,5 +1,5 @@
 #include "Channel.h"
-
+#include "message_builder.h"
 Channel::Channel(std::string const &channel_name) : channel_name(channel_name) {
 
 }
@@ -76,6 +76,12 @@ int Channel::is_user_OP(std::string const &nickname) const{
 }
 
 int Channel::broardcast(std::string const &message, const User *from_user){
+    for (int i = 0; i < this->members.size(); i++)
+    {
+        if (this->members[i].is_me(from_user->get_nickname()))
+            continue;
+        this->members[i].send_messsage(bld_privmsg_msg(*from_user, *this , message), false);
+    }
     return 0;
 }
 

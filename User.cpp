@@ -50,12 +50,12 @@ void    User::set_user(std::string const &username, std::string const &hostname,
     this->_hostname = hostname;
     this->_servername = servername;
     this->_realname = realname;
+    this->_prefix = this->_nickname + "!" + this->_username + "@" + this->_hostname;
 }
 
 void     User::set_last_pong(void){}
 
 void     User::set_last_ping(void){}
-
 
 const std::string & User::get_nickname(void)   const{
     return(this->_nickname);

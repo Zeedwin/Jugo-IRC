@@ -18,6 +18,12 @@ const std::string &ServerCore::get_password(void) const
 {
     return this->_password;
 }
+
+ChannelManager    &ServerCore::get_channelManager(void){
+    return (this->_channel_manager);
+}
+
+
 void ServerCore::loop(int port)
 {
     std::vector<pollfd_t> pfds;
@@ -70,12 +76,11 @@ void ServerCore::loop(int port)
                 {
                     User *client = this->_user_manager.get_user(pfds[i].fd);
                     client->recvu();
-                    // std::cout << "Ramcho 1" << "\n";
                     while (client->is_message_buffered())
                     {
                         Message msg;
                         client->get_message(msg);
-                        // std::cout << "Ramcho 2" << "\n";
+                        std::cout << "Ramcho 2" << msg.get_params()[0] << std::endl;
                         handle_command(*client, msg, *this);
                     }
                 }

@@ -1,4 +1,6 @@
 #include "ChannelManager.h"
+#include "message_builder.h"
+#include <iostream>
 
 ChannelManager::ChannelManager(void){
     
@@ -19,9 +21,11 @@ int     ChannelManager::join(User &user, std::string const &chan_name){
         Channel disney(chan_name);
         this->channels.push_back(disney);
         chan = this->get_channel(chan_name);
+        std::cout << "name = " << chan_name << std::endl;
         disney.add_OP(user);
     }
     chan->join(user);
+    user.send_messsage(bld_join_msg(user, *chan), true);
     return 0;
 }
 void    ChannelManager::leave(User &user){

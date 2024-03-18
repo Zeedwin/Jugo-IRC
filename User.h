@@ -64,7 +64,7 @@ class User
         );
         void    set_last_pong(void);
         void    set_last_ping(void);
-        const user_state_t  get_state(void);
+        const user_state_t &get_state(void);
         const std::string &get_nickname(void)   const;
         const std::string &get_username(void)   const;
         const std::string &get_hostname(void)   const;
