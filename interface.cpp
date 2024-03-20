@@ -13,14 +13,14 @@ const std::string bld_privmsg_msg(const User &usr, const Channel &chn, const std
     return( ":" + usr.get_prefix() + " PRIVMSG " + chn.get_name() + " :" + msg + "\r\n");
 }
 const std::string bld_privmsg_msg(const User &usr, const User &target, const std::string &msg) {
-    return "Hello brother";
+    return( ":" + usr.get_prefix() + " PRIVMSG " + target.get_nickname() + " :" + msg + "\r\n");
 }
 
 const std::string bld_rpl_topic(const Channel &chan){
     return "lmao";
 }
 const std::string bld_rpl_welcome(const User &user){
-    return  "001 " + user.get_nickname() + " :Welcome to the Internet Relay Network " + user.get_nickname() + "!" + user.get_username() + "@" + user.get_hostname() + "\r\n";
+    return ( PREFIX_SRV  " 001 " + user.get_nickname() + " :Welcome to the Internet Relay Network " + user.get_nickname() + "!" + user.get_username() + "@" + user.get_hostname() + "\r\n");
 }
 const std::string bld_rpl_umodeis(const User &user){
     return "lmao";
@@ -71,16 +71,16 @@ const std::string bld_kick_msg(const User &oper, const User &target, const Chann
 }
 
 const std::string bld_err_nicknameinuse(const User &user){
-    return "lmao";
+    return (PREFIX_SRV " 433 " + user.get_nickname() + " :Nickname is already in use" + "\r\n");
 }
 const std::string bld_err_nosuchnick(const std::string &name){
-    return "lmao";
+    return("401 " + name + " :" + name +  "\r\n");
 }
 const std::string bld_err_chanoprivsneeded(const Channel &chan){
     return "lmao";
 }
 const std::string bld_err_nonicknamegiven(void){
-    return "lmao";
+    return ("431 :No nickname given");
 }
 const std::string bld_err_erroneusnickname(const std::string &nick){
     return "lmao";
@@ -113,10 +113,14 @@ const std::string bld_err_cannotsendtochan(const Channel &chan){
     return "lmao";
 }
 const std::string bld_err_needmoreparams(const std::string &cmd){
-    return "lmao";
+    return (PREFIX_SRV " 461 " + cmd + " :Not enough parameters" + "\r\n");
 }
 const std::string bld_err_needpass(void){
     return "lmao";
+}
+
+const std::string bld_err_alreadyregistred(void){
+    return(PREFIX_SRV " 462 " ":You may not reregister" "\r\n");
 }
 
 const std::string bld_bad_pass(void){

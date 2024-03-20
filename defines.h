@@ -10,7 +10,7 @@ typedef struct sockaddr_in  sockaddr_in_t;
 #define NEED_CONN       0x4
 
 #define BAD_PASS 0x1
-
+#define PREFIX_SRV ":irc.42.fr"
 
 #define UMODE_i 0x1 // i - marque un utilisateur comme invisible ;
 #define UMODE_s 0x2 // s - marque un utilisateur comme recevant les notifications du serveur ;

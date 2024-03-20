@@ -56,16 +56,16 @@ void UserManager::check_pings(void)
     for (int i = 0; i < this->users.size(); i++)
     {
         // std::cout << this->users[i].get_delta() << std::endl;
-        if (this->users[i].get_delta() > 30)
+        if (this->users[i].get_delta() > 300000000)
         {
                 
             this->users[i].set_state(User::WAITING_FOR_QUIT);
         }
-        else if (this->users[i].get_last_ping() + 10 <= time(NULL))
+        else if (this->users[i].get_last_ping() + 100000000 <= time(NULL))
         {
             if (this->users.size() != 0)
             {
-                std::cout << "send ping" << std::endl;
+                //std::cout << "send ping" << std::endl;
                 this->users[i].send_ping();
             }
             

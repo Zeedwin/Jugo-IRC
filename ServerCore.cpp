@@ -23,6 +23,10 @@ ChannelManager    &ServerCore::get_channelManager(void){
     return (this->_channel_manager);
 }
 
+UserManager &ServerCore::get_userManager(void){
+    return (this->_user_manager);
+}
+
 
 void ServerCore::loop(int port)
 {
@@ -71,9 +75,9 @@ void ServerCore::loop(int port)
             }
             else
             {
+                User *client = this->_user_manager.get_user(pfds[i].fd);
                 try
                 {
-                    User *client = this->_user_manager.get_user(pfds[i].fd);
                     client->recvu();
                     while (client->is_message_buffered())
                     {
@@ -85,7 +89,8 @@ void ServerCore::loop(int port)
                 }
                 catch (const std::exception &e)
                 {
-                    std::cerr << e.what() << '\n';
+                    client->set_state(User::WAITING_FOR_QUIT);    
+                    std::cerr << e.what() << std::endl;
                 }
             }
         }
