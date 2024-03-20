@@ -58,7 +58,7 @@ const std::string bld_part_msg(const User &user, const Channel &chan, const std:
     return "lmao";
 }
 const std::string bld_nick_msg(const User &user, const std::string &nick){
-    return "lmao";
+    return (":" + user.get_nickname() + " NICK " + nick + "\r\n");
 }
 const std::string bld_ping_msg(const User &user){
     return "lmao";

@@ -30,20 +30,30 @@ void nick_handler(User &user, Message const &message, ServerCore &core)
     }
     if (message.get_params()[0] == user.get_nickname())
     {
-        user.send_messsage(bld_err_nicknameinuse(user), false)
+        user.send_messsage(bld_err_nicknameinuse(user), false);
+        return;
     }
-    if (user.is_state(User::CONNECTED) || user.is_state(User::WAITING_FOR_CONN_1) || user.is_state(User::WAITING_FOR_CONN_2))
+    if (message.get_params()[0].size() > 9 || )
+    if (user.is_state(User::WAITING_FOR_CONN_1) || user.is_state(User::WAITING_FOR_CONN_2))
     {
+        std::cout << "username = " << user.get_nickname() << std::endl; 
         user.set_nickname(message.get_params()[0]);
+        std::cout << "username = " << user.get_nickname() << std::endl; 
         if (user.is_state(User::WAITING_FOR_CONN_1))
             user.set_state(User::WAITING_FOR_CONN_2);
         else if (user.is_state(User::WAITING_FOR_CONN_2))
             user.set_state(User::CONNECTED);
     }
+    if (user.is_state(User::CONNECTED))
+    {
+        UserManager *_user_man = &core.get_userManager();
+        user.send_messsage(bld_nick_msg(user, message.get_params()[0]), false);
+        user.set_nickname(message.get_params()[0]);
+    }
 }
 void user_handler(User &user, Message const &message, ServerCore &core)
 {
-    std::cout << message.get_params()[0]<< ' ' << message.get_params()[1] << ' ' << message.get_params()[2] << ' ' << message.get_params()[3] << std::endl;
+    //std::cout << message.get_params()[0]<< ' ' << message.get_params()[1] << ' ' << message.get_params()[2] << ' ' << message.get_params()[3] << std::endl;
     user.set_user(message.get_params()[0], message.get_params()[1], message.get_params()[2], message.get_params()[3]);
     if (user.is_state(User::WAITING_FOR_CONN_1))
         user.set_state(User::WAITING_FOR_CONN_2);

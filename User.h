@@ -42,6 +42,7 @@ class User
         User(int fd);
 
         User operator=(const User &rhs) const;
+        bool operator==(const User &user) const;
 
         /*  tu peux aussi rajouter une surcharge de l'opérateur ==,
             mais j'aime pas trop
