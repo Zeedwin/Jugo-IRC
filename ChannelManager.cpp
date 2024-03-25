@@ -31,21 +31,21 @@ int     ChannelManager::join(User &user, std::string const &chan_name){
     // user.send_messsage(bld_join_msg(user, *chan), true);
     return 0;
 }
-void    ChannelManager::leave(User &user){
+void    ChannelManager::leave(User &user, std::string const message){
     for (int i = 0; i < channels.size(); i++)
     {
             std::cout << "COUSCOUS A LA MAISON " << this->channels[i].is_user_present(user.get_nickname()) << std::endl;
         if (this->channels[i].is_user_present(user.get_nickname()) == 0)
         {
 
-            this->channels[i].quit(user);
+            this->channels[i].quit(user, message);
             //todo: destroy channel if empty & remove OP(discord mod privileges(dont post jb in #general use #jailbait))
         }
     }
     
 }   
-void    ChannelManager::leave(User &user, Channel &chan){
-    chan.quit(user);
+void    ChannelManager::leave(User &user, Channel &chan, std::string const message){
+    chan.quit(user, message);
     //std::cout << "COUSCOUS A LA MAISON" << std::endl;
     //todo: destroy channel if empty & remove OP(discord mod privileges(dont post jb in #general use #jailbait))
 }

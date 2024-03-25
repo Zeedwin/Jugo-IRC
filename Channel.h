@@ -26,7 +26,7 @@ class Channel
         std::string const &get_topic(void) const;
 
         int join(User &user);
-        int quit(User &user);
+        int quit(User &user, std::string const message);
         int kick(User &kicker, User &kicked, std::string const &reason);
 
         void set_channel();

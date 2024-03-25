@@ -16,7 +16,7 @@ struct {
      {.cmd = "NICK", .state_needed = (User::user_state_t)-1, .min_arg = 1, .max_arg = 1, .handle = nick_handler},
      {.cmd = "USER", .state_needed = (User::user_state_t)-1, .min_arg = 4, .max_arg = 4, .handle = user_handler},
      {.cmd = "JOIN", .state_needed = User::CONNECTED, .min_arg = 1, .max_arg = 1, .handle = join_handler},
-     {.cmd = "PART", .state_needed = User::CONNECTED, .min_arg = 1, .max_arg = 1, .handle = part_handler},
+     {.cmd = "PART", .state_needed = User::CONNECTED, .min_arg = 1, .max_arg = 2, .handle = part_handler},
      {.cmd = "PRIVMSG", .state_needed = User::CONNECTED, .min_arg = 1, .max_arg = -1, .handle = privmsg_handler},
      {.cmd = "PING", .state_needed = (User::user_state_t)-1, .min_arg = 1, .max_arg = 2, .handle = ping_handler},
      {.cmd = "PONG", .state_needed = (User::user_state_t)-1, .min_arg = 0, .max_arg = 2, .handle = pong_handler},
@@ -27,17 +27,17 @@ int check_command(User &user, Message const &message, int i, ServerCore &core) {
     std::vector<std::string> const &vector = message.get_params();
     if (!user.is_state(command_table[i].state_needed) && command_table[i].state_needed != (User::user_state_t)-1)
     {
-       // std::cout << "ddddddddddddddd" << std::endl;
+       std::cout << "ddddddddddddddd" << std::endl;
         return(0);
     }
     if (vector.size() < command_table[i].min_arg)
     {
-       // std::cout << "wefwefwfwfew" << std::endl;
+        std::cout << "wefwefwfwfew" << std::endl;
        return (2);
     }
     if (vector.size() > command_table[i].max_arg)
     {
-       // std::cout << "lololooooooooo" << std::endl;
+        std::cout << "lololooooooooo" << std::endl;
         return (0);
     }
     return(1);

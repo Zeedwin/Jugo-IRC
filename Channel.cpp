@@ -31,25 +31,14 @@ int Channel::join(User &user){
     return 0;
 }
 
-int Channel::quit(User &user)
+int Channel::quit(User &user, std::string const message)
 {
-    // for (int i = 0; i < this->members.size(); i++) {
-    //     if ((this->members[i].get_nickname() == user.get_nickname())) {
-    //         std::cout << "User " << user.get_nickname() << " left channel " << this->channel_name << std::endl;
-    //         continue;
-    //     }
-    //     std::cout << " remains " <<  this->members[i].get_nickname() << std::endl;
-    //     tmp.push_back(this->members[i]);
-    // }
-
-    // this->members = tmp;
-    
     for (std::vector<User*>::iterator it = this->members.begin(); it < this->members.end(); it++)
     {
         if (user.get_nickname() == (*it)->get_nickname())
         {
             std::cout << "User " << (*it)->get_nickname() << " left channel " << this->channel_name << std::endl;
-            //this->broadcast(bld_part_msg(user, *this), &user);
+            this->broadcast(bld_part_msg(user, *this, message), NULL);
             this->members.erase(it);
             break;
         }

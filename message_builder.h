@@ -21,7 +21,7 @@ const std::string bld_rpl_topic_msg(const User &user, const Channel &chan);
 const std::string bld_join_msg(const User &user, const Channel &chan);
 const std::string bld_privmsg_msg(const User &user, const Channel &chan, const std::string &message);
 const std::string bld_privmsg_msg(const User &user, const User &target, const std::string &message);
-const std::string bld_part_msg(const User &user, const Channel &chan);
+const std::string bld_part_msg(const User &user, const Channel &chan, const std::string &message);
 const std::string bld_nick_msg(const User &user, const std::string &nick);
 const std::string bld_ping_msg(const User &user);
 const std::string bld_pong_msg(const User &user);
