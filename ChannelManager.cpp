@@ -25,7 +25,9 @@ int     ChannelManager::join(User &user, std::string const &chan_name){
         disney.add_OP(user);
     }
     chan->join(user);
-    user.send_messsage(bld_join_msg(user, *chan), true);
+    user.send_messsage(bld_rpl_topic(*chan));
+    user.send_messsage(bld_rpl_namreply(*chan));
+    // user.send_messsage(bld_join_msg(user, *chan), true);
     return 0;
 }
 void    ChannelManager::leave(User &user){

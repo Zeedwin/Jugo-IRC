@@ -20,6 +20,7 @@ struct {
      {.cmd = "PRIVMSG", .state_needed = User::CONNECTED, .min_arg = 1, .max_arg = -1, .handle = privmsg_handler},
      {.cmd = "PING", .state_needed = (User::user_state_t)-1, .min_arg = 1, .max_arg = 2, .handle = ping_handler},
      {.cmd = "PONG", .state_needed = (User::user_state_t)-1, .min_arg = 0, .max_arg = 2, .handle = pong_handler},
+     {.cmd = "CAP",  .state_needed = (User::user_state_t)-1, .min_arg = 1, .max_arg = 2, .handle = cap_handler}
 };
 
 int check_command(User &user, Message const &message, int i, ServerCore &core) {
@@ -44,11 +45,14 @@ void handle_command(User &user, Message const &message, ServerCore &core)
         if (message.get_command() == command_table[index].cmd && check_command(user, message, index, core) == 1)
         {
             command_table[index].handle(user, message, core);
+            return;
         }
         else if (message.get_command() == command_table[index].cmd && check_command(user, message, index, core) == 2)
         {
             user.send_messsage(bld_err_needmoreparams(message.get_command()), false);
+            return ;
         }
     }
+    user.send_messsage(bld_err_unknowncmd(message.get_command()));
     //std::cout << "user = " << user.get_username() << std::endl;
 }

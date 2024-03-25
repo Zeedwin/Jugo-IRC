@@ -11,8 +11,8 @@ class Channel
     private:
         std::string   		channel_name;
         std::string         topic;
-        std::vector<User>   members;
-        std::vector<User>   OPs;
+        std::vector<User*>   members;
+        std::vector<User*>   OPs;
         const User          *topic_changer;
         
     public:
@@ -44,7 +44,7 @@ class Channel
         int is_user_OP(User const &user) const;
         int is_user_OP(std::string const &nickname) const;
 
-        int broardcast(std::string const &message, const User *from_user);
+        int broadcast(std::string const &message, const User *from_user);
 
 		size_t members_count(void) const;
 		const std::string get_username_list(void) const;

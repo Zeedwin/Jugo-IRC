@@ -71,7 +71,7 @@ class User
         const std::string &get_hostname(void)   const;
         const std::string &get_servername(void) const;
         const std::string &get_realname(void)   const;
-        const std::string &get_prefix(void)     const;
+        const std::string get_prefix(void)     const;
         const std::string get_mode(void)        const;
         time_t            get_last_ping(void)   const;
         time_t            get_delta(void)       const;

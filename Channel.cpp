@@ -23,7 +23,8 @@ std::string const &Channel::get_topic(void) const{
 }
 
 int Channel::join(User &user){
-    this->members.push_back(user);
+    this->members.push_back(&user);
+    this->broadcast(bld_join_msg(user, *this), NULL);
     return 0;
 }
 
@@ -40,7 +41,7 @@ void Channel::set_channel(){
 }
 
 void Channel::set_topic(std::string const &topic){
-
+    this->topic = topic;
 }
 
 void Channel::set_topic_changer(const User &user){
@@ -48,7 +49,7 @@ void Channel::set_topic_changer(const User &user){
 }
 
 int Channel::add_OP(User &user){
-    this->OPs.push_back(user);
+    this->OPs.push_back(&user);
     return 0;
 }
 
@@ -76,17 +77,17 @@ int Channel::is_user_OP(std::string const &nickname) const{
     return 0;
 }
 
-int Channel::broardcast(std::string const &message, const User *from_user){
+int Channel::broadcast(std::string const &message, const User *from_user){
     for (int i = 0; i < this->members.size(); i++)
     {
-        std::cout << "il envoie = " << from_user->get_nickname() << std::endl;
-        std::cout << "membre = " << this->members[i].get_nickname() << std::endl;
-        if (this->members[i] == *from_user)
+        //std::cout << "il envoie = " << from_user->get_nickname() << std::endl;
+        //std::cout << "membre = " << this->members[i]->get_nickname() << std::endl;
+        if (this->members[i] == from_user)
         {
             std::cout << "on est dans le print" << std::endl;
             continue;
         }
-        this->members[i].send_messsage(bld_privmsg_msg(*from_user, *this , message), false);
+        this->members[i]->send_messsage(message, false);
     }
     return 0;
 }
@@ -96,5 +97,7 @@ size_t Channel::members_count(void) const{
 }
 
 const std::string Channel::get_username_list(void) const{
+
+    
     return "mafoi\n";
 }

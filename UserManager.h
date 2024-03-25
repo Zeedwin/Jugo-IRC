@@ -11,7 +11,7 @@
 class UserManager
 {
     private:
-        std::vector<User>   users;
+        std::vector<User*>   users;
     
     public:
         UserManager(void);
@@ -21,13 +21,13 @@ class UserManager
         User    *get_user(int fd);
         /* d'autres surcharges de `get_user` */
 
-        std::vector<User>::iterator begin(void); /* this->users.begin() */
-        std::vector<User>::iterator end(void);   /* this->users.end() */
+        std::vector<User*>::iterator begin(void); /* this->users.begin() */
+        std::vector<User*>::iterator end(void);   /* this->users.end() */
 
         /*  !!ATTENTION!! ne pas utiliser ces methodes
             !!ATTENTION!! si ont est entrain d'itérer sur les utilisateurs */
         void    create_user(int fd); /* créer une utilisateur dans `users` */
-		std::vector<User>::iterator erase(std::vector<User>::iterator it); /* enlève un utilisateur de `users` */
+		std::vector<User*>::iterator erase(std::vector<User*>::iterator it); /* enlève un utilisateur de `users` */
 
         void    check_pings(void);
 

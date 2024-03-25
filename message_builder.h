@@ -45,4 +45,5 @@ const std::string bld_err_needmoreparams(const std::string &cmd);
 const std::string bld_err_needpass(void);
 const std::string bld_err_alreadyregistred(void);
 const std::string bld_bad_pass(void);
+const std::string bld_err_unknowncmd(const std::string cmd);
 #endif

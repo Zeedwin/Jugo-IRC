@@ -85,8 +85,8 @@ const std::string &User::get_realname(void)   const{
     return(this->_realname);
 }
 
-const std::string &User::get_prefix(void)     const{
-    return(this->_nickname + "!" + this->_username + "@" + this->_hostname);
+const std::string User::get_prefix(void)     const{
+    return this->get_nickname() + "!" + this->get_username() + "@" + this->get_hostname();
 }
 
 /*const std::string  User::get_mode(void)        const{
