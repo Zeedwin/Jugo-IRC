@@ -25,25 +25,35 @@ struct {
 
 int check_command(User &user, Message const &message, int i, ServerCore &core) {
     std::vector<std::string> const &vector = message.get_params();
-
     if (!user.is_state(command_table[i].state_needed) && command_table[i].state_needed != (User::user_state_t)-1)
+    {
+       // std::cout << "ddddddddddddddd" << std::endl;
         return(0);
+    }
     if (vector.size() < command_table[i].min_arg)
-        return (2);
+    {
+       // std::cout << "wefwefwfwfew" << std::endl;
+       return (2);
+    }
     if (vector.size() > command_table[i].max_arg)
+    {
+       // std::cout << "lololooooooooo" << std::endl;
         return (0);
+    }
     return(1);
 
 }
 
 void handle_command(User &user, Message const &message, ServerCore &core)
 {
+    //std::cout << "whwefwefgwekbwefkwehwe" << std::endl;
     //std::cout << "command = " << message.get_command() << std::endl;
     for (int index = 0; index < sizeof(command_table) / sizeof(command_table[0]); index++)
     {
         //std::cout << message.get_command() << message.get_params()[0] << std::endl;
         if (message.get_command() == command_table[index].cmd && check_command(user, message, index, core) == 1)
         {
+            //std::cout << "on lrentre dedans" << std::endl;
             command_table[index].handle(user, message, core);
             return;
         }

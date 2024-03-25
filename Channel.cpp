@@ -49,7 +49,7 @@ int Channel::quit(User &user)
         if (user.get_nickname() == (*it)->get_nickname())
         {
             std::cout << "User " << (*it)->get_nickname() << " left channel " << this->channel_name << std::endl;
-            this->broadcast(bld_part_msg(user, *this), &user);
+            //this->broadcast(bld_part_msg(user, *this), &user);
             this->members.erase(it);
             break;
         }
@@ -113,11 +113,11 @@ int Channel::is_user_present(std::string const &nickname)
     {
         if ((*it)->get_nickname() == nickname)
         {
-            std::cout << nickname << " is in " << this->channel_name << std::endl;
+            //std::cout << nickname << " is in " << this->channel_name << std::endl;
             return 1;
         }
     }
-    std::cout << nickname << "is not in " << this->channel_name << std::endl;
+    //std::cout << nickname << "is not in " << this->channel_name << std::endl;
     return 0;
 }
 

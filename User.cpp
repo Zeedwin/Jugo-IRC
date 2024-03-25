@@ -140,7 +140,7 @@ int     User::is_message_buffered(void){
 void    User::get_message(Message &msg){
     size_t oc = this->_buffer.find("\r\n");
     std::string str;
-    std::cout << this->_buffer << std::endl;
+    //std::cout << this->_buffer << std::endl;
     str = this->_buffer.substr(0, oc);
     this->_buffer.erase(0, oc + 2);
     msg.update(str);
@@ -164,6 +164,8 @@ void	User::close_connection(void){
     std::cout << "User " << this->get_nickname() << " got disconected (Reason: Timeout)\n";
     close(this->_fd);
 }
+
+
 
 User::~User(void){
     
