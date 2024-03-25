@@ -145,15 +145,16 @@ void ping_handler(User &user, Message const &message, ServerCore &core)
 
 std::string get_reason(Message const &message)
 {
-    std::string reason;
     int i = 0;
     for (int i = 0; i < message.get_params().size(); i++)
     {
         if (message.get_params()[i][0] == ':')
         {
+            return(message.get_params()[i]);
             
         }
     }
+    return(NULL);
 }
 
 void kick_handler(User &user, Message const &message, ServerCore &core){
@@ -171,7 +172,7 @@ void kick_handler(User &user, Message const &message, ServerCore &core){
                 {
                     UserManager *user_man = &core.get_userManager();
                     User *user_kick = user_man->get_user(message.get_params()[j]);
-                    chan->kick(user, user_kick, )
+                    chan->kick(user, *user_kick, get_reason(message));
                 }
             }
         }
