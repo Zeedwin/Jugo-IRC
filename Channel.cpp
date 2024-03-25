@@ -5,20 +5,23 @@ Channel::Channel(std::string const &channel_name) : channel_name(channel_name) {
 
 }
 
-bool Channel::operator==(Channel const &channel){
+bool Channel::operator==(Channel const &channel)
+{
     return this->channel_name == channel.channel_name;
 }
 
-int Channel::is_me(std::string const &channel_name){
+int Channel::is_me(std::string const &channel_name)
+{
     return this->channel_name == channel_name;
 }
 
-std::string const &Channel::get_name(void)  const
+std::string const &Channel::get_name(void) const
 {
     return this->channel_name;
 }
 
-std::string const &Channel::get_topic(void) const{
+std::string const &Channel::get_topic(void) const
+{
     return this->topic;
 }
 
@@ -28,24 +31,51 @@ int Channel::join(User &user){
     return 0;
 }
 
-int Channel::quit(User &user){
+int Channel::quit(User &user)
+{
+    // for (int i = 0; i < this->members.size(); i++) {
+    //     if ((this->members[i].get_nickname() == user.get_nickname())) {
+    //         std::cout << "User " << user.get_nickname() << " left channel " << this->channel_name << std::endl;
+    //         continue;
+    //     }
+    //     std::cout << " remains " <<  this->members[i].get_nickname() << std::endl;
+    //     tmp.push_back(this->members[i]);
+    // }
+
+    // this->members = tmp;
+    
+    for (std::vector<User*>::iterator it = this->members.begin(); it < this->members.end(); it++)
+    {
+        if (user.get_nickname() == (*it)->get_nickname())
+        {
+            std::cout << "User " << (*it)->get_nickname() << " left channel " << this->channel_name << std::endl;
+            this->broadcast(bld_part_msg(user, *this), &user);
+            this->members.erase(it);
+            break;
+        }
+    }
+    for (std::vector<User*>::iterator it2 = this->members.begin(); it2 < this->members.end(); it2++)
+    {
+        std::cout << "THIS USER IS CONNECTED STILL: " << (*it2)->get_nickname() << std::endl;
+    }
+    return (0);
+}
+
+int Channel::kick(User &kicker, User &kicked, std::string const &reason)
+{
     return 0;
 }
 
-int Channel::kick(User &kicker, User &kicked, std::string const &reason){
-    return 0;
-}
-
-void Channel::set_channel(){
-
+void Channel::set_channel()
+{
 }
 
 void Channel::set_topic(std::string const &topic){
     this->topic = topic;
 }
 
-void Channel::set_topic_changer(const User &user){
-
+void Channel::set_topic_changer(const User &user)
+{
 }
 
 int Channel::add_OP(User &user){
@@ -53,27 +83,41 @@ int Channel::add_OP(User &user){
     return 0;
 }
 
-int Channel::remove_OP(const User &user){
+int Channel::remove_OP(const User &user)
+{
     return 0;
 }
 
-int Channel::remove_user(User &user){
+int Channel::remove_user(User &user)
+{
     return 0;
 }
 
-int Channel::is_user_present(User const &user){
+// int Channel::is_user_present(User const &user){
+
+// }
+
+int Channel::is_user_present(std::string const &nickname)
+{
+    for (std::vector<User*>::iterator it = this->members.begin(); it < this->members.end(); it++)
+    {
+        if ((*it)->get_nickname() == nickname)
+        {
+            std::cout << nickname << " is in " << this->channel_name << std::endl;
+            return 1;
+        }
+    }
+    std::cout << nickname << "is not in " << this->channel_name << std::endl;
     return 0;
 }
 
-int Channel::is_user_present(std::string const &nickname){
+int Channel::is_user_OP(User const &user) const
+{
     return 0;
 }
 
-int Channel::is_user_OP(User const &user) const{
-    return 0;
-}
-
-int Channel::is_user_OP(std::string const &nickname) const{
+int Channel::is_user_OP(std::string const &nickname) const
+{
     return 0;
 }
 
@@ -92,8 +136,13 @@ int Channel::broadcast(std::string const &message, const User *from_user){
     return 0;
 }
 
-size_t Channel::members_count(void) const{
-    return 0;
+size_t Channel::members_count(void) const
+{
+    for (size_t i = 0; i < this->members.size(); i++)
+    {
+        if (i == this->members.size())
+            return (i);
+    }
 }
 
 const std::string Channel::get_username_list(void) const{

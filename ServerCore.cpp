@@ -9,6 +9,7 @@
 
 #include "ServerCore.h"
 #include "command_handler.h"
+#include "commands/commands.h"
 
 ServerCore::ServerCore(std::string const &password) : _password(password)
 {
@@ -26,7 +27,6 @@ ChannelManager    &ServerCore::get_channelManager(void){
 UserManager &ServerCore::get_userManager(void){
     return (this->_user_manager);
 }
-
 
 void ServerCore::loop(int port)
 {

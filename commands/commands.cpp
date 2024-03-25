@@ -3,6 +3,8 @@
 #include "../message_builder.h"
 #include "../Channel.h"
 #include "../User.h"
+#include "../UserManager.h"
+#include "../ServerCore.h"
 
 void cap_handler(User &user, Message const &message, ServerCore &core)
 {
@@ -21,7 +23,6 @@ void pass_handler(User &user, Message const &message, ServerCore &core)
     else
         user.set_state(User::WAITING_FOR_CONN_1);
 }
-
 
 void nick_handler(User &user, Message const &message, ServerCore &core)
 {
@@ -64,7 +65,8 @@ void user_handler(User &user, Message const &message, ServerCore &core)
         user.set_state(User::CONNECTED);
     user.send_messsage(bld_rpl_welcome(user) + "\r\n", true);
 }
-void join_handler(User &user, Message const &message, ServerCore &core){
+void join_handler(User &user, Message const &message, ServerCore &core)
+{
     ChannelManager *_chanel_manager = &core.get_channelManager();
     int i = 0;
     std::string name;
@@ -92,14 +94,25 @@ void join_handler(User &user, Message const &message, ServerCore &core){
     //     }
     //}
 }
-void mode_handler(User &user, Message const &message, ServerCore &core){}
-void part_handler(User &user, Message const &message, ServerCore &core){}
-void quit_handler(User &user, Message const &message, ServerCore &core){}
-void pong_handler(User &user, Message const &message, ServerCore &core){
+void mode_handler(User &user, Message const &message, ServerCore &core) {}
+void part_handler(User &user, Message const &message, ServerCore &core) {
+    ChannelManager &_chan_man = core.get_channelManager();
+    Channel        *chan      = _chan_man.get_channel(message.get_params()[0]);
+    //User           *_user     = core.get_userManager().get_user(user.get_nickname());
+    std::cout << "Entered the PART_HANDLER" << std::endl;
+    if(chan)
+        _chan_man.leave(user, *chan);
+    //TODO: else send an error for non existing channel
+
+}
+void quit_handler(User &user, Message const &message, ServerCore &core) {}
+void pong_handler(User &user, Message const &message, ServerCore &core)
+{
     //std::cout << "Pong HANDLED" << std::endl;
     user.set_last_pong();
 }
-void ping_handler(User &user, Message const &message, ServerCore &core){
+void ping_handler(User &user, Message const &message, ServerCore &core)
+{
     user.send_messsage("PONG :" + message.get_params()[0] + "\r\n", false);
 }
 void kick_handler(User &user, Message const &message, ServerCore &core){

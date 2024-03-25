@@ -1,9 +1,11 @@
 #include <cstdio>
+#include <iostream>
 
 #include "User.h"
 #include "UserManager.h"
 #include "ServerCore.h"
 #include "message_builder.h"
+
 
 #define SUS "Welcome to Jugo's IRC Server"
 
@@ -108,6 +110,10 @@ const std::string bld_err_nonicknamegiven(void) {
 
 const std::string bld_err_erroneusnickname(const std::string &nick) {
     return "432 " + nick + " :Erroneus nickname\r\n";
+}
+
+const std::string bld_err_nonicknamegiven(void){
+    return ("431 :No nickname given\r\n");
 }
 
 const std::string bld_err_nosuchchannel(const std::string &chan) {

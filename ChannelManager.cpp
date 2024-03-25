@@ -23,6 +23,7 @@ int     ChannelManager::join(User &user, std::string const &chan_name){
         chan = this->get_channel(chan_name);
         //std::cout << "name = " << chan_name << std::endl;
         disney.add_OP(user);
+        std::cout << "NEW CHANNEL " << chan_name << std::endl;
     }
     chan->join(user);
     user.send_messsage(bld_rpl_topic(*chan));
@@ -33,9 +34,11 @@ int     ChannelManager::join(User &user, std::string const &chan_name){
 void    ChannelManager::leave(User &user){
     for (int i = 0; i < channels.size(); i++)
     {
-        if (channels[i].is_user_present(user.get_nickname()))
+            std::cout << "COUSCOUS A LA MAISON " << this->channels[i].is_user_present(user.get_nickname()) << std::endl;
+        if (this->channels[i].is_user_present(user.get_nickname()) == 0)
         {
-            channels[i].quit(user);
+
+            this->channels[i].quit(user);
             //todo: destroy channel if empty & remove OP(discord mod privileges(dont post jb in #general use #jailbait))
         }
     }
@@ -43,5 +46,6 @@ void    ChannelManager::leave(User &user){
 }   
 void    ChannelManager::leave(User &user, Channel &chan){
     chan.quit(user);
+    //std::cout << "COUSCOUS A LA MAISON" << std::endl;
     //todo: destroy channel if empty & remove OP(discord mod privileges(dont post jb in #general use #jailbait))
 }

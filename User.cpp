@@ -1,7 +1,10 @@
+#include <iostream>
+
+#include <string.h>
+
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-#include <string.h>
-#include <unistd.h>
 
 #include "User.h"
 #include "message_builder.h"
@@ -11,6 +14,7 @@ User::User(int fd) : _fd(fd), _last_ping(time(NULL)), _last_pong(time(NULL)){
 }
 
 User User::operator=(const User &rhs) const {
+    std::cout << "I am a faggot (and im copying another user)" << std::endl;
     return(*this);
 }
 
@@ -99,17 +103,14 @@ time_t             User::get_last_ping(void)   const{
 
 time_t             User::get_delta(void)       const{
     //std::cout << "last ping" << this->_last_ping << " last pong" << this->_last_pong << "\n";
-    if (this->_last_ping <= this->_last_pong)
-    {
-        return this->_last_pong - this->_last_ping;
-    }
-    else
-        return this->_last_ping - this->_last_pong;
+    
+    return(time(NULL) - _last_pong);
     
 }
 
 int     User::send_messsage(std::string const &message, bool throw_exception){
-    if (send(this->_fd, message.c_str(), message.size(), MSG_DONTWAIT | MSG_NOSIGNAL) < 0)
+    int r = send(this->_fd, message.c_str(), message.size(), MSG_DONTWAIT | MSG_NOSIGNAL);
+    if (throw_exception && r < 0)
         throw DisconnectException();
     return(1);
 }
@@ -118,7 +119,7 @@ void    User::recvu(void){
     char buff[513];
     ssize_t ret = recv(this->_fd, buff, 512, MSG_DONTWAIT | MSG_NOSIGNAL);
     if (ret <= 0) {
-        throw DisconnectException();
+        throw DisconnectException();   
     } else {
         buff[ret] = 0;
         this->_buffer += buff;
@@ -160,7 +161,7 @@ void	User::set_idle(void){
 //time_t	User::get_idle(void) const {}
 
 void	User::close_connection(void){
-    //std::cout << "User " << this->get_nickname() << "got disconected (Reason: Timeout)\n";
+    std::cout << "User " << this->get_nickname() << " got disconected (Reason: Timeout)\n";
     close(this->_fd);
 }
 

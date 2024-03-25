@@ -1,5 +1,5 @@
-#ifndef NETWORK_MANAGER_H_
-#define NETWORK_MANAGER_H_
+#ifndef SERVERCORE_H_
+#define SERVERCORE_H_
 
 #include <string>
 
