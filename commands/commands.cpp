@@ -24,24 +24,47 @@ void pass_handler(User &user, Message const &message, ServerCore &core)
         user.set_state(User::WAITING_FOR_CONN_1);
 }
 
+int check_nick(const std::string str)
+{
+    if ((str[0] < 'A' || str[0] > 'Z') && (str[0] < 'a' || str[0] > 'z'))
+        return(0);
+    for(int i = 0; str[i] ; i++)
+    {
+        if (((str[0] < 'A' || str[0] > 'Z') && (str[0] < 'a' || str[0] > 'z')) && (str[i] < 0 || str[i] > 9))
+        {
+            if (str[i] != '-' && str[i] != '[' && str[i] != ']' && str[i] != '\\' && str[i] != '`' && str[i] != '^' && str[i] != '{' && str[i] != '}')
+            {
+                return(0);
+            }
+        }
+
+    }
+    return(1);
+}
+
 void nick_handler(User &user, Message const &message, ServerCore &core)
 {
     //std::cout << "chaneg name for :" << message.get_params()[0] << std::endl;
-    if (message.get_params().size() < 0)
+    std::string msg = message.get_params()[0].substr(0, 9);
+    UserManager *_user_man = &core.get_userManager();
     {
         user.send_messsage(bld_err_nonicknamegiven(), false);
         return;
     }
-    if (message.get_params()[0] == user.get_nickname())
+    if (_user_man->get_user(msg) == NULL)
     {
         user.send_messsage(bld_err_nicknameinuse(user), false);
         return;
     }
-    //if (message.get_params()[0].size() > 9 || )
+    if (check_nick(msg) <= 0)
+    {
+        user.send_messsage(bld_err_erroneusnickname(msg), false);
+        return;
+    }
     if (user.is_state(User::WAITING_FOR_CONN_1) || user.is_state(User::WAITING_FOR_CONN_2))
     {
         std::cout << "username = " << user.get_nickname() << std::endl; 
-        user.set_nickname(message.get_params()[0]);
+        user.set_nickname(msg);
         std::cout << "username = " << user.get_nickname() << std::endl; 
         if (user.is_state(User::WAITING_FOR_CONN_1))
             user.set_state(User::WAITING_FOR_CONN_2);
@@ -50,14 +73,18 @@ void nick_handler(User &user, Message const &message, ServerCore &core)
     }
     if (user.is_state(User::CONNECTED))
     {
-        UserManager *_user_man = &core.get_userManager();
-        user.send_messsage(bld_nick_msg(user, message.get_params()[0]), false);
-        user.set_nickname(message.get_params()[0]);
+        user.send_messsage(bld_nick_msg(user, msg), false);
+        user.set_nickname(msg);
     }
 }
 void user_handler(User &user, Message const &message, ServerCore &core)
 {
     //std::cout << message.get_params()[0]<< ' ' << message.get_params()[1] << ' ' << message.get_params()[2] << ' ' << message.get_params()[3] << std::endl;
+    if (user.is_state(User::CONNECTED))
+    {
+        user.send_messsage(bld_err_alreadyregistred(), false);
+        return;
+    }
     user.set_user(message.get_params()[0], message.get_params()[1], message.get_params()[2], message.get_params()[3]);
     if (user.is_state(User::WAITING_FOR_CONN_1))
         user.set_state(User::WAITING_FOR_CONN_2);
@@ -115,13 +142,41 @@ void ping_handler(User &user, Message const &message, ServerCore &core)
 {
     user.send_messsage("PONG :" + message.get_params()[0] + "\r\n", false);
 }
+
+std::string get_reason(Message const &message)
+{
+    std::string reason;
+    int i = 0;
+    for (int i = 0; i < message.get_params().size(); i++)
+    {
+        if (message.get_params()[i][0] == ':')
+        {
+            
+        }
+    }
+}
+
 void kick_handler(User &user, Message const &message, ServerCore &core){
+    ChannelManager *chan_man = &core.get_channelManager();
 
+        for (int i = 0; message.get_params()[i][0] == '#'; i++)
+        {
+            Channel *chan = chan_man->get_channel(message.get_params()[0]);
+            if (chan->is_user_OP(user))
+            {
+                int j = 0;
+                while (message.get_params()[j][0] == '#')
+                    j++;
+                for(j; message.get_params()[j][0] != ':'; j++)
+                {
+                    UserManager *user_man = &core.get_userManager();
+                    User *user_kick = user_man->get_user(message.get_params()[j]);
+                    chan->kick(user, user_kick, )
+                }
+            }
+        }
 }
-void topic_handler(User &user, Message const &message, ServerCore &core){
-
-}
-
+void topic_handler(User &user, Message const &message, ServerCore &core){}
 void whois_handler(User &user, Message const &message, ServerCore &core){}
 void privmsg_handler(User &user, Message const &message, ServerCore &core){
     ChannelManager *_chanel_man = &core.get_channelManager();

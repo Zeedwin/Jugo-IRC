@@ -63,6 +63,16 @@ int Channel::quit(User &user)
 
 int Channel::kick(User &kicker, User &kicked, std::string const &reason)
 {
+    for (std::vector<User*>::iterator it = this->members.begin(); it < this->members.end(); it++)
+    {
+        if (kicked.get_nickname() == (*it)->get_nickname())
+        {
+            std::cout << "User " << (*it)->get_nickname() << " left channel " << this->channel_name << std::endl;
+            this->broadcast(bld_kick_msg(kicker, kicked, *this, reason), NULL);
+            this->members.erase(it);
+            break;
+        }
+    }
     return 0;
 }
 
@@ -111,13 +121,25 @@ int Channel::is_user_present(std::string const &nickname)
     return 0;
 }
 
-int Channel::is_user_OP(User const &user) const
-{
+int Channel::is_user_OP(User const &user) const{
+    for (int i = 0; i < this->OPs.size(); i++)
+    {
+        if(*this->OPs[i] == user)
+        {
+            return (1);
+        }
+    }
     return 0;
 }
 
-int Channel::is_user_OP(std::string const &nickname) const
-{
+int Channel::is_user_OP(std::string const &nickname) const{
+    for (int i = 0; i < this->OPs.size(); i++)
+    {
+        if(this->OPs[i]->is_me(nickname) == 1)
+        {
+            return (1);
+        }
+    }
     return 0;
 }
 
