@@ -113,7 +113,6 @@ void user_handler(User &user, Message const &message, ServerCore &core)
 void join_handler(User &user, Message const &message, ServerCore &core)
 {
     ChannelManager &_chanel_manager = core.get_channelManager();
-    int i = 0;
     int pos = 0;
     std::string chans = message.get_params()[0];
     while(chans.size() > 0)
@@ -133,7 +132,7 @@ void join_handler(User &user, Message const &message, ServerCore &core)
         user.send_messsage(bld_err_needmoreparams(message.get_command()));
         return;
     }
-    while ((pos = chanlist.find(",")) != std::string::npos) {
+    while ((pos = chanlist.find(",")) != (int)std::string::npos) {
         std::string channame = message.get_params()[0].substr(0, pos);
         Channel *chan = _chanel_manager.get_channel(channame);
         std::cout << "Join channame: " << channame << std::endl;
@@ -173,7 +172,7 @@ void part_handler(User &user, Message const &message, ServerCore &core)
     } else if (message.get_params().size() == 2) {
         message_ = message.get_params()[1];
     }
-    while ((pos = chanlist.find(",")) != std::string::npos) {
+    while ((pos = chanlist.find(",")) != (int)std::string::npos) {
         std::string channame = message.get_params()[0].substr(0, pos);
 
         Channel *chan = _chan_man.get_channel(channame);
@@ -251,8 +250,28 @@ void kick_handler(User &user, Message const &message, ServerCore &core)
         }
     }
 }
-void topic_handler(User &user, Message const &message, ServerCore &core) {}
-void whois_handler(User &user, Message const &message, ServerCore &core) {}
+
+void topic_handler(User &user, Message const &message, ServerCore &core) {
+    ChannelManager *_chanel_man = &core.get_channelManager();
+    Channel *channel = _chanel_man->get_channel(message.get_params()[0]);
+    std::cout << "TES RAMCHO de loco " << message.get_params()[1] << std::endl;
+    if (!channel)
+    {
+        user.send_messsage(bld_err_nosuchchannel(channel->get_name()));
+        return ;
+    }
+    if (channel->get_name() != message.get_params()[0])
+        user.send_messsage(bld_err_nosuchchannel(message.get_params()[0]));
+    if (channel->is_user_OP(user))
+    {
+        std::cout << "sexcasst " << std::endl;
+        channel->set_topic(message.get_params()[1]);
+        channel->broadcast(bld_rpl_topic_msg(user ,*channel), NULL); 
+    }
+
+
+}
+// void whois_handler(User &user, Message const &message, ServerCore &core) {}
 void privmsg_handler(User &user, Message const &message, ServerCore &core)
 {
     ChannelManager *_chanel_man = &core.get_channelManager();
@@ -263,7 +282,7 @@ void privmsg_handler(User &user, Message const &message, ServerCore &core)
         user.send_messsage("412 :No text to send");
         return;
     }
-    for (int i = 1; i < message.get_params().size(); i++)
+    for (int i = 1; i < (int)message.get_params().size(); i++)
     {
         message_ += message.get_params()[i];
     }

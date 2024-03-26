@@ -6,6 +6,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <limits.h>
+#include <string.h>
+
 
 #include "ServerCore.h"
 #include "command_handler.h"
@@ -31,7 +33,9 @@ UserManager &ServerCore::get_userManager(void){
 void ServerCore::loop(int port)
 {
     std::vector<pollfd_t> pfds;
-    sockaddr_in ipv4 = {0};
+    memset(&pfds, 0, sizeof(pfds));
+    sockaddr_in ipv4;
+    memset(&ipv4, 0, sizeof(ipv4));
     int fd = 0;
     int ret = 0;
     int setsock = 1;
@@ -48,10 +52,11 @@ void ServerCore::loop(int port)
         exit(1);
     }
     {
-        pollfd tmpfd = {0};
+        pollfd tmpfd;
+        memset(&tmpfd, 0, sizeof(tmpfd));
         tmpfd.fd = fd;
         tmpfd.events = POLLIN;
-         pfds.push_back(tmpfd);
+        pfds.push_back(tmpfd);
         //pfds.push_back(*(pollfd[]){{ .fd = fd, .events = POLLIN}});
     }
     while ("fisabil al-etan")
@@ -66,8 +71,10 @@ void ServerCore::loop(int port)
             }
             if (pfds[i].fd == fd)
             {
-                pollfd tmpfd = {0};
-                socklen_t a = 0;
+                pollfd tmpfd;
+                memset(&tmpfd, 0, sizeof(tmpfd));
+                socklen_t a;
+                memset(&a, 0, sizeof(a));
                 tmpfd.fd = accept(pfds[i].fd, (sockaddr *)0x01, &a);
                 tmpfd.events = POLLIN;
                 pfds.push_back(tmpfd);

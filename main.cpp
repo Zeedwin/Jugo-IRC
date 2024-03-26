@@ -21,5 +21,6 @@ int main(int ac, char **av)
 {
     ServerCore sv(av[2]);
 
+    (void)ac;
     sv.loop(atoi(av[1]));
 }

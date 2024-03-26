@@ -13,11 +13,6 @@ User::User(int fd) : _fd(fd), _last_ping(time(NULL)), _last_pong(time(NULL)){
 
 }
 
-User User::operator=(const User &rhs) const {
-    std::cout << "I am a faggot (and im copying another user)" << std::endl;
-    return(*this);
-}
-
 int User::is_me(int fd) const
 {
     if (this->_fd != fd)
@@ -39,11 +34,15 @@ int User::is_state(user_state_t state) const
     return(1);
 }
 
-int User::check_flag(int flag) const {
-    return(0);
-}
+// int User::check_flag(int flag) const {
+//     (void)flag;
+//     return(0);
+// }
 
-void	User::set_flag(int flag, int set_to){}
+// void	User::set_flag(int flag, int set_to){
+//     (void)set_to;
+
+// }
 
 void    User::set_state(user_state_t state){
     this->_state = state;
@@ -131,7 +130,7 @@ void    User::recvu(void){
 }
 
 int     User::is_message_buffered(void){
-    for (int i = 0; i <= this->_buffer.size(); i++)
+    for (int i = 0; i <= (int)this->_buffer.size(); i++)
     {
         if (this->_buffer[i] == '\r' && this->_buffer[i + 1] == '\n')
         {
