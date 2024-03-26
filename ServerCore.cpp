@@ -89,6 +89,8 @@ void ServerCore::loop(int port)
                 }
                 catch (const std::exception &e)
                 {
+                    std::cout << "1er pos ?"  << std::endl;
+                    perror("error");
                     client->set_state(User::WAITING_FOR_QUIT);    
                     std::cerr << e.what() << std::endl;
                 }

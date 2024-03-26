@@ -5,7 +5,18 @@
 #include "../User.h"
 #include "../UserManager.h"
 #include "../ServerCore.h"
-
+#include <string> 
+std::string get_arg(std::string str)
+{
+    std::string str2;
+    size_t i = str.find(',');
+    if (i == std::string::npos)
+    {
+        return(str);
+    }
+    str2 = str.substr(0, i);
+    return(str2);
+}
 void cap_handler(User &user, Message const &message, ServerCore &core)
 {
     return;
@@ -18,6 +29,7 @@ void pass_handler(User &user, Message const &message, ServerCore &core)
     }
     if (core.get_password() != message.get_params()[0])
     {
+        std::cout << "3er pos ?" << std::endl;
         user.set_state(User::WAITING_FOR_QUIT);
     }
     else
@@ -103,19 +115,31 @@ void join_handler(User &user, Message const &message, ServerCore &core)
     ChannelManager &_chanel_manager = core.get_channelManager();
     int i = 0;
     int pos = 0;
-    std::string chanlist = message.get_params()[0] + "," ;
-
-    if (message.get_params().size() < 1)
+    std::string chans = message.get_params()[0];
+    while(chans.size() > 0)
+    {
+        std::string cha_name = get_arg(chans);
+        Channel *chan = _chanel_manager.get_channel(cha_name);
+        if(chans.find(',') != std::string::npos)
+        {
+            chans = chans.substr(chans.find(',') + 1, chans.size() - chans.find(','));
+        }
+        else
+            chans = "";
+        _chanel_manager.join(user, cha_name);
+    }
+    /*if (message.get_params().size() < 1)
     {
         user.send_messsage(bld_err_needmoreparams(message.get_command()));
         return;
     }
     while ((pos = chanlist.find(",")) != std::string::npos) {
         std::string channame = message.get_params()[0].substr(0, pos);
+        Channel *chan = _chanel_manager.get_channel(channame);
         std::cout << "Join channame: " << channame << std::endl;
         _chanel_manager.join(user, channame);
         chanlist.erase(0, pos + 1);
-    }
+    }*/
     // while (1)
     // {
     //     if (i != 0)
@@ -172,29 +196,24 @@ void ping_handler(User &user, Message const &message, ServerCore &core)
     user.send_messsage("PONG :" + message.get_params()[0] + "\r\n", false);
 }
 
-std::string get_reason(Message const &message)
-{
-    int i = 0;
-    for (int i = 0; i < message.get_params().size(); i++)
-    {
-        if (message.get_params()[i][0] == ':')
-        {
-            return (message.get_params()[i]);
-        }
-    }
-    return (NULL);
-}
 
 void kick_handler(User &user, Message const &message, ServerCore &core)
 {
-    ChannelManager *chan_man = &core.get_channelManager();
-
-    for (int i = 0; message.get_params()[i][0] == '#'; i++)
+    ChannelManager &chan_man = core.get_channelManager();
+    std::cout << "on est la" << std::endl;
+    std::string chans = message.get_params()[0];
+    while (chans.size() > 0)
     {
-        Channel *chan = chan_man->get_channel(message.get_params()[0]);
+        Channel *chan = chan_man.get_channel(get_arg(chans));
+        if(chans.find(',') != std::string::npos)
+        {
+            chans = chans.substr(chans.find(',') + 1, chans.size() - chans.find(','));
+        }
+        else
+            chans = "";
         if (chan == NULL)
         {
-            user.send_messsage(bld_err_nosuchchannel(message.get_params()[i]));
+            user.send_messsage(bld_err_nosuchchannel(chan->get_name()), false);
         }
         else if (chan->is_user_present(user.get_nickname()) == 0)
         {
@@ -202,14 +221,28 @@ void kick_handler(User &user, Message const &message, ServerCore &core)
         }
         else if (chan->is_user_OP(user))
         {
-            int j = 0;
-            while (message.get_params()[j][0] == '#')
-                j++;
-            for (j; message.get_params()[j][0] != ':'; j++)
+
+            std::string users = message.get_params()[1];
+            while (users.size() > 0)
             {
-                UserManager *user_man = &core.get_userManager();
-                User *user_kick = user_man->get_user(message.get_params()[j]);
-                chan->kick(user, *user_kick, get_reason(message));
+                std::cout << "chan = " << users << std::endl;
+                UserManager &user_man = core.get_userManager();
+                User *user_kick = user_man.get_user(get_arg(users));
+                std::string user_name = get_arg(users);
+                if(users.find(',') != std::string::npos)
+                    users = users.substr(users.find(',') + 1, users.size() - users.find(','));
+                else
+                    users = "";
+                if (user_kick == NULL)
+                {
+                    user.send_messsage(bld_err_nosuchnick(user_name), false);
+                    continue;
+                }
+                if (message.get_params().size() == 3)
+                    chan->kick(user, *user_kick, message.get_params()[2]);
+                else
+                    chan->kick(user, *user_kick, "");
+                    std::cout << "on va kick lui la " << std::endl;
             }
         }
         else

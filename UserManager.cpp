@@ -59,7 +59,7 @@ void UserManager::check_pings(void)
         // std::cout << this->users[i].get_delta() << std::endl;
         if (this->users[i]->get_delta() > 300000000)
         {
-                
+            std::cout << "2er pos ?" << std::endl;
             this->users[i]->set_state(User::WAITING_FOR_QUIT);
         }
         else if (this->users[i]->get_last_ping() + 100000000 <= time(NULL))

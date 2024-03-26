@@ -22,7 +22,7 @@ int     ChannelManager::join(User &user, std::string const &chan_name){
         this->channels.push_back(disney);
         chan = this->get_channel(chan_name);
         //std::cout << "name = " << chan_name << std::endl;
-        disney.add_OP(user);
+        chan->add_OP(user);
         std::cout << "NEW CHANNEL " << chan_name << std::endl;
     }
     chan->join(user);

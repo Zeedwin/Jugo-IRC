@@ -111,7 +111,10 @@ time_t             User::get_delta(void)       const{
 int     User::send_messsage(std::string const &message, bool throw_exception){
     int r = send(this->_fd, message.c_str(), message.size(), MSG_DONTWAIT | MSG_NOSIGNAL);
     if (throw_exception && r < 0)
+    {
+        std::cout << "PROBLEME ICI" << std::endl;
         throw DisconnectException();
+    }
     return(1);
 }
 
@@ -119,6 +122,7 @@ void    User::recvu(void){
     char buff[513];
     ssize_t ret = recv(this->_fd, buff, 512, MSG_DONTWAIT | MSG_NOSIGNAL);
     if (ret <= 0) {
+        std::cout << "LAAAA" << std::endl;
         throw DisconnectException();   
     } else {
         buff[ret] = 0;
