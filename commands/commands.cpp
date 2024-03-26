@@ -166,23 +166,20 @@ void part_handler(User &user, Message const &message, ServerCore &core)
     int pos = 0;
     std::string chanlist = message.get_params()[0];
 
-    if (message.get_params().size() < 1)
-    {
-        user.send_messsage("412 :No text to send");
-        return;
-    } else if (message.get_params().size() == 2) {
-        message_ = message.get_params()[1];
-    }
-    while ((pos = chanlist.find(",")) != std::string::npos) {
-        std::string channame = message.get_params()[0].substr(0, pos);
-
+    while (chanlist.size() > 0) {
+        std::string channame = get_arg(chanlist);
+        if (chanlist.find(',') != std::string::npos)
+        {
+            chanlist = chanlist.substr(chanlist.find(',') + 1, chanlist.size() - chanlist.find(','));
+        }
+        else{
+            chanlist = "";
+        }
         Channel *chan = _chan_man.get_channel(channame);
         if (chan)
             _chan_man.leave(user, *chan, message_);
         else
-            user.send_messsage(bld_err_nosuchchannel(message.get_params()[0]));
-        
-        chanlist.erase(0, pos + 1);
+            user.send_messsage(bld_err_nosuchchannel(channame));
     }
 }
 void quit_handler(User &user, Message const &message, ServerCore &core) {}
