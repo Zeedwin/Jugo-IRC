@@ -6,7 +6,7 @@ ChannelManager::ChannelManager(void){
     
 }
 Channel  *ChannelManager::get_channel(std::string const &name){
-    for (int i = 0; i < channels.size(); i++)
+    for (int i = 0; i < (int)channels.size(); i++)
     {
         if(channels[i].is_me(name))
         {
@@ -32,7 +32,7 @@ int     ChannelManager::join(User &user, std::string const &chan_name){
     return 0;
 }
 void    ChannelManager::leave(User &user, std::string const message){
-    for (int i = 0; i < channels.size(); i++)
+    for (int i = 0; i < (int)channels.size(); i++)
     {
             std::cout << "COUSCOUS A LA MAISON " << this->channels[i].is_user_present(user.get_nickname()) << std::endl;
         if (this->channels[i].is_user_present(user.get_nickname()) == 0)

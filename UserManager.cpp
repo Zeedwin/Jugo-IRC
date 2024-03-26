@@ -8,7 +8,7 @@ UserManager::UserManager(void)
 
 User *UserManager::get_user(std::string const &name)
 {
-    for (int i = 0; i < this->users.size(); i++)
+    for (unsigned long i = 0; i < this->users.size(); i++)
     {
         if (users[i]->is_me(name))
             return (this->users[i]);
@@ -18,7 +18,7 @@ User *UserManager::get_user(std::string const &name)
 
 User *UserManager::get_user(int fd)
 {
-    for (int i = 0; i < this->users.size(); i++)
+    for (unsigned long i = 0; i < this->users.size(); i++)
     {
         if (this->users[i]->is_me(fd))
             return (this->users[i]);
@@ -54,7 +54,7 @@ std::vector<User*>::iterator UserManager::end(void)
 
 void UserManager::check_pings(void)
 {
-    for (int i = 0; i < this->users.size(); i++)
+    for (unsigned long i = 0; i < this->users.size(); i++)
     {
         // std::cout << this->users[i].get_delta() << std::endl;
         if (this->users[i]->get_delta() > 300000000)

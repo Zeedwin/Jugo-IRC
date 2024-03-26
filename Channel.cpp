@@ -117,8 +117,7 @@ int Channel::is_user_present(std::string const &nickname)
 }
 
 int Channel::is_user_OP(User const &user) const{
-    std::cout << "taille liste oop = " << this->OPs.size() << std::endl;
-    for (int i = 0; i < this->OPs.size(); i++)
+    for (unsigned long i = 0; i < this->OPs.size(); i++)
     {
         std::cout << this->OPs[i]->get_nickname()<< " est dans la liste d'op" << std::endl;
         if(*this->OPs[i] == user)
@@ -131,8 +130,9 @@ int Channel::is_user_OP(User const &user) const{
 }
 
 int Channel::is_user_OP(std::string const &nickname) const{
-    for (int i = 0; i < this->OPs.size(); i++)
+    for (size_t i = 0; i < this->OPs.size(); i++)
     {
+        std::cout << "User: " << nickname << std::endl;
         if(this->OPs[i]->is_me(nickname) == 1)
         {
             return (1);
@@ -142,7 +142,7 @@ int Channel::is_user_OP(std::string const &nickname) const{
 }
 
 int Channel::broadcast(std::string const &message, const User *from_user){
-    for (int i = 0; i < this->members.size(); i++)
+    for (int i = 0; i < (int)this->members.size(); i++)
     {
         //std::cout << "il envoie = " << from_user->get_nickname() << std::endl;
         //std::cout << "membre = " << this->members[i]->get_nickname() << std::endl;
@@ -158,11 +158,7 @@ int Channel::broadcast(std::string const &message, const User *from_user){
 
 size_t Channel::members_count(void) const
 {
-    for (size_t i = 0; i < this->members.size(); i++)
-    {
-        if (i == this->members.size())
-            return (i);
-    }
+    return this->members.size();
 }
 
 const std::string Channel::get_username_list(void) const{
