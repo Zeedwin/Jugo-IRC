@@ -19,4 +19,5 @@ void kick_handler(User &user, Message const &message, ServerCore &core);
 void topic_handler(User &user, Message const &message, ServerCore &core);
 void whois_handler(User &user, Message const &message, ServerCore &core);
 void privmsg_handler(User &user, Message const &message, ServerCore &core);
+void invite_handler(User &user, Message const &message, ServerCore &core);
 #endif

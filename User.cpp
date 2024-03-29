@@ -15,6 +15,7 @@ User::User(int fd) : _fd(fd), _last_ping(time(NULL)), _last_pong(time(NULL)){
 
 int User::is_me(int fd) const
 {
+    // return this->_fd == fd
     if (this->_fd != fd)
         return(0);
     return(1);
@@ -130,6 +131,7 @@ void    User::recvu(void){
 }
 
 int     User::is_message_buffered(void){
+    // return this->buffer.find("\r\n") != npos;
     for (int i = 0; i <= (int)this->_buffer.size(); i++)
     {
         if (this->_buffer[i] == '\r' && this->_buffer[i + 1] == '\n')

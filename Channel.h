@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "User.h"
+#include "UserManager.h"
 
 class Channel
 {
@@ -13,6 +14,7 @@ class Channel
         std::string         topic;
         std::vector<User*>   members;
         std::vector<User*>   OPs;
+        std::vector<User*>   invited;
         const User          *topic_changer;
         std::string         key;
         int flags;
@@ -29,15 +31,20 @@ class Channel
         std::string const &get_topic(void) const;
         std::string const &get_key(void) const;
         int const &get_userlimit(void) const;
+        User             get_invited(void);
 
         int join(User &user);
         int quit(User &user, std::string const message);
         int kick(User &kicker, User &kicked, std::string const &reason);
+        int invite(User &user, User *uinvited);
+        int is_user_invited(User &user);
+        int is_on_invite(void);
 
         void set_userlimit(int i);
         void set_channel();
         void set_key(std::string str);
         void set_topic(std::string const &topic);
+        void set_invited(User &user);
         void set_topic_changer(const User &user);
         void set_flags(int flag);
         int add_OP(User &user);

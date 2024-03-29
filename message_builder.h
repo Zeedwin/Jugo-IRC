@@ -16,6 +16,8 @@ const std::string bld_rpl_endofwhois(const User &user);
 const std::string bld_rpl_namreply(const Channel &chan);
 const std::string bld_rpl_endofnames(const Channel &chan);
 const std::string bld_rpl_whoisidle(const User &user);
+const std::string bld_rpl_invite(const User &user, const Channel &chan);
+const std::string bld_rpl_invite_msg(const User &user, const Channel &chan);
 
 const std::string bld_rpl_topic_msg(const User &user, const Channel &chan);
 const std::string bld_join_msg(const User &user, const Channel &chan);

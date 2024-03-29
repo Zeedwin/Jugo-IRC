@@ -1,8 +1,0 @@
-#!/bin/bash
-
-if [[ $# -ne 3 ]]; then
-    echo "$0 <addr> <port> <pass>"
-    exit 1
-fi
-
-cat <(echo "PASS $3") <(echo "NICK tim") <(echo "USER d d d d") - | nc -C $1 $2

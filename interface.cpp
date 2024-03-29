@@ -22,7 +22,7 @@ const std::string bld_rpl_welcome(const User &user) {
 // }
 
 const std::string bld_rpl_topic(const Channel &chan) {
-	return "332 " + chan.get_name() + " :" + chan.get_topic() + "\r\n";
+	return "332 " + chan.get_name() + " :" + chan.get_name() + " " + chan.get_topic() + "\r\n";
 }
 
 const std::string bld_rpl_notopic(const Channel &chan) {
@@ -42,8 +42,19 @@ const std::string bld_rpl_endofwhois(const User &user) {
 }
 
 const std::string bld_rpl_namreply(const Channel &chan) {
-	return "353 = " + chan.get_name() + " :" + chan.get_username_list() + "\r\n";
+	return "353 " + chan.get_name() + " :" + chan.get_username_list() + "\r\n";
 }
+
+const std::string bld_rpl_invite(const User &user, const Channel &chan)
+{
+    return "341 " + chan.get_name() + " " + user.get_nickname() + " :" + chan.get_name() + "\r\n";
+}
+
+const std::string bld_rpl_invite_msg(const User &user, const Channel &chan)
+{
+    return  "\033[1;37m" + user.get_nickname() + "\033[0;37m"+ " invites you to " "\033[1;37m" + chan.get_name() + "\r\n";
+}
+
 
 const std::string bld_rpl_endofnames(const Channel &chan) {
 	return "366 " + chan.get_name() + "\r\n";

@@ -21,6 +21,7 @@ int main(int ac, char **av)
 {
     ServerCore sv(av[2]);
 
+    // todo verifier argc et aguments
     (void)ac;
     sv.loop(atoi(av[1]));
 }

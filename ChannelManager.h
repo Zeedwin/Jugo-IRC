@@ -9,7 +9,7 @@
 class ChannelManager
 {
     private:
-        std::vector<Channel>    channels;
+        std::vector<Channel*>    channels;
 
     public:
         ChannelManager(void);
@@ -21,7 +21,7 @@ class ChannelManager
 
         /*  rejoin le salon `chan_name` (en créant le salon + OP s'il n'existe pas),
             retourne 0 en cas de succès ou le numéro d'erreur associé au message `JOIN` en cas d'erreur */
-        int     join(User &user, std::string const &chan_name);
+        int     create(User &user, std::string const &chan_name);
         
         ~ChannelManager(void){
             

@@ -65,8 +65,30 @@ std::string const &Channel::get_key(void) const{
 
 
 int Channel::join(User &user){
+    std::cout << user.get_nickname() << " joined " << this->channel_name << std::endl;
     this->members.push_back(&user);
     this->broadcast(bld_join_msg(user, *this), NULL);
+    user.send_messsage(bld_rpl_topic(*this));
+    user.send_messsage(bld_rpl_namreply(*this));
+    return 0;
+}
+
+int Channel::is_on_invite(void){
+    //Todo: check chan inv flags
+    return 0;
+}
+
+
+int Channel::is_user_invited(User &user)
+{
+    for (std::vector<User*>::iterator it = this->invited.begin(); it < this->invited.end(); it++)
+    {
+        if (user == (**it))
+        {
+            return 1;
+        }
+        
+    }
     return 0;
 }
 
@@ -107,6 +129,17 @@ int Channel::kick(User &kicker, User &kicked, std::string const &reason)
     }
     return 0;
 }
+
+int Channel::invite(User &user, User *uinvited){
+
+    std::cout << "Debut" << std::endl;
+    user.send_messsage(bld_rpl_invite(user, *this));
+    uinvited->send_messsage(bld_rpl_invite_msg(user, *this));
+    this->invited.push_back(uinvited);
+     std::cout << "fin" << std::endl;
+    return 1;
+}
+
 
 void Channel::set_channel()
 {
