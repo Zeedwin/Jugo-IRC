@@ -27,6 +27,7 @@ const std::string bld_ping_msg(const User &user);
 const std::string bld_pong_msg(const User &user);
 const std::string bld_kick_msg(const User &oper, const User &target, const Channel &chan, const std::string reason);
 
+const std::string bld_err_badchannelkey(const std::string &chan);
 const std::string bld_err_nicknameinuse(const User &user);
 const std::string bld_err_nosuchnick(const std::string &name);
 const std::string bld_err_chanoprivsneeded(const Channel &chan);

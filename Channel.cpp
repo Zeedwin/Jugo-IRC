@@ -1,8 +1,7 @@
 #include "Channel.h"
 #include "message_builder.h"
 #include <iostream>
-Channel::Channel(std::string const &channel_name) : channel_name(channel_name) {
-
+Channel::Channel(std::string const &channel_name) : channel_name(channel_name), key(""), user_limit(-1){
 }
 
 bool Channel::operator==(Channel const &channel)
@@ -15,6 +14,41 @@ int Channel::is_me(std::string const &channel_name)
     return this->channel_name == channel_name;
 }
 
+void Channel::set_key(std::string str)
+{
+    this->key = str;
+}
+
+int Channel::remove_flag(int flag)
+{
+    this->flags &= ~flag;
+}
+/*
+1 << 1
+0010
+
+ 0000
+|0010
+ 0010
+
+   0010
+& ~0010
+
+   0010
+&  1101
+   0000
+*/
+
+void Channel::set_flags(int flag)
+{
+    this->flags |= flag;
+}
+
+int Channel::get_flag(int flag)
+{
+    return((this->flags & flag) == flag);
+}
+
 std::string const &Channel::get_name(void) const
 {
     return this->channel_name;
@@ -24,6 +58,11 @@ std::string const &Channel::get_topic(void) const
 {
     return this->topic;
 }
+
+std::string const &Channel::get_key(void) const{
+    return this->key;
+}
+
 
 int Channel::join(User &user){
     this->members.push_back(&user);
@@ -90,6 +129,15 @@ int Channel::add_OP(User &user){
 
 int Channel::remove_OP(const User &user)
 {
+    for (std::vector<User*>::iterator it = this->OPs.begin(); it < this->OPs.end(); it++)
+    {
+        if (user.get_nickname() == (*it)->get_nickname())
+        {
+            this->OPs.erase(it);
+            break;
+        }
+
+    }
     return 0;
 }
 
@@ -165,4 +213,12 @@ const std::string Channel::get_username_list(void) const{
 
     
     return "mafoi\n";
+}
+
+void Channel::set_userlimit(int i){
+    this->user_limit = i;
+}
+
+int const &Channel::get_userlimit(void) const{
+    return(this->user_limit);
 }

@@ -1,6 +1,7 @@
 #include "ChannelManager.h"
 #include "message_builder.h"
 #include <iostream>
+#include "defines.h"
 
 ChannelManager::ChannelManager(void){
     
@@ -23,6 +24,7 @@ int     ChannelManager::join(User &user, std::string const &chan_name){
         chan = this->get_channel(chan_name);
         //std::cout << "name = " << chan_name << std::endl;
         chan->add_OP(user);
+        chan->set_flags(MODE_t);
         std::cout << "NEW CHANNEL " << chan_name << std::endl;
     }
     chan->join(user);

@@ -6,6 +6,8 @@
 #include "../UserManager.h"
 #include "../ServerCore.h"
 #include <string> 
+#include <algorithm>
+#include <vector>
 std::string get_arg(std::string str)
 {
     std::string str2;
@@ -115,49 +117,149 @@ void join_handler(User &user, Message const &message, ServerCore &core)
     ChannelManager &_chanel_manager = core.get_channelManager();
     int pos = 0;
     std::string chans = message.get_params()[0];
+    std::string keys = "";
     while(chans.size() > 0)
     {
         std::string cha_name = get_arg(chans);
         Channel *chan = _chanel_manager.get_channel(cha_name);
+        if (message.get_params().size() > 1 && chan != NULL)
+            keys = message.get_params()[1];
         if(chans.find(',') != std::string::npos)
         {
             chans = chans.substr(chans.find(',') + 1, chans.size() - chans.find(','));
         }
         else
             chans = "";
-        _chanel_manager.join(user, cha_name);
+        if (chan == NULL)
+        {
+            _chanel_manager.join(user, cha_name);
+        }
+        else if (chan->get_key() != "")
+        {
+            std::string key = get_arg(keys);
+            if (keys.find(',') != std::string::npos)
+            {
+                keys = keys.substr(keys.find(',') + 1, keys.size() - keys.find(','));
+            }
+            else{
+                keys = "";
+            }
+            if (key == chan->get_key())
+            {
+                _chanel_manager.join(user, cha_name);
+            }
+            else
+            {
+                user.send_messsage(bld_err_badchannelkey(chan->get_name()));
+            }
+        }
     }
-    /*if (message.get_params().size() < 1)
-    {
-        user.send_messsage(bld_err_needmoreparams(message.get_command()));
-        return;
-    }
-    while ((pos = chanlist.find(",")) != (int)std::string::npos) {
-        std::string channame = message.get_params()[0].substr(0, pos);
-        Channel *chan = _chanel_manager.get_channel(channame);
-        std::cout << "Join channame: " << channame << std::endl;
-        _chanel_manager.join(user, channame);
-        chanlist.erase(0, pos + 1);
-    }*/
-    // while (1)
-    // {
-    //     if (i != 0)
-    //         i++;
-    //     if(message.get_params()[0].find(",", i) != std::string::npos)
-    //     {
-    //         name = message.get_params()[0].substr(i, message.get_params()[0].find(",", i) - i);
-    //         i = message.get_params()[0].find(",", i);
-    //         _chanel_manager->join(user, name);
-    //     }
-    //     else
-    //     {
-    //         name = message.get_params()[0].substr(i, message.get_params()[0].size() - i);
-    //         _chanel_manager->join(user, name);
-    //         break;
-    //     }
-    //}
 }
-void mode_handler(User &user, Message const &message, ServerCore &core) {}
+int check_mode(std::string str)
+{
+    for (int i = 0; i < str.size(); i++)
+    {
+        if (str[i] != 'i' && str[i] != 'k' && str[i] != 'o' && str[i] != 'l' && str[i] != 't' && str[i] != '+' && str[i] != '-')
+            return (0);
+    }
+    return (1);
+}
+
+int remaining_mode(std::string str)
+{
+    for (int i = 0; i < str.size(); i++)
+    {
+        if (str[i] == 'i' || str[i] == 'k' || str[i] == 'o' || str[i] == 'l' || str[i] == 't')
+            return (1);
+    }
+    return (0);
+}
+
+void mode_handler(User &user, Message const &message, ServerCore &core) {
+    std::string str = message.get_params()[1];
+    int i = 1;
+    int k = 2;
+    UserManager    &user_man = core.get_userManager();
+    ChannelManager &chan_man = core.get_channelManager();
+    Channel *chan = chan_man.get_channel(message.get_params()[0]);
+    if (check_mode(message.get_params()[1]) == 0)
+        return;
+    while(remaining_mode(str) == 1)
+    {
+        for (int j = 0; j < str.size(); j++)
+        {
+            if (str[j] == '+')
+                i = 1;
+            if (str[j] == '-')
+                i = -1;
+            if (str[j] == 'k')
+            {
+                if (i == 1)
+                {
+                    chan->set_flags(MODE_k);
+                    chan->set_key(message.get_params()[k]);
+                }
+                if (i == -1 && chan->get_key() == message.get_params()[k])
+                {
+                    chan->remove_flag(MODE_k);
+                    chan->set_key("");
+                }
+                k++;
+                str = str.substr(j + 1, str.size() - j);
+                break;
+            }
+            if (str[j] == 'o')
+            {
+                User *user = user_man.get_user(message.get_params()[k]);
+                if (i == 1)
+                {
+                    chan->add_OP(*user);
+                }
+                if (i == -1)
+                {
+                    chan->remove_OP(*user);
+                }
+                k++;
+                str = str.substr(j + 1, str.size() - j);
+                break;
+            }
+            if (str[j] == 'i')
+            {
+                if (i == 1)
+                    chan->set_flags(MODE_i);
+                if (i == -1)
+                    chan->remove_flag(MODE_i);
+                str = str.substr(j + 1, str.size() - j);
+                break;
+            }
+            if (str[i] == 't')
+            {
+                if (i == 1)
+                    chan->set_flags(MODE_t);
+                if (i == -1)
+                    chan->remove_flag(MODE_t);
+                str = str.substr(j + 1, str.size() - j);
+                break;
+            }
+            if (str[i] == 'l')
+            {
+                if (i == 1)
+                {
+                    chan->set_userlimit(atoi(message.get_params()[k].c_str()));
+                    chan->set_flags(MODE_l);
+                    k++;
+                }
+                if (i == -1)
+                {
+                    chan->set_userlimit(-1);
+                    chan->remove_flag(MODE_l);
+                }
+                str = str.substr(j + 1, str.size() - j);
+                break;
+            }
+        }
+    }
+}
 void part_handler(User &user, Message const &message, ServerCore &core)
 {
     ChannelManager &_chan_man = core.get_channelManager();
