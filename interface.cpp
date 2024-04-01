@@ -22,7 +22,7 @@ const std::string bld_rpl_welcome(const User &user) {
 // }
 
 const std::string bld_rpl_topic(const Channel &chan) {
-	return "332 " + chan.get_name() + " :" + chan.get_name() + " " + chan.get_topic() + "\r\n";
+	return "332 " + chan.get_name() + " :" + chan.get_topic() + "\r\n";
 }
 
 const std::string bld_rpl_notopic(const Channel &chan) {
@@ -71,7 +71,7 @@ const std::string bld_join_msg(const User &user, const Channel &chan) {
 }
 
 const std::string bld_rpl_topic_msg(const User &user, const Channel &chan) {
-    //std::cout << "HOLA AMIGOS" << std::endl;
+    std::cout << "Topic: " << chan.get_topic() << " name = " << chan.get_name() << std::endl;
     return ":" +user.get_prefix() + " TOPIC " + chan.get_name() + " :" + chan.get_topic() + "\r\n";
 }
 const std::string bld_privmsg_msg(const User &user, const Channel &chan, const std::string &message) {

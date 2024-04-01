@@ -38,10 +38,12 @@ int check_command(User &user, Message const &message, int i, ServerCore &core)
     }
     if ((int)vector.size() < command_table[i].min_arg)
     {
+        std::cout << "wooooow" << std::endl;
         return (2);
     }
     if (vector.size() > command_table[i].max_arg)
     {
+        std::cout << "waaaaw" << std::endl;
         return (0);
     }
     return (1);
@@ -49,14 +51,14 @@ int check_command(User &user, Message const &message, int i, ServerCore &core)
 
 void handle_command(User &user, Message const &message, ServerCore &core)
 {
-    // std::cout << "whwefwefgwekbwefkwehwe" << std::endl;
-    // std::cout << "command = " << message.get_command() << std::endl;
+     std::cout << "whwefwefgwekbwefkwehwe" << std::endl;
+     std::cout << "command = " << message.get_command() << std::endl;
     for (unsigned long index = 0; index < sizeof(command_table) / sizeof(command_table[0]); index++)
     {
-        // std::cout << message.get_command() << message.get_params()[0] << std::endl;
+         std::cout << message.get_command() << message.get_params()[0] << std::endl;
         if (message.get_command() == command_table[index].cmd && check_command(user, message, index, core) == 1)
         {
-            // std::cout << "on lrentre dedans" << std::endl;
+             std::cout << "on lrentre dedans" << std::endl;
             command_table[index].handle(user, message, core);
             return;
         }

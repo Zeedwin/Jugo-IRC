@@ -384,15 +384,20 @@ void topic_handler(User &user, Message const &message, ServerCore &core) {
     if (channel->is_user_OP(user))
     {
         if (message.get_params().size() == 2) {
-            channel->set_topic(message.get_params()[1]);
-        } else {
-            channel->set_topic("");
+            if (message.get_params()[1].size() == 1)   
+                user.send_messsage(bld_rpl_topic_msg(user, *channel));
+            else
+                channel->set_topic(message.get_params()[1]);
         }
+        std::cout << "rien" << std::endl;
         channel->broadcast(bld_rpl_topic_msg(user ,*channel), NULL); 
     }
-    else    
-        user.send_messsage(bld_rpl_topic(*channel));
-
+    else
+    {
+        std::cout << "b ppgbarrgbnrfghnsrien" << std::endl;
+        user.send_messsage((bld_rpl_topic(*channel)), false);
+        channel->broadcast(bld_rpl_topic_msg(user, *channel), &user);
+    }
 }
 // void whois_handler(User &user, Message const &message, ServerCore &core) {}
 void privmsg_handler(User &user, Message const &message, ServerCore &core)

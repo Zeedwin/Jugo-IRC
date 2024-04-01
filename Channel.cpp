@@ -133,7 +133,7 @@ int Channel::kick(User &kicker, User &kicked, std::string const &reason)
 int Channel::invite(User &user, User *uinvited){
 
     std::cout << "Debut" << std::endl;
-    user.send_messsage(bld_rpl_invite(user, *this));
+    user.send_messsage(bld_rpl_invite(*uinvited, *this));
     uinvited->send_messsage(bld_rpl_invite_msg(user, *this));
     this->invited.push_back(uinvited);
      std::cout << "fin" << std::endl;
@@ -236,6 +236,21 @@ int Channel::broadcast(std::string const &message, const User *from_user){
     }
     return 0;
 }
+
+/*int Channel::broadcast(std::string const &message, const User *from_user){
+    for (int i = 0; i < (int)this->members.size(); i++)
+    {
+        //std::cout << "il envoie = " << from_user->get_nickname() << std::endl;
+        //std::cout << "membre = " << this->members[i]->get_nickname() << std::endl;
+        if (this->members[i] != from_user)
+        {
+            //std::cout << "on est dans le print" << std::endl;
+            continue;
+        }
+        this->members[i]->send_messsage(message, false);
+    }
+    return 0;
+}*/
 
 size_t Channel::members_count(void) const
 {

@@ -86,17 +86,17 @@ void ServerCore::loop(int port)
                 try
                 {
                     client->recvu();
+                    std::cout << "1er pos ?"  << std::endl;
                     while (client->is_message_buffered())
                     {
                         Message msg;
                         client->get_message(msg);
-                        // std::cout << "Ramcho 2" << msg.get_params()[0] << std::endl;
+                        //std::cout << "Ramcho 2" << msg.get_params()[0] << std::endl;
                         handle_command(*client, msg, *this);
                     }
                 }
                 catch (const std::exception &e)
                 {
-                    std::cout << "1er pos ?"  << std::endl;
                     perror("error");
                     client->set_state(User::WAITING_FOR_QUIT);    
                     std::cerr << e.what() << std::endl;

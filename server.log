@@ -1,0 +1,30 @@
+<< PRIVMSG #ty :l
+<< TOPIC #ty
+>> :lmao!jgirard-@jgirard- TOPIC #ty :
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+<< TOPIC #ty l
+>> :lmao!jgirard-@jgirard- TOPIC #ty :
+>> :lmao!jgirard-@jgirard- TOPIC #ty :
+<< CAP LS
+<< PASS lol
+<< NICK lmao
+<< USER jgirard- jgirard- 127.0.0.1 :Julen Girard-grat
+>> 001 lmao :Welcome to the Internet Relay Network
+<< MODE lmao +i
+>> Welcome to Jugo's IRC Server
+>> 
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+<< JOIN #ty
+>> :lmao!jgirard-@jgirard- JOIN :#ty
+>> 332 #ty :
+>> 353 #ty :mafoi
+>> 
+<< TOPIC #ty lol
+>> :lmao!jgirard-@jgirard- TOPIC #ty :lol
+<< TOPIC #ty
+>> :lmao!jgirard-@jgirard- TOPIC #ty :lol
+<< TOPIC
