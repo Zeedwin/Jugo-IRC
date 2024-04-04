@@ -19,10 +19,12 @@ std::string get_arg(std::string str)
     str2 = str.substr(0, i);
     return(str2);
 }
-void cap_handler(User &user, Message const &message, ServerCore &core)
-{
-    return;
-}
+
+// void cap_handler(User &user, Message const &message, ServerCore &core)
+// {
+//     return;
+// }
+
 void pass_handler(User &user, Message const &message, ServerCore &core)
 {
     if (user.is_state(User::CONNECTED))
@@ -94,8 +96,11 @@ void nick_handler(User &user, Message const &message, ServerCore &core)
         user.set_nickname(msg);
     }
 }
+
 void user_handler(User &user, Message const &message, ServerCore &core)
 {
+    (void)user;
+    (void)core;
     // std::cout << message.get_params()[0]<< ' ' << message.get_params()[1] << ' ' << message.get_params()[2] << ' ' << message.get_params()[3] << std::endl;
     if (user.is_state(User::CONNECTED))
     {
@@ -178,7 +183,7 @@ void join_handler(User &user, Message const &message, ServerCore &core)
 }
 int check_mode(std::string str)
 {
-    for (int i = 0; i < str.size(); i++)
+    for (size_t i = 0; i < str.size(); i++)
     {
         if (str[i] != 'i' && str[i] != 'k' && str[i] != 'o' && str[i] != 'l' && str[i] != 't' && str[i] != '+' && str[i] != '-')
             return (0);
@@ -188,7 +193,7 @@ int check_mode(std::string str)
 
 int remaining_mode(std::string str)
 {
-    for (int i = 0; i < str.size(); i++)
+    for (size_t i = 0; i < str.size(); i++)
     {
         if (str[i] == 'i' || str[i] == 'k' || str[i] == 'o' || str[i] == 'l' || str[i] == 't')
             return (1);
@@ -197,6 +202,8 @@ int remaining_mode(std::string str)
 }
 
 void mode_handler(User &user, Message const &message, ServerCore &core) {
+    
+    (void)user;    
     std::string str = message.get_params()[1];
     int i = 1;
     int k = 2;
@@ -210,7 +217,7 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
         return;
     while(remaining_mode(str) == 1)
     {
-        for (int j = 0; j < str.size(); j++)
+        for (size_t j = 0; j < str.size(); j++)
         {
             if (str[j] == '+')
                 i = 1;
@@ -288,7 +295,6 @@ void part_handler(User &user, Message const &message, ServerCore &core)
 {
     ChannelManager &_chan_man = core.get_channelManager();
     std::string message_;
-    int pos = 0;
     std::string chanlist = message.get_params()[0];
 
     while (chanlist.size() > 0) {
@@ -307,14 +313,18 @@ void part_handler(User &user, Message const &message, ServerCore &core)
             user.send_messsage(bld_err_nosuchchannel(channame));
     }
 }
-void quit_handler(User &user, Message const &message, ServerCore &core) {}
+
+// TODO: void quit_handler(User &user, Message const &message, ServerCore &core) {}
+
 void pong_handler(User &user, Message const &message, ServerCore &core)
 {
-    // std::cout << "Pong HANDLED" << std::endl;
+    (void)message;
+    (void)core;
     user.set_last_pong();
 }
 void ping_handler(User &user, Message const &message, ServerCore &core)
 {
+    (void)core;
     user.send_messsage("PONG :" + message.get_params()[0] + "\r\n", false);
 }
 
@@ -335,7 +345,7 @@ void kick_handler(User &user, Message const &message, ServerCore &core)
             chans = "";
         if (chan == NULL)
         {
-            user.send_messsage(bld_err_nosuchchannel(chan->get_name()), false);
+            user.send_messsage(bld_err_nosuchchannel(chans), false);
         }
         else if (chan->is_user_present(user.get_nickname()) == 0)
         {
@@ -377,11 +387,10 @@ void topic_handler(User &user, Message const &message, ServerCore &core) {
     ChannelManager *_chanel_man = &core.get_channelManager();
     Channel *channel = _chanel_man->get_channel(message.get_params()[0]);
     if (!channel)
-    {
         user.send_messsage(bld_err_nosuchchannel(message.get_params()[0]));
-        return ;
-    }
-    if (channel->is_user_OP(user))
+    else if(!channel->is_user_present(user.get_nickname()))
+        bld_err_notonchannel(channel->get_name());
+    else if (channel->is_user_OP(user))
     {
         if (message.get_params().size() == 2) {
             if (message.get_params()[1].size() == 1)   
@@ -396,7 +405,7 @@ void topic_handler(User &user, Message const &message, ServerCore &core) {
     {
         std::cout << "b ppgbarrgbnrfghnsrien" << std::endl;
         user.send_messsage((bld_rpl_topic(*channel)), false);
-        channel->broadcast(bld_rpl_topic_msg(user, *channel), &user);
+       // channel->broadcast(bld_rpl_topic_msg(user, *channel), &user);
     }
 }
 // void whois_handler(User &user, Message const &message, ServerCore &core) {}

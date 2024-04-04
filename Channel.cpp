@@ -21,7 +21,7 @@ void Channel::set_key(std::string str)
 
 int Channel::remove_flag(int flag)
 {
-    this->flags &= ~flag;
+   return this->flags &= ~flag;
 }
 /*
 1 << 1
@@ -150,7 +150,8 @@ void Channel::set_topic(std::string const &topic){
 }
 
 void Channel::set_topic_changer(const User &user)
-{
+{    
+    this->topic_changer = user.get_nickname();
 }
 
 int Channel::add_OP(User &user){
@@ -173,15 +174,6 @@ int Channel::remove_OP(const User &user)
     }
     return 0;
 }
-
-int Channel::remove_user(User &user)
-{
-    return 0;
-}
-
-// int Channel::is_user_present(User const &user){
-
-// }
 
 int Channel::is_user_present(std::string const &nickname)
 {

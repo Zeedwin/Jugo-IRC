@@ -1,18 +1,21 @@
 #include <iostream>
 #include <string>
+#include <unistd.h>
 #include "command_handler.h"
 #include "commands/commands.h"
 #include "message_builder.h"
 
-struct
+struct command_table
 {
     std::string cmd;
     User::user_state_t state_needed;
     int min_arg;
-    size_t max_arg;
+    int max_arg;
     void (*handle)(User &, Message const &, ServerCore &);
 
-} command_table[] = {
+};
+
+struct command_table static const command_table[] = {
     {.cmd = "PASS",    .state_needed = (User::user_state_t)-1, .min_arg = 1, .max_arg = 1, .handle = pass_handler},
     {.cmd = "NICK",    .state_needed = (User::user_state_t)-1, .min_arg = 1, .max_arg = 1, .handle = nick_handler},
     {.cmd = "USER",    .state_needed = (User::user_state_t)-1, .min_arg = 4, .max_arg = 4, .handle = user_handler},
@@ -21,12 +24,11 @@ struct
     {.cmd = "PRIVMSG", .state_needed = User::CONNECTED,        .min_arg = 1, .max_arg =-1, .handle = privmsg_handler},
     {.cmd = "PING",    .state_needed = (User::user_state_t)-1, .min_arg = 1, .max_arg = 2, .handle = ping_handler},
     {.cmd = "PONG",    .state_needed = (User::user_state_t)-1, .min_arg = 0, .max_arg = 2, .handle = pong_handler},
-    {.cmd = "CAP",     .state_needed = (User::user_state_t)-1, .min_arg = 1, .max_arg = 2, .handle = cap_handler},
     {.cmd = "TOPIC",   .state_needed = (User::CONNECTED),      .min_arg = 1, .max_arg = 2, .handle = topic_handler},
     {.cmd = "KICK",    .state_needed = User::CONNECTED,        .min_arg = 1, .max_arg = -1,.handle = kick_handler},
     {.cmd = "MODE",    .state_needed = User::CONNECTED,        .min_arg = 1, .max_arg = -1,.handle = mode_handler},
     {.cmd = "INVITE",  .state_needed = (User::CONNECTED),      .min_arg = 2, .max_arg = 2, .handle = invite_handler}
-    };
+ };
 
 int check_command(User &user, Message const &message, int i, ServerCore &core)
 {
@@ -41,8 +43,9 @@ int check_command(User &user, Message const &message, int i, ServerCore &core)
         std::cout << "wooooow" << std::endl;
         return (2);
     }
-    if (vector.size() > command_table[i].max_arg)
+    if ((ssize_t)(vector.size()) > (ssize_t)command_table[i].max_arg && (ssize_t)command_table[i].max_arg >= 0)
     {
+        //TODO LO MIO: error handling
         std::cout << "waaaaw" << std::endl;
         return (0);
     }

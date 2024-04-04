@@ -15,7 +15,7 @@ class Channel
         std::vector<User*>   members;
         std::vector<User*>   OPs;
         std::vector<User*>   invited;
-        const User          *topic_changer;
+        std::string          topic_changer;
         std::string         key;
         int flags;
         int user_limit;

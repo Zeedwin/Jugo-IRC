@@ -33,7 +33,6 @@ UserManager &ServerCore::get_userManager(void){
 void ServerCore::loop(int port)
 {
     std::vector<pollfd_t> pfds;
-    memset(&pfds, 0, sizeof(pfds));
     sockaddr_in ipv4;
     memset(&ipv4, 0, sizeof(ipv4));
     int fd = 0;

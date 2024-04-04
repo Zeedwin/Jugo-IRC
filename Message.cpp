@@ -5,7 +5,7 @@
 Message::Message(void){}
 
 Message::Message(std::string const &raw_message){
-    //this->update()
+    this->update(raw_message);
 }
 
 void Message::update(const std::string &raw_message){
