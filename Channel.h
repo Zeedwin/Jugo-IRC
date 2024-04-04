@@ -12,13 +12,15 @@ class Channel
     private:
         std::string   		channel_name;
         std::string         topic;
-        std::vector<User*>   members;
-        std::vector<User*>   OPs;
-        std::vector<User*>   invited;
-        std::string          topic_changer;
+        std::vector<User*>  members;
+        std::vector<User*>  OPs;
+        std::vector<User*>  invited;
+        std::string         topic_changer;
+        std::string         topic_changer_prefix;
         std::string         key;
-        int flags;
-        int user_limit;
+        int                 flags;
+        time_t              t_changed_at;
+        int                 user_limit;
         
     public:
         Channel(std::string const &channel_name);
@@ -30,6 +32,9 @@ class Channel
         std::string const &get_name(void)  const;
         std::string const &get_topic(void) const;
         std::string const &get_key(void) const;
+        std::string const &get_topic_changer(void) const;
+        std::string const &get_topic_changer_prefix(void) const;
+        time_t  get_t_changed_at(void) const;
         int const &get_userlimit(void) const;
         User             get_invited(void);
 

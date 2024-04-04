@@ -6,7 +6,7 @@
 #include "Channel.h"
 #include "User.h"
 
-const std::string bld_rpl_topic(const Channel &chan);
+const std::string bld_rpl_topic(const Channel &chan, const std::string &nickname);
 const std::string bld_rpl_welcome(const User &user);
 const std::string bld_rpl_umodeis(const User &user);
 const std::string bld_rpl_notopic(const Channel &chan);
@@ -14,12 +14,13 @@ const std::string bld_rpl_whoisuser(const User &user);
 const std::string bld_rpl_whoisoperator(const User &user);
 const std::string bld_rpl_endofwhois(const User &user);
 const std::string bld_rpl_namreply(const Channel &chan);
+const std::string bld_rpl_topic_changer(const Channel &chan);
 const std::string bld_rpl_endofnames(const Channel &chan);
 const std::string bld_rpl_whoisidle(const User &user);
 const std::string bld_rpl_invite(const User &user, const Channel &chan);
 const std::string bld_rpl_invite_msg(const User &user, const Channel &chan);
 
-const std::string bld_rpl_topic_msg(const User &user, const Channel &chan);
+const std::string bld_rpl_topic_msg(const User &user, const Channel &chan, bool i);
 const std::string bld_join_msg(const User &user, const Channel &chan);
 const std::string bld_privmsg_msg(const User &user, const Channel &chan, const std::string &message);
 const std::string bld_privmsg_msg(const User &user, const User &target, const std::string &message);

@@ -68,7 +68,7 @@ int Channel::join(User &user){
     std::cout << user.get_nickname() << " joined " << this->channel_name << std::endl;
     this->members.push_back(&user);
     this->broadcast(bld_join_msg(user, *this), NULL);
-    user.send_messsage(bld_rpl_topic(*this));
+    user.send_messsage(bld_rpl_topic(*this, user.get_nickname()));
     user.send_messsage(bld_rpl_namreply(*this));
     return 0;
 }
@@ -152,6 +152,23 @@ void Channel::set_topic(std::string const &topic){
 void Channel::set_topic_changer(const User &user)
 {    
     this->topic_changer = user.get_nickname();
+    this->topic_changer_prefix = user.get_prefix();
+    this->t_changed_at = time(NULL);
+}
+
+std::string const &Channel::get_topic_changer(void) const
+{
+    return this->topic_changer;
+}
+
+std::string const &Channel::get_topic_changer_prefix(void) const
+{
+    return this->topic_changer_prefix;
+}
+
+time_t  Channel::get_t_changed_at(void) const
+{
+    return this->t_changed_at;
 }
 
 int Channel::add_OP(User &user){
@@ -251,7 +268,7 @@ size_t Channel::members_count(void) const
 
 const std::string Channel::get_username_list(void) const{
 
-    
+    //todo: MAFOI
     return "mafoi\n";
 }
 

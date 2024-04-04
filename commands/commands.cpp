@@ -393,18 +393,22 @@ void topic_handler(User &user, Message const &message, ServerCore &core) {
     else if (channel->is_user_OP(user))
     {
         if (message.get_params().size() == 2) {
-            if (message.get_params()[1].size() == 1)   
-                user.send_messsage(bld_rpl_topic_msg(user, *channel));
-            else
-                channel->set_topic(message.get_params()[1]);
+            
+            channel->set_topic_changer(user);
+            channel->set_topic(message.get_params()[1]);
+            channel->broadcast(bld_rpl_topic_msg(user ,*channel, true), NULL);
         }
-        std::cout << "rien" << std::endl;
-        channel->broadcast(bld_rpl_topic_msg(user ,*channel), NULL); 
+        else{
+            user.send_messsage(bld_rpl_topic(*channel, channel->get_topic_changer()));
+            user.send_messsage(bld_rpl_topic_changer(*channel));
+        }
     }
     else
     {
-        std::cout << "b ppgbarrgbnrfghnsrien" << std::endl;
-        user.send_messsage((bld_rpl_topic(*channel)), false);
+        if(message.get_params().size() == 2)
+            user.send_messsage(bld_err_chanoprivsneeded(*channel));
+        else
+          user.send_messsage((bld_rpl_topic(*channel, user.get_nickname())));
        // channel->broadcast(bld_rpl_topic_msg(user, *channel), &user);
     }
 }

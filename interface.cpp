@@ -21,8 +21,8 @@ const std::string bld_rpl_welcome(const User &user) {
 // 	return "221 " + user.get_prefix() + " +" + user.get_mode() + "\r\n";
 // }
 
-const std::string bld_rpl_topic(const Channel &chan) {
-	return "332 " + chan.get_name() + " :" + chan.get_topic() + "\r\n";
+const std::string bld_rpl_topic(const Channel &chan, const std::string &nickname) {
+    return "332 " + nickname  + " " + chan.get_name() + " :" + chan.get_topic() + "\r\n";
 }
 
 const std::string bld_rpl_notopic(const Channel &chan) {
@@ -40,6 +40,12 @@ const std::string bld_rpl_whoisoperator(const User &user) {
 const std::string bld_rpl_endofwhois(const User &user) {
     return "318 " + user.get_nickname() + " :End of /WHOIS list\r\n";
 }
+
+const std::string bld_rpl_topic_changer(const Channel &chan){
+    char a[255];
+    sprintf(a,"%ld",chan.get_t_changed_at());
+    return "333 " + chan.get_topic_changer() + " " + chan.get_name() + " " + chan.get_topic_changer_prefix() + " :" + a + "\r\n";
+} 
 
 const std::string bld_rpl_namreply(const Channel &chan) {
 	return "353 " + chan.get_name() + " :" + chan.get_username_list() + "\r\n";
@@ -70,8 +76,14 @@ const std::string bld_join_msg(const User &user, const Channel &chan) {
     return  ":" + user.get_prefix() + " JOIN :" + chan.get_name()  + "\r\n";
 }
 
-const std::string bld_rpl_topic_msg(const User &user, const Channel &chan) {
+const std::string bld_rpl_topic_msg(const User &user, const Channel &chan, bool i) {
     std::cout << "Topic: " << chan.get_topic() << " name = " << chan.get_name() << std::endl;
+    if (i == false)
+    {
+            std::cout << "QUERY: " << time(NULL) << std::endl;
+        return ":" +user.get_prefix() + " TOPIC " + chan.get_name() + "\r\n";
+    }
+    std::cout << "SET: " << time(NULL) << std::endl;
     return ":" +user.get_prefix() + " TOPIC " + chan.get_name() + " :" + chan.get_topic() + "\r\n";
 }
 const std::string bld_privmsg_msg(const User &user, const Channel &chan, const std::string &message) {

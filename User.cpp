@@ -109,6 +109,7 @@ time_t             User::get_delta(void)       const{
 }
 
 int     User::send_messsage(std::string const &message, bool throw_exception){
+    std::cout << "menfou: " << message << std::endl;
     int r = send(this->_fd, message.c_str(), message.size(), MSG_DONTWAIT | MSG_NOSIGNAL);
     if (throw_exception && r < 0)
     {
