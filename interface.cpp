@@ -17,9 +17,9 @@ const std::string bld_rpl_welcome(const User &user) {
 	return "001 " + user.get_nickname() + " :Welcome to the Internet Relay Network\n" + SUS + "\r\n";
 }
 
-// const std::string bld_rpl_umodeis(const User &user) {
-// 	return "221 " + user.get_prefix() + " +" + user.get_mode() + "\r\n";
-// }
+const std::string bld_rpl_umodeis(const User &user) {
+	return "221 " + user.get_prefix() + " +" + "@" + "\r\n";
+}
 
 const std::string bld_rpl_topic(const Channel &chan, const std::string &nickname) {
     return "332 " + nickname  + " " + chan.get_name() + " :" + chan.get_topic() + "\r\n";
@@ -47,8 +47,8 @@ const std::string bld_rpl_topic_changer(const Channel &chan){
     return "333 " + chan.get_topic_changer() + " " + chan.get_name() + " " + chan.get_topic_changer_prefix() + " :" + a + "\r\n";
 } 
 
-const std::string bld_rpl_namreply(const Channel &chan) {
-	return "353 " + chan.get_name() + " :" + chan.get_username_list() + "\r\n";
+const std::string bld_rpl_namreply(const Channel &chan, const User &user) {
+	return "353 " + user.get_nickname() + " @ " + chan.get_name() + " :" + chan.get_username_list("@") + "\r\n";
 }
 
 const std::string bld_rpl_invite(const User &user, const Channel &chan)
@@ -62,8 +62,13 @@ const std::string bld_rpl_invite_msg(const User &user, const Channel &chan)
 }
 
 
-const std::string bld_rpl_endofnames(const Channel &chan) {
-	return "366 " + chan.get_name() + "\r\n";
+const std::string bld_rpl_endofnames(const Channel &chan, User &user) {
+    if (chan.is_user_OP(user.get_nickname()))
+    {
+	    return "366 " + user.get_nickname() + " " + chan.get_name() + " :End of /NAMES list." + "\r\n";
+    }
+    
+	return "366 " + user.get_nickname() + " " + chan.get_name() + " :End of /NAMES list." + "\r\n";
 }
 
 // const std::string bld_rpl_whoisidle(const User &user) {

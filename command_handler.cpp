@@ -27,7 +27,7 @@ struct command_table static const command_table[] = {
     {.cmd = "TOPIC",   .state_needed = (User::CONNECTED),      .min_arg = 1, .max_arg = 2, .handle = topic_handler},
     {.cmd = "KICK",    .state_needed = User::CONNECTED,        .min_arg = 1, .max_arg = -1,.handle = kick_handler},
     {.cmd = "MODE",    .state_needed = User::CONNECTED,        .min_arg = 1, .max_arg = -1,.handle = mode_handler},
-    {.cmd = "INVITE",  .state_needed = (User::CONNECTED),      .min_arg = 2, .max_arg = 2, .handle = invite_handler}
+    {.cmd = "INVITE",  .state_needed = (User::CONNECTED),      .min_arg = 2, .max_arg = 2, .handle = invite_handler},
  };
 
 int check_command(User &user, Message const &message, int i, ServerCore &core)

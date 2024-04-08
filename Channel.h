@@ -34,9 +34,10 @@ class Channel
         std::string const &get_key(void) const;
         std::string const &get_topic_changer(void) const;
         std::string const &get_topic_changer_prefix(void) const;
-        time_t  get_t_changed_at(void) const;
-        int const &get_userlimit(void) const;
-        User             get_invited(void);
+        std::string const &get_member_names(void) const;
+        time_t      get_t_changed_at(void) const;
+        int const   &get_userlimit(void) const;
+        User        get_invited(void);
 
         int join(User &user);
         int quit(User &user, std::string const message);
@@ -66,7 +67,7 @@ class Channel
         int broadcast(std::string const &message, const User *from_user);
 
 		size_t members_count(void) const;
-		const std::string get_username_list(void) const;
+		const std::string get_username_list(std::string const mode) const;
         int get_flag(int flag);
         int remove_flag(int flag);
 

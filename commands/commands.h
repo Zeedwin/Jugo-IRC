@@ -15,6 +15,7 @@ void part_handler(User &user, Message const &message, ServerCore &core);
 void quit_handler(User &user, Message const &message, ServerCore &core);
 void pong_handler(User &user, Message const &message, ServerCore &core);
 void ping_handler(User &user, Message const &message, ServerCore &core);
+void names_handler(User &user, Message const &message, ServerCore &core);
 void kick_handler(User &user, Message const &message, ServerCore &core);
 void topic_handler(User &user, Message const &message, ServerCore &core);
 void whois_handler(User &user, Message const &message, ServerCore &core);

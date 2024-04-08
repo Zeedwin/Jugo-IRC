@@ -390,10 +390,11 @@ void topic_handler(User &user, Message const &message, ServerCore &core) {
         user.send_messsage(bld_err_nosuchchannel(message.get_params()[0]));
     else if(!channel->is_user_present(user.get_nickname()))
         bld_err_notonchannel(channel->get_name());
+    //else if (channel->get_topic_changer().empty())
+    //     user.send_messsage(bld_rpl_notopic(*channel));
     else if (channel->is_user_OP(user))
     {
         if (message.get_params().size() == 2) {
-            
             channel->set_topic_changer(user);
             channel->set_topic(message.get_params()[1]);
             channel->broadcast(bld_rpl_topic_msg(user ,*channel, true), NULL);

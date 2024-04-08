@@ -68,8 +68,9 @@ int Channel::join(User &user){
     std::cout << user.get_nickname() << " joined " << this->channel_name << std::endl;
     this->members.push_back(&user);
     this->broadcast(bld_join_msg(user, *this), NULL);
-    user.send_messsage(bld_rpl_topic(*this, user.get_nickname()));
-    user.send_messsage(bld_rpl_namreply(*this));
+    user.send_messsage(bld_rpl_umodeis(user));
+    user.send_messsage(bld_rpl_namreply(*this, user));
+    user.send_messsage(bld_rpl_endofnames(*this, user));
     return 0;
 }
 
@@ -266,10 +267,20 @@ size_t Channel::members_count(void) const
     return this->members.size();
 }
 
-const std::string Channel::get_username_list(void) const{
+const std::string Channel::get_username_list(std::string const mode) const{
 
-    //todo: MAFOI
-    return "mafoi\n";
+    std::string parsd_mem;
+
+    for (std::vector<User*>::const_iterator it = this->members.begin(); it < this->members.end(); it++)
+    {
+        if(this->is_user_OP((*it)->get_nickname()))
+        {
+            parsd_mem += mode + (*it)->get_nickname();
+        }
+        else
+            parsd_mem += (*it)->get_nickname();
+    }
+    return parsd_mem;
 }
 
 void Channel::set_userlimit(int i){
