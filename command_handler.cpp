@@ -19,7 +19,7 @@ struct command_table static const command_table[] = {
     {.cmd = "PASS",    .state_needed = (User::user_state_t)-1, .min_arg = 1, .max_arg = 1, .handle = pass_handler},
     {.cmd = "NICK",    .state_needed = (User::user_state_t)-1, .min_arg = 1, .max_arg = 1, .handle = nick_handler},
     {.cmd = "USER",    .state_needed = (User::user_state_t)-1, .min_arg = 4, .max_arg = 4, .handle = user_handler},
-    {.cmd = "JOIN",    .state_needed = User::CONNECTED,        .min_arg = 1, .max_arg = -1, .handle = join_handler},
+    {.cmd = "JOIN",    .state_needed = User::CONNECTED,        .min_arg = 1, .max_arg = -1,.handle = join_handler},
     {.cmd = "PART",    .state_needed = User::CONNECTED,        .min_arg = 1, .max_arg = 2, .handle = part_handler},
     {.cmd = "PRIVMSG", .state_needed = User::CONNECTED,        .min_arg = 1, .max_arg =-1, .handle = privmsg_handler},
     {.cmd = "PING",    .state_needed = (User::user_state_t)-1, .min_arg = 1, .max_arg = 2, .handle = ping_handler},
@@ -28,6 +28,7 @@ struct command_table static const command_table[] = {
     {.cmd = "KICK",    .state_needed = User::CONNECTED,        .min_arg = 1, .max_arg = -1,.handle = kick_handler},
     {.cmd = "MODE",    .state_needed = User::CONNECTED,        .min_arg = 1, .max_arg = -1,.handle = mode_handler},
     {.cmd = "INVITE",  .state_needed = (User::CONNECTED),      .min_arg = 2, .max_arg = 2, .handle = invite_handler},
+    {.cmd = "QUIT",    .state_needed = (User::CONNECTED),      .min_arg = 0, .max_arg = 1, .handle = quit_handler}
  };
 
 int check_command(User &user, Message const &message, int i, ServerCore &core)
@@ -58,7 +59,7 @@ void handle_command(User &user, Message const &message, ServerCore &core)
      std::cout << "command = " << message.get_command()<< "," << message.get_params().size() << std::endl;
     for (unsigned long index = 0; index < sizeof(command_table) / sizeof(command_table[0]); index++)
     {
-         std::cout << message.get_command() << message.get_params()[0] << std::endl;
+        // std::cout << message.get_command() << message.get_params()[0] << std::endl;
         if (message.get_command() == command_table[index].cmd && check_command(user, message, index, core) == 1)
         {
              std::cout << "on lrentre dedans" << std::endl;

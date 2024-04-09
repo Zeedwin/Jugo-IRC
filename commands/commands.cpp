@@ -294,7 +294,7 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
 void part_handler(User &user, Message const &message, ServerCore &core)
 {
     ChannelManager &_chan_man = core.get_channelManager();
-    std::string message_;
+    std::string message_ = message.get_params()[1];
     std::string chanlist = message.get_params()[0];
 
     while (chanlist.size() > 0) {
@@ -448,12 +448,18 @@ void privmsg_handler(User &user, Message const &message, ServerCore &core)
     {
         UserManager *user_man = &core.get_userManager();
         User *recipient_user = user_man->get_user(message.get_params()[0]);
-        // std::cout << bld_err_nosuchnick(message.get_params()[0]) << std::endl;
         if (recipient_user == NULL)
             user.send_messsage(bld_err_nosuchnick(message.get_params()[0]), false);
         else
             recipient_user->send_messsage(bld_privmsg_msg(user, *recipient_user, message_), false);
     }
+}
+
+void quit_handler(User &user, Message const &message, ServerCore &core){
+    ChannelManager &_chanel_man = core.get_channelManager();
+
+    _chanel_man.leave(user, message.get_params()[0]);
+    user.set_state(User::WAITING_FOR_QUIT);
 }
 
 void invite_handler(User &user, Message const &message, ServerCore &core){

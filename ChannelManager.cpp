@@ -27,14 +27,19 @@ int     ChannelManager::create(User &user, std::string const &chan_name){
     return 0;
 }
 void    ChannelManager::leave(User &user, std::string const message){
-    for (int i = 0; i < (int)channels.size(); i++)
+    
+    for (std::vector<Channel*>::iterator it = this->channels.begin(); it < this->channels.end(); it++)
     {
-            std::cout << "COUSCOUS A LA MAISON " << this->channels[i]->is_user_present(user.get_nickname()) << std::endl;
-        if (this->channels[i]->is_user_present(user.get_nickname()) == 0)
+            std::cout << "COUSCOUS A LA MAISON " << (*it)->is_user_present(user.get_nickname()) << std::endl;
+        if ((*it)->is_user_present(user.get_nickname()) == 0)
         {
 
-            this->channels[i]->quit(user, message);
-            //todo: destroy channel if empty & remove OP(discord mod privileges(dont post jb in #general use #jailbait))
+            (*it)->quit(user, message);
+            if((*it)->members_count() == 0)
+            {
+                delete *it;
+                it = this->channels.erase(it);
+            }
         }
     }
     

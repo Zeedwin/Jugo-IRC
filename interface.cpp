@@ -100,7 +100,7 @@ const std::string bld_privmsg_msg(const User &user, const User &target, const st
 }
 
 const std::string bld_part_msg(const User &user, const Channel &chan, const std::string &message) {
-    return ":" + user.get_prefix() + " PART " + chan.get_name() + " :" + message + "\r\n";
+    return ":" + user.get_prefix() + " PART " + chan.get_name() + " " + message + "\r\n";
 }
 
 const std::string bld_nick_msg(const User &user, const std::string &nick) {
