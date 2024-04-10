@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <iostream>
 
 #include <unistd.h>
 #include <poll.h>
@@ -19,9 +20,18 @@
 
 int main(int ac, char **av)
 {
-    ServerCore sv(av[2]);
-
-    // todo verifier argc et aguments
-    (void)ac;
-    sv.loop(atoi(av[1]));
+    if (ac == 3)
+    {
+        ServerCore sv(av[2]);
+        if(isdigit(atoi(av[1])) && atoi(av[1]) >= 0 && atoi(av[1]) <= 65535)
+            sv.loop(atoi(av[1]));
+        else
+        {
+            std::cout << "Error: Not an available port" << std::endl;
+            return 1;   
+        }
+    }
+    else
+        std::cout << "Error: <Port> <Password> " << std::endl;
+    return(1);
 }

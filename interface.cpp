@@ -199,6 +199,10 @@ const std::string bld_err_alreadyregistred(void)
     return "462 :Unauthorized command (already registered)\r\n";
 }
 
+const std::string bld_err_inviteonlychan(const Channel &chan){
+    return "473 " + chan.get_name() + " :Cannot join channel (+i)\r\n";
+}
+
 const std::string bld_err_unknowncmd(const std::string cmd)
 {
     return "421 " + cmd + " :Unknown command\r\n";

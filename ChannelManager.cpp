@@ -35,8 +35,8 @@ void    ChannelManager::leave(User &user, std::string const message){
             (*it)->quit(user, message);
             if((*it)->members_count() == 0)
             {
-                delete *it;
                 it = this->channels.erase(it);
+                delete *it;
             }
         }
     }
@@ -44,6 +44,12 @@ void    ChannelManager::leave(User &user, std::string const message){
 }   
 void    ChannelManager::leave(User &user, Channel &chan, std::string const message){
     chan.quit(user, message);
-    //std::cout << "COUSCOUS A LA MAISON" << std::endl;
-    //todo: destroy channel if empty & remove OP(discord mod privileges(dont post jb in #general use #jailbait))
+    for (std::vector<Channel*>::iterator it = this->channels.begin(); it < this->channels.end(); it++)
+    {
+        if (chan.members_count() == 0)
+        {
+            it = this->channels.erase(it);
+            delete *it;
+        }
+    }
 }

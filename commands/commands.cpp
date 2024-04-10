@@ -101,7 +101,6 @@ void user_handler(User &user, Message const &message, ServerCore &core)
 {
     (void)user;
     (void)core;
-    // std::cout << message.get_params()[0]<< ' ' << message.get_params()[1] << ' ' << message.get_params()[2] << ' ' << message.get_params()[3] << std::endl;
     if (user.is_state(User::CONNECTED))
     {
         user.send_messsage(bld_err_alreadyregistred(), false);
@@ -112,7 +111,6 @@ void user_handler(User &user, Message const &message, ServerCore &core)
         user.set_state(User::WAITING_FOR_CONN_2);
     else if (user.is_state(User::WAITING_FOR_CONN_2))
     {
-        // std::cout << "on l'a faaaiiiiittt " << std::endl;
         user.set_state(User::CONNECTED);
     }
     user.send_messsage(bld_rpl_welcome(user) + "\r\n", true);
@@ -155,8 +153,7 @@ void join_handler(User &user, Message const &message, ServerCore &core)
                     if (chan->is_user_invited(user))
                         chan->join(user);
                     else
-                    {}
-                        //todo bld err
+                        user.send_messsage(bld_err_inviteonlychan(*chan));
                 }
                 else
                     chan->join(user);
@@ -173,8 +170,7 @@ void join_handler(User &user, Message const &message, ServerCore &core)
                     if (chan->is_user_invited(user))
                         chan->join(user);
                     else
-                    {}
-                        //todo bld err
+                        user.send_messsage(bld_err_inviteonlychan(*chan));
                 }
                 else
                     chan->join(user);
@@ -204,89 +200,93 @@ int remaining_mode(std::string str)
 void mode_handler(User &user, Message const &message, ServerCore &core) {
     
     (void)user;    
-    std::string str = message.get_params()[1];
-    int i = 1;
-    int k = 2;
-    std::cout << message.get_command() << " " << message.get_params()[0] << message.get_params()[1] <<  std::endl;
-    UserManager    &user_man = core.get_userManager();
-    ChannelManager &chan_man = core.get_channelManager();
-    Channel *chan = chan_man.get_channel(message.get_params()[0]);
-    if (message.get_params()[0][0] != '#' && message.get_params()[0][0] != '&')
-        return;
-    if (check_mode(message.get_params()[1]) == 0)
-        return;
-    while(remaining_mode(str) == 1)
+
+    if (message.get_params().size())
     {
-        for (size_t j = 0; j < str.size(); j++)
+        std::string str = message.get_params()[1];
+        int i = 1;
+        int k = 2;
+        std::cout << message.get_command() << " " << message.get_params()[0] << message.get_params()[1] <<  std::endl;
+        UserManager    &user_man = core.get_userManager();
+        ChannelManager &chan_man = core.get_channelManager();
+        Channel *chan = chan_man.get_channel(message.get_params()[0]);
+        if (message.get_params()[0][0] != '#' && message.get_params()[0][0] != '&')
+            return;
+        if (check_mode(message.get_params()[1]) == 0)
+            return;
+        while(remaining_mode(str) == 1)
         {
-            if (str[j] == '+')
-                i = 1;
-            if (str[j] == '-')
-                i = -1;
-            if (str[j] == 'k')
+            for (size_t j = 0; j < str.size(); j++)
             {
-                if (i == 1)
+                if (str[j] == '+')
+                    i = 1;
+                if (str[j] == '-')
+                    i = -1;
+                if (str[j] == 'k')
                 {
-                    chan->set_flags(MODE_k);
-                    chan->set_key(message.get_params()[k]);
-                }
-                if (i == -1 && chan->get_key() == message.get_params()[k])
-                {
-                    chan->remove_flag(MODE_k);
-                    chan->set_key("");
-                }
-                k++;
-                str = str.substr(j + 1, str.size() - j);
-                break;
-            }
-            if (str[j] == 'o')
-            {
-                User *user = user_man.get_user(message.get_params()[k]);
-                if (i == 1)
-                {
-                    chan->add_OP(*user);
-                }
-                if (i == -1)
-                {
-                    chan->remove_OP(*user);
-                }
-                k++;
-                str = str.substr(j + 1, str.size() - j);
-                break;
-            }
-            if (str[j] == 'i')
-            {
-                if (i == 1)
-                    chan->set_flags(MODE_i);
-                if (i == -1)
-                    chan->remove_flag(MODE_i);
-                str = str.substr(j + 1, str.size() - j);
-                break;
-            }
-            if (str[i] == 't')
-            {
-                if (i == 1)
-                    chan->set_flags(MODE_t);
-                if (i == -1)
-                    chan->remove_flag(MODE_t);
-                str = str.substr(j + 1, str.size() - j);
-                break;
-            }
-            if (str[i] == 'l')
-            {
-                if (i == 1)
-                {
-                    chan->set_userlimit(atoi(message.get_params()[k].c_str()));
-                    chan->set_flags(MODE_l);
+                    if (i == 1)
+                    {
+                        chan->set_flags(MODE_k);
+                        chan->set_key(message.get_params()[k]);
+                    }
+                    if (i == -1 && chan->get_key() == message.get_params()[k])
+                    {
+                        chan->remove_flag(MODE_k);
+                        chan->set_key("");
+                    }
                     k++;
+                    str = str.substr(j + 1, str.size() - j);
+                    break;
                 }
-                if (i == -1)
+                if (str[j] == 'o')
                 {
-                    chan->set_userlimit(-1);
-                    chan->remove_flag(MODE_l);
+                    User *user = user_man.get_user(message.get_params()[k]);
+                    if (i == 1)
+                    {
+                        chan->add_OP(*user);
+                    }
+                    if (i == -1)
+                    {
+                        chan->remove_OP(*user);
+                    }
+                    k++;
+                    str = str.substr(j + 1, str.size() - j);
+                    break;
                 }
-                str = str.substr(j + 1, str.size() - j);
-                break;
+                if (str[j] == 'i')
+                {
+                    if (i == 1)
+                        chan->set_flags(MODE_i);
+                    if (i == -1)
+                        chan->remove_flag(MODE_i);
+                    str = str.substr(j + 1, str.size() - j);
+                    break;
+                }
+                if (str[i] == 't')
+                {
+                    if (i == 1)
+                        chan->set_flags(MODE_t);
+                    if (i == -1)
+                        chan->remove_flag(MODE_t);
+                    str = str.substr(j + 1, str.size() - j);
+                    break;
+                }
+                if (str[i] == 'l')
+                {
+                    if (i == 1)
+                    {
+                        chan->set_userlimit(atoi(message.get_params()[k].c_str()));
+                        chan->set_flags(MODE_l);
+                        k++;
+                    }
+                    if (i == -1)
+                    {
+                        chan->set_userlimit(-1);
+                        chan->remove_flag(MODE_l);
+                    }
+                    str = str.substr(j + 1, str.size() - j);
+                    break;
+                }
             }
         }
     }
@@ -294,7 +294,6 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
 void part_handler(User &user, Message const &message, ServerCore &core)
 {
     ChannelManager &_chan_man = core.get_channelManager();
-    std::string message_ = message.get_params()[1];
     std::string chanlist = message.get_params()[0];
 
     while (chanlist.size() > 0) {
@@ -307,14 +306,15 @@ void part_handler(User &user, Message const &message, ServerCore &core)
             chanlist = "";
         }
         Channel *chan = _chan_man.get_channel(channame);
-        if (chan)
-            _chan_man.leave(user, *chan, message_);
+        if (chan){
+            if (message.get_params()[1].size())
+                _chan_man.leave(user, *chan, message.get_params()[1]);
+            _chan_man.leave(user, *chan, "No reason specified");
+        }
         else
             user.send_messsage(bld_err_nosuchchannel(channame));
     }
 }
-
-// TODO: void quit_handler(User &user, Message const &message, ServerCore &core) {}
 
 void pong_handler(User &user, Message const &message, ServerCore &core)
 {
@@ -332,7 +332,6 @@ void ping_handler(User &user, Message const &message, ServerCore &core)
 void kick_handler(User &user, Message const &message, ServerCore &core)
 {
     ChannelManager &chan_man = core.get_channelManager();
-    std::cout << "on est la" << std::endl;
     std::string chans = message.get_params()[0];
     while (chans.size() > 0)
     {
@@ -390,8 +389,6 @@ void topic_handler(User &user, Message const &message, ServerCore &core) {
         user.send_messsage(bld_err_nosuchchannel(message.get_params()[0]));
     else if(!channel->is_user_present(user.get_nickname()))
         bld_err_notonchannel(channel->get_name());
-    //else if (channel->get_topic_changer().empty())
-    //     user.send_messsage(bld_rpl_notopic(*channel));
     else if (channel->is_user_OP(user))
     {
         if (message.get_params().size() == 2) {
@@ -410,15 +407,13 @@ void topic_handler(User &user, Message const &message, ServerCore &core) {
             user.send_messsage(bld_err_chanoprivsneeded(*channel));
         else
           user.send_messsage((bld_rpl_topic(*channel, user.get_nickname())));
-       // channel->broadcast(bld_rpl_topic_msg(user, *channel), &user);
     }
 }
-// void whois_handler(User &user, Message const &message, ServerCore &core) {}
+
 void privmsg_handler(User &user, Message const &message, ServerCore &core)
 {
     ChannelManager &_chanel_man = core.get_channelManager();
     std::string message_;
-    // std::cout << "errferfe " << user.get_nickname() << std::endl;
     if (message.get_params().size() < 1)
     {
         user.send_messsage("412 :No text to send");

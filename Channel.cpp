@@ -75,7 +75,8 @@ int Channel::join(User &user){
 }
 
 int Channel::is_on_invite(void){
-    //Todo: check chan inv flags
+    if (this->get_flag(MODE_i))
+        return 1;
     return 0;
 }
 
@@ -132,12 +133,9 @@ int Channel::kick(User &kicker, User &kicked, std::string const &reason)
 }
 
 int Channel::invite(User &user, User *uinvited){
-
-    std::cout << "Debut" << std::endl;
     user.send_messsage(bld_rpl_invite(*uinvited, *this));
     uinvited->send_messsage(bld_rpl_invite_msg(user, *this));
     this->invited.push_back(uinvited);
-     std::cout << "fin" << std::endl;
     return 1;
 }
 
