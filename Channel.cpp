@@ -198,12 +198,8 @@ int Channel::is_user_present(std::string const &nickname)
     for (std::vector<User*>::iterator it = this->members.begin(); it < this->members.end(); it++)
     {
         if ((*it)->get_nickname() == nickname)
-        {
-            std::cout << nickname << " is in " << this->channel_name << std::endl;
             return 1;
-        }
     }
-    //std::cout << nickname << "is not in " << this->channel_name << std::endl;
     return 0;
 }
 

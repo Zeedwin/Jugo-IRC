@@ -30,10 +30,8 @@ void    ChannelManager::leave(User &user, std::string const message){
     
     for (std::vector<Channel*>::iterator it = this->channels.begin(); it < this->channels.end(); it++)
     {
-            std::cout << "COUSCOUS A LA MAISON " << (*it)->is_user_present(user.get_nickname()) << std::endl;
-        if ((*it)->is_user_present(user.get_nickname()) == 0)
+        if ((*it)->is_user_present(user.get_nickname()) == 1)
         {
-
             (*it)->quit(user, message);
             if((*it)->members_count() == 0)
             {

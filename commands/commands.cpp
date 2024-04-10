@@ -458,7 +458,11 @@ void privmsg_handler(User &user, Message const &message, ServerCore &core)
 void quit_handler(User &user, Message const &message, ServerCore &core){
     ChannelManager &_chanel_man = core.get_channelManager();
 
-    _chanel_man.leave(user, message.get_params()[0]);
+    if (message.get_params().size())
+        _chanel_man.leave(user, message.get_params()[0]);
+    else
+        _chanel_man.leave(user, "No reason specified");
+    
     user.set_state(User::WAITING_FOR_QUIT);
 }
 
