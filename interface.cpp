@@ -48,6 +48,20 @@ const std::string bld_rpl_topic_changer(const Channel &chan){
     return "333 " + chan.get_topic_changer() + " " + chan.get_name() + " " + chan.get_topic_changer_prefix() + " :" + a + "\r\n";
 } 
 
+const std::string bld_rpl_userstatus(const User &user, Channel &chan){
+    std::string str;
+    if (chan.get_flag(MODE_i))
+        str += "i";
+    if (chan.get_flag(MODE_t))
+        str += "t";
+    if (chan.get_flag(MODE_k))
+        str += "k";
+    if (chan.get_flag(MODE_l))
+        str += "l";
+    
+    return "324 " + user.get_nickname() + " " + chan.get_name() + " +" + str +"\r\n";
+}
+
 const std::string bld_rpl_namreply(const Channel &chan, const User &user) {
 	return "353 " + user.get_nickname() + " @ " + chan.get_name() + " :" + chan.get_username_list("@") + "\r\n";
 }
@@ -55,6 +69,10 @@ const std::string bld_rpl_namreply(const Channel &chan, const User &user) {
 const std::string bld_rpl_invite(const User &user, const Channel &chan)
 {
     return "341 " + chan.get_name() + " " + user.get_nickname() + " :" + chan.get_name() + "\r\n";
+}
+ 
+const std::string bld_rpl_modechg(const User &user, const Channel &chan, const std::string mchanges) {
+    return ":" + user.get_prefix() + " MODE " + chan.get_name() + " " + mchanges + "\r\n";
 }
 
 const std::string bld_rpl_invite_msg(const User &user, const Channel &chan)
@@ -146,9 +164,9 @@ const std::string bld_err_erroneusnickname(const std::string &nick) {
     return "432 " + nick + " :Erroneus nickname\r\n";
 }
 
-const std::string bld_err_badchannelkey(const std::string &chan)
+const std::string bld_err_badchannelkey(const std::string &chan, const User &user)
 {
-    return ("475 " + chan + " :Cannot join channel (+k)" "\r\n");
+    return ("475" + user.get_nickname() + chan + " :Cannot join channel (+k) - bad key" "\r\n");
 }
 
 const std::string bld_err_nosuchchannel(const std::string &chan) {
@@ -207,6 +225,8 @@ const std::string bld_err_alreadyregistred(void)
 const std::string bld_err_inviteonlychan(const Channel &chan){
     return "473 " + chan.get_name() + " :Cannot join channel (+i)\r\n";
 }
+
+
 
 const std::string bld_err_unknowncmd(const std::string cmd)
 {

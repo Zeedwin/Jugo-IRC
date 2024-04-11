@@ -23,7 +23,7 @@ int main(int ac, char **av)
     if (ac == 3)
     {
         ServerCore sv(av[2]);
-        if(isdigit(atoi(av[1])) && atoi(av[1]) >= 0 && atoi(av[1]) <= 65535)
+        if(atoi(av[1]) >= 0 && atoi(av[1]) <= 65535)
             sv.loop(atoi(av[1]));
         else
         {

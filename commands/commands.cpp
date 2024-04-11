@@ -160,8 +160,7 @@ void join_handler(User &user, Message const &message, ServerCore &core)
             }
             else
             {
-                user.send_messsage(bld_err_badchannelkey(chan->get_name()));
-                return;
+                user.send_messsage(bld_err_badchannelkey(chan->get_name(), user));
             }
         }
         else if (chan->get_flag(MODE_i))
@@ -193,7 +192,7 @@ int check_mode(std::string str)
 
 int check_params(Message const &message)
 {
-    int nbpar = 0;
+    size_t nbpar = 0;
     int k = 0;
     int o = 0;
     int l = 0;
@@ -203,7 +202,7 @@ int check_params(Message const &message)
         signe = -1;
     else
         signe = 1;
-    for (int i = 0; i < str.size() ; i++)
+    for (size_t i = 0; i < str.size() ; i++)
     {
         if (str[i] == '+')
         {
@@ -247,7 +246,7 @@ std::string finalmodestr(std::string str)
     int k = 0;
     int l = 0;
     std::string str2;
-    for (int i = 0; i < str.size(); i++)
+    for (size_t i = 0; i < str.size(); i++)
     {
         if (str[i] == '+')
         {
@@ -261,17 +260,17 @@ std::string finalmodestr(std::string str)
             o = 0;
             l = 0;
         }
-        else if (str[i] = 'o' && o == 0)
+        else if (str[i] == 'o' && o == 0)
         {
             str2 += str[i];
             o = 1;
         }
-        else if (str[i] = 'k' && k == 0)
+        else if (str[i] == 'k' && k == 0)
         {
             str2 += str[i];
             k = 1;
         }
-        else if (str[i] = 'l' && l == 0)
+        else if (str[i] == 'l' && l == 0)
         {
             str2 += str[i];
             l = 1;
@@ -304,17 +303,17 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
             return;
         if (check_mode(message.get_params()[1]) == 0)
             return;//erreur opt inconnue
-        for (int j = 0; j < str.size(); j++)
+        for (size_t j = 0; j < str.size(); j++)
         {
             if (str[j] == '-')
             {
-                i == -1;
+                i =-1;
                 if (str[j + 1] != '+' && str[j + 1] != '-')
                     addmode += '-';
             }
             if (str[j] == '+')
             {
-                i == 1;
+                i = 1;
                 if (str[j + 1] != '+' && str[j + 1] != '-')
                     addmode += '+';
             }
@@ -414,7 +413,7 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
             }
         }
         std::string final = finalmodestr(addmode) + addopt;
-        user.send_messsage();
+        user.send_messsage(bld_rpl_modechg(user, *chan, final));
     }
 }
 void part_handler(User &user, Message const &message, ServerCore &core)

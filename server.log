@@ -1,188 +1,443 @@
-<< PRIVMSG #ty :l
-<< TOPIC #ty
->> :lmao!jgirard-@jgirard- TOPIC #ty :
-<< PING 127.0.0.1
->> PONG :127.0.0.1
---> lag pong
-<< TOPIC #ty l
->> :lmao!jgirard-@jgirard- TOPIC #ty :
->> :lmao!jgirard-@jgirard- TOPIC #ty :
-<< CAP LS
-<< PASS lol
-<< NICK lmao
-<< USER jgirard- jgirard- 127.0.0.1 :Julen Girard-grat
->> 001 lmao :Welcome to the Internet Relay Network
-<< MODE lmao +i
->> Welcome to Jugo's IRC Server
->> 
-<< PING 127.0.0.1
->> PONG :127.0.0.1
---> lag pong
-<< JOIN #ty
->> :lmao!jgirard-@jgirard- JOIN :#ty
->> 332 #ty :
->> 353 #ty :mafoi
->> 
-<< TOPIC #ty lol
->> :lmao!jgirard-@jgirard- TOPIC #ty :lol
-<< TOPIC #ty
->> :lmao!jgirard-@jgirard- TOPIC #ty :lol
-<< TOPIC
 << CAP LS
 << NICK ShowerNotGrower
 << USER jgirard- jgirard- irc.libera.chat :Julen Girard-grat
->> :calcium.libera.chat NOTICE * :*** Checking Ident
->> :calcium.libera.chat NOTICE * :*** Looking up your hostname...
->> :calcium.libera.chat NOTICE * :*** Couldn't look up your hostname
->> :calcium.libera.chat NOTICE * :*** No Ident response
->> :calcium.libera.chat CAP * LS :account-notify away-notify chghost extended-join multi-prefix sasl tls account-tag cap-notify echo-message server-time solanum.chat/identify-msg solanum.chat/oper solanum.chat/realhost
+>> :lithium.libera.chat NOTICE * :*** Checking Ident
+>> :lithium.libera.chat NOTICE * :*** Looking up your hostname...
+>> :lithium.libera.chat NOTICE * :*** Couldn't look up your hostname
+>> :lithium.libera.chat NOTICE * :*** No Ident response
+>> :lithium.libera.chat CAP * LS :account-notify away-notify chghost extended-join multi-prefix sasl tls account-tag cap-notify echo-message server-time solanum.chat/identify-msg solanum.chat/oper solanum.chat/realhost
 << CAP REQ :multi-prefix
->> :calcium.libera.chat CAP ShowerNotGrower ACK :multi-prefix
+>> :lithium.libera.chat CAP ShowerNotGrower ACK :multi-prefix
 << CAP END
->> :calcium.libera.chat 001 ShowerNotGrower :Welcome to the Libera.Chat Internet Relay Chat Network ShowerNotGrower
+>> :lithium.libera.chat 001 ShowerNotGrower :Welcome to the Libera.Chat Internet Relay Chat Network ShowerNotGrower
 << MODE ShowerNotGrower +i
->> :calcium.libera.chat 002 ShowerNotGrower :Your host is calcium.libera.chat[64.86.243.186/6697], running version solanum-1.0-dev
->> :calcium.libera.chat 003 ShowerNotGrower :This server was created Mon Nov 13 2023 at 21:34:42 UTC
->> :calcium.libera.chat 004 ShowerNotGrower calcium.libera.chat solanum-1.0-dev DGIMQRSZaghilopsuwz CFILMPQRSTbcefgijklmnopqrstuvz bkloveqjfI
->> :calcium.libera.chat 005 ShowerNotGrower ACCOUNTEXTBAN=a ETRACE SAFELIST ELIST=CMNTU MONITOR=100 CALLERID=g FNC WHOX KNOCK CHANTYPES=# EXCEPTS INVEX :are supported by this server
->> :calcium.libera.chat 005 ShowerNotGrower CHANMODES=eIbq,k,flj,CFLMPQRSTcgimnprstuz CHANLIMIT=#:250 PREFIX=(ov)@+ MAXLIST=bqeI:100 MODES=4 NETWORK=Libera.Chat STATUSMSG=@+ CASEMAPPING=rfc1459 NICKLEN=16 MAXNICKLEN=16 CHANNELLEN=50 TOPICLEN=390 :are supported by this server
->> :calcium.libera.chat 005 ShowerNotGrower DEAF=D TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: EXTBAN=$,agjrxz :are supported by this server
->> :calcium.libera.chat 251 ShowerNotGrower :There are 70 users and 35760 invisible on 28 servers
->> :calcium.libera.chat 252 ShowerNotGrower 43 :IRC Operators online
->> :calcium.libera.chat 253 ShowerNotGrower 213 :unknown connection(s)
->> :calcium.libera.chat 254 ShowerNotGrower 23160 :channels formed
->> :calcium.libera.chat 255 ShowerNotGrower :I have 2586 clients and 1 servers
->> :calcium.libera.chat 265 ShowerNotGrower 2586 2971 :Current local users 2586, max 2971
->> :calcium.libera.chat 266 ShowerNotGrower 35830 37286 :Current global users 35830, max 37286
->> :calcium.libera.chat 250 ShowerNotGrower :Highest connection count: 2972 (2971 clients) (308215 connections received)
->> :calcium.libera.chat 375 ShowerNotGrower :- calcium.libera.chat Message of the Day - 
->> :calcium.libera.chat 372 ShowerNotGrower :- Welcome to Libera Chat, the IRC network for
->> :calcium.libera.chat 372 ShowerNotGrower :- free & open-source software and peer directed projects.
->> :calcium.libera.chat 372 ShowerNotGrower :-  
->> :calcium.libera.chat 372 ShowerNotGrower :- Use of Libera Chat is governed by our network policies.
->> :calcium.libera.chat 372 ShowerNotGrower :-  
->> :calcium.libera.chat 372 ShowerNotGrower :- To reduce network abuses we perform open proxy checks
->> :calcium.libera.chat 372 ShowerNotGrower :- on hosts at connection time.
->> :calcium.libera.chat 372 ShowerNotGrower :-  
->> :calcium.libera.chat 372 ShowerNotGrower :- Please visit us in #libera for questions and support.
->> :calcium.libera.chat 372 ShowerNotGrower :-  
->> :calcium.libera.chat 372 ShowerNotGrower :- Website and documentation:  https://libera.chat
->> :calcium.libera.chat 372 ShowerNotGrower :- Webchat:                    https://web.libera.chat
->> :calcium.libera.chat 372 ShowerNotGrower :- Network policies:           https://libera.chat/policies
->> :calcium.libera.chat 372 ShowerNotGrower :- Email:                      support@libera.chat
->> :calcium.libera.chat 376 ShowerNotGrower :End of /MOTD command.
+>> :lithium.libera.chat 002 ShowerNotGrower :Your host is lithium.libera.chat[176.58.122.119/6697], running version solanum-1.0-dev
+>> :lithium.libera.chat 003 ShowerNotGrower :This server was created Sat Nov 18 2023 at 19:05:10 UTC
+>> :lithium.libera.chat 004 ShowerNotGrower lithium.libera.chat solanum-1.0-dev DGIMQRSZaghilopsuwz CFILMPQRSTbcefgijklmnopqrstuvz bkloveqjfI
+>> :lithium.libera.chat 005 ShowerNotGrower ACCOUNTEXTBAN=a SAFELIST ELIST=CMNTU KNOCK MONITOR=100 CALLERID=g ETRACE FNC WHOX CHANTYPES=# EXCEPTS INVEX :are supported by this server
+>> :lithium.libera.chat 005 ShowerNotGrower CHANMODES=eIbq,k,flj,CFLMPQRSTcgimnprstuz CHANLIMIT=#:250 PREFIX=(ov)@+ MAXLIST=bqeI:100 MODES=4 NETWORK=Libera.Chat STATUSMSG=@+ CASEMAPPING=rfc1459 NICKLEN=16 MAXNICKLEN=16 CHANNELLEN=50 TOPICLEN=390 :are supported by this server
+>> :lithium.libera.chat 005 ShowerNotGrower DEAF=D TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: EXTBAN=$,agjrxz :are supported by this server
+>> :lithium.libera.chat 251 ShowerNotGrower :There are 70 users and 35463 invisible on 28 servers
+>> :lithium.libera.chat 252 ShowerNotGrower 43 :IRC Operators online
+>> :lithium.libera.chat 253 ShowerNotGrower 71 :unknown connection(s)
+>> :lithium.libera.chat 254 ShowerNotGrower 23095 :channels formed
+>> :lithium.libera.chat 255 ShowerNotGrower :I have 2505 clients and 1 servers
+>> :lithium.libera.chat 265 ShowerNotGrower 2505 3424 :Current local users 2505, max 3424
+>> :lithium.libera.chat 266 ShowerNotGrower 35533 37286 :Current global users 35533, max 37286
+>> :lithium.libera.chat 250 ShowerNotGrower :Highest connection count: 3425 (3424 clients) (357817 connections received)
+>> :lithium.libera.chat 375 ShowerNotGrower :- lithium.libera.chat Message of the Day - 
+>> :lithium.libera.chat 372 ShowerNotGrower :- Welcome to Libera Chat, the IRC network for
+>> :lithium.libera.chat 372 ShowerNotGrower :- free & open-source software and peer directed projects.
+>> :lithium.libera.chat 372 ShowerNotGrower :-  
+>> :lithium.libera.chat 372 ShowerNotGrower :- Use of Libera Chat is governed by our network policies.
+>> :lithium.libera.chat 372 ShowerNotGrower :-  
+>> :lithium.libera.chat 372 ShowerNotGrower :- To reduce network abuses we perform open proxy checks
+>> :lithium.libera.chat 372 ShowerNotGrower :- on hosts at connection time.
+>> :lithium.libera.chat 372 ShowerNotGrower :-  
+>> :lithium.libera.chat 372 ShowerNotGrower :- Please visit us in #libera for questions and support.
+>> :lithium.libera.chat 372 ShowerNotGrower :-  
+>> :lithium.libera.chat 372 ShowerNotGrower :- Website and documentation:  https://libera.chat
+>> :lithium.libera.chat 372 ShowerNotGrower :- Webchat:                    https://web.libera.chat
+>> :lithium.libera.chat 372 ShowerNotGrower :- Network policies:           https://libera.chat/policies
+>> :lithium.libera.chat 372 ShowerNotGrower :- Email:                      support@libera.chat
+>> :lithium.libera.chat 376 ShowerNotGrower :End of /MOTD command.
 >> :ShowerNotGrower MODE ShowerNotGrower :+Ziw
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
---> lag pong
-<< JOIN #kfwe
->> :ShowerNotGrower!~jgirard-@62.129.8.171 JOIN #kfwe
->> :calcium.libera.chat MODE #kfwe +Cnst
->> :calcium.libera.chat 353 ShowerNotGrower @ #kfwe :@ShowerNotGrower
->> :calcium.libera.chat 366 ShowerNotGrower #kfwe :End of /NAMES list.
-<< MODE #kfwe
->> :calcium.libera.chat 324 ShowerNotGrower #kfwe +Cnst
+<< JOIN #tetera
+>> :ShowerNotGrower!~jgirard-@62.129.8.171 JOIN #tetera
+>> :lithium.libera.chat MODE #tetera +Cnst
+>> :lithium.libera.chat 353 ShowerNotGrower @ #tetera :@ShowerNotGrower
+>> :lithium.libera.chat 366 ShowerNotGrower #tetera :End of /NAMES list.
+<< MODE #tetera
+>> :lithium.libera.chat 324 ShowerNotGrower #tetera +Cnst
 --> chanquery mode
-<< WHO #kfwe
->> :calcium.libera.chat 329 ShowerNotGrower #kfwe 1712754022
+<< WHO #tetera
+>> :lithium.libera.chat 329 ShowerNotGrower #tetera 1712833112
 --> event 329
->> :calcium.libera.chat 352 ShowerNotGrower #kfwe ~jgirard- 62.129.8.171 calcium.libera.chat ShowerNotGrower H@ :0 Julen Girard-grat
+>> :lithium.libera.chat 352 ShowerNotGrower #tetera ~jgirard- 62.129.8.171 lithium.libera.chat ShowerNotGrower H@ :0 Julen Girard-grat
 --> silent event who
->> :calcium.libera.chat 315 ShowerNotGrower #kfwe :End of /WHO list.
+>> :lithium.libera.chat 315 ShowerNotGrower #tetera :End of /WHO list.
 --> chanquery who end
-<< MODE #kfwe b
->> :calcium.libera.chat 368 ShowerNotGrower #kfwe :End of Channel Ban List
+<< MODE #tetera b
+>> :lithium.libera.chat 368 ShowerNotGrower #tetera :End of Channel Ban List
 --> chanquery ban end
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< MODE #kfwe +i
->> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #kfwe +i 
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< MODE #kfwe -i
->> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #kfwe -i 
->> :lmao77sd!~jgirard-@62.129.8.171 JOIN #kfwe
-<< MODE #kfwe +i
->> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #kfwe +i 
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< MODE #kfwe +kl-i
->> :calcium.libera.chat 461 ShowerNotGrower MODE :Not enough parameters
-<< MODE #kfwe +kl-i yy 90
->> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #kfwe +kl-i yy 90
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< MODE #kfwe +klkii yy 90
->> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #kfwe +kli yy 90
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< MODE #kfwe +k-k kk yy
->> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #kfwe +k-k * *
-<< MODE #kfwe +k pp
->> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #kfwe +k pp
-<< MODE #kfwe -k pp
->> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #kfwe -k *
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< MODE #tetera +k hola
+>> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #tetera +k hola
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
-<< PING calcium.libera.chat
->> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< CAP LS
+<< PASS lol
+<< NICK ShowerNotGrower
+<< USER jgirard- jgirard- 127.0.0.1 :Julen Girard-grat
+>> 421 CAP :Unknown command
+>> 001 ShowerNot :Welcome to the Internet Relay Network
+<< MODE ShowerNot +i
+<< WHOIS ShowerNotGrower
+>> Welcome to Jugo's IRC Server
+>> 
+>> 421 WHOIS :Unknown command
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+<< JOIN #a
+>> :ShowerNot!jgirard-@jgirard- JOIN :#a
+>> 221 ShowerNot!jgirard-@jgirard- +@
+>> 324 ShowerNot #a +
+>> 353 ShowerNot @ #a :@ShowerNot
+>> 366 ShowerNot #a :End of /NAMES list.
+<< MODE #a
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> FAILED whois
+--> lag pong
+<< MODE #a +k alo\
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> FAILED mode channel: chanquery abort
+<< MODE #a
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< CAP LS
+<< PASS lol
+<< NICK ShowerNotGrower
+<< USER jgirard- jgirard- 127.0.0.1 :Julen Girard-grat
+>> 421 CAP :Unknown command
+>> 001 ShowerNot :Welcome to the Internet Relay Network
+<< MODE ShowerNot +i
+<< WHOIS ShowerNotGrower
+>> Welcome to Jugo's IRC Server
+>> 
+>> 421 WHOIS :Unknown command
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+<< JOIN #aq
+>> :ShowerNot!jgirard-@jgirard- JOIN :#aq
+>> 221 ShowerNot!jgirard-@jgirard- +@
+>> 324 ShowerNot #aq +t
+>> 353 ShowerNot @ #aq :@ShowerNot
+>> 366 ShowerNot #aq :End of /NAMES list.
+<< MODE #aq
+<< MODE #aq +k olo
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> FAILED whois
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> FAILED mode channel: chanquery abort
+<< MODE #aq
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> FAILED mode channel: chanquery abort
+<< WHO #aq
+--> lag pong
+>> 421 WHO :Unknown command
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+<< MODE #aq +o ShowerNot
+>> :ShowerNot!jgirard-@jgirard- MODE #aq #aq
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> FAILED who: chanquery abort
+<< WHO #aq
+--> lag pong
+>> 421 WHO :Unknown command
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< MODE #tetera +k asujdab
+>> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #tetera +k asujdab
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< QUIT :leaving
+<< CAP LS
+<< NICK ShowerNotGrower
+<< USER jgirard- jgirard- irc.libera.chat :Julen Girard-grat
+>> :lithium.libera.chat NOTICE * :*** Checking Ident
+>> :lithium.libera.chat NOTICE * :*** Looking up your hostname...
+>> :lithium.libera.chat NOTICE * :*** Couldn't look up your hostname
+>> :lithium.libera.chat NOTICE * :*** No Ident response
+>> :lithium.libera.chat CAP * LS :account-notify away-notify chghost extended-join multi-prefix sasl tls account-tag cap-notify echo-message server-time solanum.chat/identify-msg solanum.chat/oper solanum.chat/realhost
+<< CAP REQ :multi-prefix
+>> :lithium.libera.chat 433 * ShowerNotGrower :Nickname is already in use.
+<< NICK ShowerNo1Grower
+>> :lithium.libera.chat CAP * ACK :multi-prefix
+<< CAP END
+>> :lithium.libera.chat 001 ShowerNo1Grower :Welcome to the Libera.Chat Internet Relay Chat Network ShowerNo1Grower
+<< MODE ShowerNo1Grower +i
+<< WHOIS ShowerNotGrower
+>> :lithium.libera.chat 002 ShowerNo1Grower :Your host is lithium.libera.chat[176.58.122.119/6697], running version solanum-1.0-dev
+>> :lithium.libera.chat 003 ShowerNo1Grower :This server was created Sat Nov 18 2023 at 19:05:10 UTC
+>> :lithium.libera.chat 004 ShowerNo1Grower lithium.libera.chat solanum-1.0-dev DGIMQRSZaghilopsuwz CFILMPQRSTbcefgijklmnopqrstuvz bkloveqjfI
+>> :lithium.libera.chat 005 ShowerNo1Grower ACCOUNTEXTBAN=a SAFELIST ELIST=CMNTU KNOCK MONITOR=100 CALLERID=g ETRACE FNC WHOX CHANTYPES=# EXCEPTS INVEX :are supported by this server
+>> :lithium.libera.chat 005 ShowerNo1Grower CHANMODES=eIbq,k,flj,CFLMPQRSTcgimnprstuz CHANLIMIT=#:250 PREFIX=(ov)@+ MAXLIST=bqeI:100 MODES=4 NETWORK=Libera.Chat STATUSMSG=@+ CASEMAPPING=rfc1459 NICKLEN=16 MAXNICKLEN=16 CHANNELLEN=50 TOPICLEN=390 :are supported by this server
+>> :lithium.libera.chat 005 ShowerNo1Grower DEAF=D TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: EXTBAN=$,agjrxz :are supported by this server
+>> :lithium.libera.chat 251 ShowerNo1Grower :There are 70 users and 35670 invisible on 28 servers
+>> :lithium.libera.chat 252 ShowerNo1Grower 43 :IRC Operators online
+>> :lithium.libera.chat 253 ShowerNo1Grower 40 :unknown connection(s)
+>> :lithium.libera.chat 254 ShowerNo1Grower 23136 :channels formed
+>> :lithium.libera.chat 255 ShowerNo1Grower :I have 2475 clients and 1 servers
+>> :lithium.libera.chat 265 ShowerNo1Grower 2475 3424 :Current local users 2475, max 3424
+>> :lithium.libera.chat 266 ShowerNo1Grower 35740 37286 :Current global users 35740, max 37286
+>> :lithium.libera.chat 250 ShowerNo1Grower :Highest connection count: 3425 (3424 clients) (357986 connections received)
+>> :lithium.libera.chat 375 ShowerNo1Grower :- lithium.libera.chat Message of the Day - 
+>> :lithium.libera.chat 372 ShowerNo1Grower :- Welcome to Libera Chat, the IRC network for
+>> :lithium.libera.chat 372 ShowerNo1Grower :- free & open-source software and peer directed projects.
+>> :lithium.libera.chat 372 ShowerNo1Grower :-  
+>> :lithium.libera.chat 372 ShowerNo1Grower :- Use of Libera Chat is governed by our network policies.
+>> :lithium.libera.chat 372 ShowerNo1Grower :-  
+>> :lithium.libera.chat 372 ShowerNo1Grower :- To reduce network abuses we perform open proxy checks
+>> :lithium.libera.chat 372 ShowerNo1Grower :- on hosts at connection time.
+>> :lithium.libera.chat 372 ShowerNo1Grower :-  
+>> :lithium.libera.chat 372 ShowerNo1Grower :- Please visit us in #libera for questions and support.
+>> :lithium.libera.chat 372 ShowerNo1Grower :-  
+>> :lithium.libera.chat 372 ShowerNo1Grower :- Website and documentation:  https://libera.chat
+>> :lithium.libera.chat 372 ShowerNo1Grower :- Webchat:                    https://web.libera.chat
+>> :lithium.libera.chat 372 ShowerNo1Grower :- Network policies:           https://libera.chat/policies
+>> :lithium.libera.chat 372 ShowerNo1Grower :- Email:                      support@libera.chat
+>> :lithium.libera.chat 376 ShowerNo1Grower :End of /MOTD command.
+>> :ShowerNo1Grower MODE ShowerNo1Grower :+Ziw
+<< PING lithium.libera.chat
+>> :lithium.libera.chat 311 ShowerNo1Grower ShowerNotGrower ~jgirard- 62.129.8.171 * :Julen Girard-grat
+--> nickfind event whois
+>> :lithium.libera.chat 312 ShowerNo1Grower ShowerNotGrower copper.libera.chat :Sofia, BG
+--> event empty
+>> :lithium.libera.chat 671 ShowerNo1Grower ShowerNotGrower :is using a secure connection
+--> event empty
+>> :lithium.libera.chat 338 ShowerNo1Grower ShowerNotGrower 62.129.8.171 :actually using host
+--> event empty
+>> :lithium.libera.chat 318 ShowerNo1Grower ShowerNotGrower :End of /WHOIS list.
+--> event empty
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< NICK lazl0
+>> :ShowerNo1Grower!~jgirard-@62.129.8.171 NICK :lazl0
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< JOIN #lmao0
+>> :lithium.libera.chat 475 lazl0 #lmao0 :Cannot join channel (+k) - bad key
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
+--> lag pong
+<< PING lithium.libera.chat
+>> :lithium.libera.chat PONG lithium.libera.chat :lithium.libera.chat
 --> lag pong
 << QUIT :leaving
 << CAP LS

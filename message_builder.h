@@ -15,11 +15,12 @@ const std::string bld_rpl_whoisoperator(const User &user);
 const std::string bld_rpl_endofwhois(const User &user);
 const std::string bld_rpl_namreply(const Channel &chan, const User &user);
 const std::string bld_rpl_topic_changer(const Channel &chan);
+const std::string bld_rpl_userstatus(const User &user, Channel &chan);
 const std::string bld_rpl_endofnames(const Channel &chan, User &user);
 const std::string bld_rpl_whoisidle(const User &user);
 const std::string bld_rpl_invite(const User &user, const Channel &chan);
 const std::string bld_rpl_invite_msg(const User &user, const Channel &chan);
-
+const std::string bld_rpl_modechg(const User &user, const Channel &chan, const std::string mchanges);
 const std::string bld_rpl_topic_msg(const User &user, const Channel &chan, bool i);
 const std::string bld_rpl_currentmodestate(const User &user, const Channel &chan);
 const std::string bld_join_msg(const User &user, const Channel &chan);
@@ -31,7 +32,7 @@ const std::string bld_ping_msg(const User &user);
 const std::string bld_pong_msg(const User &user);
 const std::string bld_kick_msg(const User &oper, const User &target, const Channel &chan, const std::string reason);
 
-const std::string bld_err_badchannelkey(const std::string &chan);
+const std::string bld_err_badchannelkey(const std::string &chan, const User &user);
 const std::string bld_err_nicknameinuse(const User &user);
 const std::string bld_err_nosuchnick(const std::string &name);
 const std::string bld_err_chanoprivsneeded(const Channel &chan);

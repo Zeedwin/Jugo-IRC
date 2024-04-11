@@ -69,6 +69,7 @@ int Channel::join(User &user){
     this->members.push_back(&user);
     this->broadcast(bld_join_msg(user, *this), NULL);
     user.send_messsage(bld_rpl_umodeis(user));
+    user.send_messsage(bld_rpl_userstatus(user, *this));
     user.send_messsage(bld_rpl_namreply(*this, user));
     user.send_messsage(bld_rpl_endofnames(*this, user));
     return 0;
@@ -144,6 +145,10 @@ void Channel::set_channel()
 {
 }
 
+void Channel::set_chanmodes(const std::string &modes){
+    this->modes = modes;
+}
+
 void Channel::set_topic(std::string const &topic){
     this->topic = topic;
 }
@@ -163,6 +168,10 @@ std::string const &Channel::get_topic_changer(void) const
 std::string const &Channel::get_topic_changer_prefix(void) const
 {
     return this->topic_changer_prefix;
+}
+
+std::string const &Channel::get_chanmodes(void){
+    return this->modes;
 }
 
 time_t  Channel::get_t_changed_at(void) const
@@ -284,3 +293,4 @@ void Channel::set_userlimit(int i){
 int const &Channel::get_userlimit(void) const{
     return(this->user_limit);
 }
+
