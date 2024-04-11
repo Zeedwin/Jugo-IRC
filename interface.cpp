@@ -41,6 +41,7 @@ const std::string bld_rpl_endofwhois(const User &user) {
     return "318 " + user.get_nickname() + " :End of /WHOIS list\r\n";
 }
 
+
 const std::string bld_rpl_topic_changer(const Channel &chan){
     char a[255];
     sprintf(a,"%ld",chan.get_t_changed_at());
@@ -79,6 +80,10 @@ const std::string bld_rpl_endofnames(const Channel &chan, User &user) {
 #include <iostream>
 const std::string bld_join_msg(const User &user, const Channel &chan) {
     return  ":" + user.get_prefix() + " JOIN :" + chan.get_name()  + "\r\n";
+}
+
+const std::string bld_rpl_currentmodestate(const User &user, const Channel &chan, const std::string c_status){
+    return ":" + user.get_prefix() + " MODE " + chan.get_name() + " " + c_status + "\r\n";
 }
 
 const std::string bld_rpl_topic_msg(const User &user, const Channel &chan, bool i) {

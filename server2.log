@@ -1,0 +1,645 @@
+<< CAP LS
+<< NICK ShowerNotGrower
+<< USER jgirard- jgirard- irc.libera.chat :Julen Girard-grat
+>> :calcium.libera.chat NOTICE * :*** Checking Ident
+>> :calcium.libera.chat NOTICE * :*** Looking up your hostname...
+>> :calcium.libera.chat NOTICE * :*** Couldn't look up your hostname
+>> :calcium.libera.chat NOTICE * :*** No Ident response
+>> :calcium.libera.chat CAP * LS :account-notify away-notify chghost extended-join multi-prefix sasl tls account-tag cap-notify echo-message server-time solanum.chat/identify-msg solanum.chat/oper solanum.chat/realhost
+<< CAP REQ :multi-prefix
+>> :calcium.libera.chat 433 * ShowerNotGrower :Nickname is already in use.
+<< NICK ShowerNo1Grower
+>> :calcium.libera.chat CAP * ACK :multi-prefix
+<< CAP END
+>> :calcium.libera.chat 001 ShowerNo1Grower :Welcome to the Libera.Chat Internet Relay Chat Network ShowerNo1Grower
+<< MODE ShowerNo1Grower +i
+<< WHOIS ShowerNotGrower
+>> :calcium.libera.chat 002 ShowerNo1Grower :Your host is calcium.libera.chat[64.86.243.186/6697], running version solanum-1.0-dev
+>> :calcium.libera.chat 003 ShowerNo1Grower :This server was created Mon Nov 13 2023 at 21:34:42 UTC
+>> :calcium.libera.chat 004 ShowerNo1Grower calcium.libera.chat solanum-1.0-dev DGIMQRSZaghilopsuwz CFILMPQRSTbcefgijklmnopqrstuvz bkloveqjfI
+>> :calcium.libera.chat 005 ShowerNo1Grower ACCOUNTEXTBAN=a ETRACE SAFELIST ELIST=CMNTU MONITOR=100 CALLERID=g FNC WHOX KNOCK CHANTYPES=# EXCEPTS INVEX :are supported by this server
+>> :calcium.libera.chat 005 ShowerNo1Grower CHANMODES=eIbq,k,flj,CFLMPQRSTcgimnprstuz CHANLIMIT=#:250 PREFIX=(ov)@+ MAXLIST=bqeI:100 MODES=4 NETWORK=Libera.Chat STATUSMSG=@+ CASEMAPPING=rfc1459 NICKLEN=16 MAXNICKLEN=16 CHANNELLEN=50 TOPICLEN=390 :are supported by this server
+>> :calcium.libera.chat 005 ShowerNo1Grower DEAF=D TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: EXTBAN=$,agjrxz :are supported by this server
+>> :calcium.libera.chat 251 ShowerNo1Grower :There are 70 users and 35731 invisible on 28 servers
+>> :calcium.libera.chat 252 ShowerNo1Grower 43 :IRC Operators online
+>> :calcium.libera.chat 253 ShowerNo1Grower 273 :unknown connection(s)
+>> :calcium.libera.chat 254 ShowerNo1Grower 23157 :channels formed
+>> :calcium.libera.chat 255 ShowerNo1Grower :I have 2593 clients and 1 servers
+>> :calcium.libera.chat 265 ShowerNo1Grower 2593 2971 :Current local users 2593, max 2971
+>> :calcium.libera.chat 266 ShowerNo1Grower 35801 37286 :Current global users 35801, max 37286
+>> :calcium.libera.chat 250 ShowerNo1Grower :Highest connection count: 2972 (2971 clients) (308249 connections received)
+>> :calcium.libera.chat 375 ShowerNo1Grower :- calcium.libera.chat Message of the Day - 
+>> :calcium.libera.chat 372 ShowerNo1Grower :- Welcome to Libera Chat, the IRC network for
+>> :calcium.libera.chat 372 ShowerNo1Grower :- free & open-source software and peer directed projects.
+>> :calcium.libera.chat 372 ShowerNo1Grower :-  
+>> :calcium.libera.chat 372 ShowerNo1Grower :- Use of Libera Chat is governed by our network policies.
+>> :calcium.libera.chat 372 ShowerNo1Grower :-  
+>> :calcium.libera.chat 372 ShowerNo1Grower :- To reduce network abuses we perform open proxy checks
+>> :calcium.libera.chat 372 ShowerNo1Grower :- on hosts at connection time.
+>> :calcium.libera.chat 372 ShowerNo1Grower :-  
+>> :calcium.libera.chat 372 ShowerNo1Grower :- Please visit us in #libera for questions and support.
+>> :calcium.libera.chat 372 ShowerNo1Grower :-  
+>> :calcium.libera.chat 372 ShowerNo1Grower :- Website and documentation:  https://libera.chat
+>> :calcium.libera.chat 372 ShowerNo1Grower :- Webchat:                    https://web.libera.chat
+>> :calcium.libera.chat 372 ShowerNo1Grower :- Network policies:           https://libera.chat/policies
+>> :calcium.libera.chat 372 ShowerNo1Grower :- Email:                      support@libera.chat
+>> :calcium.libera.chat 376 ShowerNo1Grower :End of /MOTD command.
+>> :ShowerNo1Grower MODE ShowerNo1Grower :+Ziw
+<< PING calcium.libera.chat
+>> :calcium.libera.chat 311 ShowerNo1Grower ShowerNotGrower ~jgirard- 62.129.8.171 * :Julen Girard-grat
+--> nickfind event whois
+>> :calcium.libera.chat 312 ShowerNo1Grower ShowerNotGrower calcium.libera.chat :Montreal, CA
+--> event empty
+>> :calcium.libera.chat 671 ShowerNo1Grower ShowerNotGrower :is using a secure connection
+--> event empty
+>> :calcium.libera.chat 338 ShowerNo1Grower ShowerNotGrower 62.129.8.171 :actually using host
+--> event empty
+>> :calcium.libera.chat 317 ShowerNo1Grower ShowerNotGrower 196 1712753928 :seconds idle, signon time
+--> event empty
+>> :calcium.libera.chat 318 ShowerNo1Grower ShowerNotGrower :End of /WHOIS list.
+--> event empty
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< NICK lmao
+>> :ShowerNo1Grower!~jgirard-@62.129.8.171 NICK :lmao
+>> :NickServ!NickServ@services.libera.chat NOTICE lmao :This nickname is registered. Please choose a different nickname, or identify via /msg NickServ IDENTIFY SigmaWP <password>
+<< NICK lmao77sd
+>> :lmao!~jgirard-@62.129.8.171 NICK :lmao77sd
+<< JOIN #kfwe
+>> :lmao77sd!~jgirard-@62.129.8.171 JOIN #kfwe
+>> :calcium.libera.chat 353 lmao77sd @ #kfwe :lmao77sd @ShowerNotGrower
+>> :calcium.libera.chat 366 lmao77sd #kfwe :End of /NAMES list.
+<< MODE #kfwe
+>> :calcium.libera.chat 324 lmao77sd #kfwe +Cnst
+--> chanquery mode
+<< WHO #kfwe
+>> :calcium.libera.chat 329 lmao77sd #kfwe 1712754022
+--> event 329
+>> :calcium.libera.chat 352 lmao77sd #kfwe ~jgirard- 62.129.8.171 calcium.libera.chat lmao77sd H :0 Julen Girard-grat
+--> silent event who
+>> :calcium.libera.chat 352 lmao77sd #kfwe ~jgirard- 62.129.8.171 calcium.libera.chat ShowerNotGrower H@ :0 Julen Girard-grat
+--> silent event who
+>> :calcium.libera.chat 315 lmao77sd #kfwe :End of /WHO list.
+--> chanquery who end
+<< MODE #kfwe b
+>> :calcium.libera.chat 368 lmao77sd #kfwe :End of Channel Ban List
+--> chanquery ban end
+>> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #kfwe +i 
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+>> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #kfwe +kl-i yy 90
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+>> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #kfwe +kli yy 90
+>> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #kfwe +k-k * *
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+>> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #kfwe +k pp
+>> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #kfwe -k *
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+>> :ShowerNotGrower!~jgirard-@62.129.8.171 QUIT :Quit: leaving
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< JOIN #allor
+>> :lmao77sd!~jgirard-@62.129.8.171 JOIN #allor
+>> :calcium.libera.chat MODE #allor +Cnst
+>> :calcium.libera.chat 353 lmao77sd @ #allor :@lmao77sd
+>> :calcium.libera.chat 366 lmao77sd #allor :End of /NAMES list.
+<< MODE #allor
+>> :calcium.libera.chat 324 lmao77sd #allor +Cnst
+--> chanquery mode
+<< WHO #allor
+>> :calcium.libera.chat 329 lmao77sd #allor 1712756981
+--> event 329
+>> :calcium.libera.chat 352 lmao77sd #allor ~jgirard- 62.129.8.171 calcium.libera.chat lmao77sd H@ :0 Julen Girard-grat
+--> silent event who
+>> :calcium.libera.chat 315 lmao77sd #allor :End of /WHO list.
+--> chanquery who end
+<< MODE #allor b
+>> :calcium.libera.chat 368 lmao77sd #allor :End of Channel Ban List
+--> chanquery ban end
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< MODE #allor +k salsa
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor +k salsa
+<< MODE #allor -k asdgyuasi6dfg
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor -k *
+<< MODE #allor +k salsa
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor +k salsa
+<< MODE #allor -k salsa
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor -k *
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< MODE #allor +k salsa
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor +k salsa
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+>> :elias32!~jgirard-@62.129.8.171 JOIN #allor
+>> :elias32!~jgirard-@62.129.8.171 PART #allor
+<< MODE #allor +k-k salsa salsa
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor +k-k * *
+>> :elias32!~jgirard-@62.129.8.171 JOIN #allor
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+>> :elias32!~jgirard-@62.129.8.171 PART #allor
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< MODE #allor +k-k+kk saasda asdasd asd a
+<< MODE #allor -k+k-k asd asd qef
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor +k-k+kk * * a a
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor -k+k-k * * *
+<< MODE #allor +k-k+kk saasda asdasd asd a
+<< MODE #allor -k+k-k+k asd asd qef
+<< MODE #allor +k-kk
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor +k-k+kk * * a a
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor -k+k-k * * *
+<< MODE #allor +k-k+kk saasda asdasd asd a
+<< MODE #allor -k+k-k+k asd asd qef aiyudf
+<< MODE #allor +k-kkdfhdfohud asdurfb sdufh sggi
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor +k-k+kk * * a a
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor -k+k-k+k * * * aiyudf
+>> :calcium.libera.chat 472 lmao77sd d :is an unknown mode char to me
+<< MODE #allor +k-k+kk saasda asdasd asd a
+<< MODE #allor -k+k-k+k asd asd qef aiyudf
+<< MODE #allor +k-kkdfhdfohudihfsdhsdhfs asdurfb sdufh sggi sidhfos
+<< MODE #allor -odf
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor +k-k+kk * * a a
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor -k+k-k+k * * * aiyudf
+>> :calcium.libera.chat 472 lmao77sd d :is an unknown mode char to me
+>> :calcium.libera.chat 461 lmao77sd MODE :Not enough parameters
+<< MODE #allor +k-k+kk saasda asdasd asd a
+<< MODE #allor -k+k-k+k asd asd qef aiyudf
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor +k-k+kk * * a a
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor -k+k-k+k * * * aiyudf
+<< MODE #allor +k-kkdfhdfohudihfsdhsdhfs asdurfb sdufh sggi sidhfos
+>> :calcium.libera.chat 472 lmao77sd d :is an unknown mode char to me
+<< MODE #allor -odf sfgihdfoghdoghudfhgdfg
+>> :calcium.libera.chat 472 lmao77sd d :is an unknown mode char to me
+<< MODE #allor +k-k+kk saasda asdasd asd a
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor +k-k+kk * * a a
+<< MODE #allor -k+k-k+k asd asd qef aiyudf
+>> :lmao77sd!~jgirard-@62.129.8.171 MODE #allor -k+k-k+k * * * aiyudf
+<< MODE #allor +k-kkdfhdfohudihfsdhsdhfs asdurfb sdufh sggi sidhfos
+>> :calcium.libera.chat 472 lmao77sd d :is an unknown mode char to me
+<< MODE #allor -odf sfgihdfoghdoghudfhgdfg
+>> :calcium.libera.chat 472 lmao77sd d :is an unknown mode char to me
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+>> :elias32!~jgirard-@62.129.8.171 JOIN #allor
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< PING calcium.libera.chat
+>> :calcium.libera.chat PONG calcium.libera.chat :calcium.libera.chat
+--> lag pong
+<< QUIT :Lost terminal
