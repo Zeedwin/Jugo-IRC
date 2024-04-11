@@ -149,7 +149,7 @@ const std::string bld_err_nicknameinuse(const User &user) {
 }
 
 const std::string bld_err_nosuchnick(const std::string &name) {
-    return "401 " + name + " :" + name + "\r\n";
+    return "401 " + name + " :No such nick/channel\r\n";
 }
 
 const std::string bld_err_chanoprivsneeded(const Channel &chan) {
@@ -185,8 +185,8 @@ const std::string bld_err_usernotinchannel(const std::string &user, const Channe
     return "441 " + user + " " + chan.get_name() + " :They aren't on that channel\r\n";
 }
 
-const std::string bld_err_unknowmode(const std::string &mode) {
-    return "472 " + mode + " :is unknown mode char to me\r\n";
+const std::string bld_err_unknowmode(const char mode, const User &user) {
+    return "472 " + user.get_nickname() + " " + mode + " :is an unknown mode char to me\r\n";
 }
 
 const std::string bld_err_usersdontmatch(void) {
@@ -205,8 +205,8 @@ const std::string bld_err_cannotsendtochan(const Channel &chan) {
     return "404 " + chan.get_name() + " :No such channel\r\n";
 }
 
-const std::string bld_err_needmoreparams(const std::string &cmd) {
-    return "461 " + cmd + " :Not enough parameters\r\n";
+const std::string bld_err_needmoreparams(const std::string &cmd, const User &user) {
+    return "461 " + user.get_nickname() + " " + cmd + " :Not enough parameters\r\n";
 }
 
 const std::string bld_err_needpass(void) {
@@ -222,8 +222,12 @@ const std::string bld_err_alreadyregistred(void)
     return "462 :Unauthorized command (already registered)\r\n";
 }
 
-const std::string bld_err_inviteonlychan(const Channel &chan){
-    return "473 " + chan.get_name() + " :Cannot join channel (+i)\r\n";
+const std::string bld_err_chanfull(const Channel &chan, const User &user){
+    return "471 " + user.get_nickname() + " " + chan.get_name() + " :Cannot join channel (+l) - channel is full, try again later\r\n";
+}
+
+const std::string bld_err_inviteonlychan(const Channel &chan, const User &user){
+    return "473 " + user.get_nickname() + " " + chan.get_name() + " :Cannot join channel (+i) - you must be invited\r\n";
 }
 
 

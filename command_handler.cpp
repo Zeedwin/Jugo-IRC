@@ -67,7 +67,7 @@ void handle_command(User &user, Message const &message, ServerCore &core)
         }
         else if (message.get_command() == command_table[index].cmd && check_command(user, message, index, core) == 2)
         {
-            user.send_messsage(bld_err_needmoreparams(message.get_command()), false);
+            user.send_messsage(bld_err_needmoreparams(message.get_command(), user), false);
             return;
         }
     }

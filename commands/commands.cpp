@@ -8,6 +8,7 @@
 #include <string> 
 #include <algorithm>
 #include <vector>
+
 std::string get_arg(std::string str)
 {
     std::string str2;
@@ -136,6 +137,11 @@ void join_handler(User &user, Message const &message, ServerCore &core)
         {
             _chanel_manager.create(user, cha_name);
         }
+        else if (chan->get_flag(MODE_l))
+        {
+            if (chan->get_userlimit() == chan->members_count())
+                user.send_messsage(bld_err_chanfull(*chan, user));
+        }
         else if (chan->get_flag(MODE_k))
         {
             std::string key = get_arg(keys);
@@ -153,7 +159,7 @@ void join_handler(User &user, Message const &message, ServerCore &core)
                     if (chan->is_user_invited(user))
                         chan->join(user);
                     else
-                        user.send_messsage(bld_err_inviteonlychan(*chan));
+                        user.send_messsage(bld_err_inviteonlychan(*chan, user));
                 }
                 else
                     chan->join(user);
@@ -170,7 +176,7 @@ void join_handler(User &user, Message const &message, ServerCore &core)
                     if (chan->is_user_invited(user))
                         chan->join(user);
                     else
-                        user.send_messsage(bld_err_inviteonlychan(*chan));
+                        user.send_messsage(bld_err_inviteonlychan(*chan, user));
                 }
                 else
                     chan->join(user);
@@ -180,6 +186,7 @@ void join_handler(User &user, Message const &message, ServerCore &core)
         
     }
 }
+
 int check_mode(std::string str)
 {
     for (size_t i = 0; i < str.size(); i++)
@@ -298,11 +305,20 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
         ChannelManager &chan_man = core.get_channelManager();
         Channel *chan = chan_man.get_channel(message.get_params()[0]);
         if (check_params(message) == 0)
-            return; //erreur pas assez de params
-        if (message.get_params()[0][0] != '#' && message.get_params()[0][0] != '&')
+        {
+            user.send_messsage(bld_err_needmoreparams(message.get_command(), user));
             return;
+        }
+        if (message.get_params()[0][0] != '#' && message.get_params()[0][0] != '&')
+        {
+            user.send_messsage(bld_err_nosuchchannel(chan->get_name()));
+            return;
+        }
         if (check_mode(message.get_params()[1]) == 0)
-            return;//erreur opt inconnue
+        {
+            user.send_messsage(bld_err_unknowmode(message.get_params()[1][0], user));
+            return;
+        }
         for (size_t j = 0; j < str.size(); j++)
         {
             if (str[j] == '-')
@@ -366,7 +382,7 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
                     }
                     else
                     {
-                        user.send_messsage(bld_err_usernotinchannel(message.get_params()[k], *chan));
+                        user.send_messsage(bld_err_nosuchnick(user.get_nickname()));
                     }
                 }
                 if (i == -1)
@@ -380,7 +396,7 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
                     }
                     else
                     {
-                        user.send_messsage(bld_err_usernotinchannel(message.get_params()[k], *chan));
+                        user.send_messsage(bld_err_nosuchnick(user.get_nickname()));
                     }
                     
                 }
