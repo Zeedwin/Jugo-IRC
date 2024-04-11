@@ -136,7 +136,7 @@ void join_handler(User &user, Message const &message, ServerCore &core)
         {
             _chanel_manager.create(user, cha_name);
         }
-        else if (chan->get_key() != "")
+        else if (chan->get_flag(MODE_k))
         {
             std::string key = get_arg(keys);
             if (keys.find(',') != std::string::npos)
@@ -161,9 +161,10 @@ void join_handler(User &user, Message const &message, ServerCore &core)
             else
             {
                 user.send_messsage(bld_err_badchannelkey(chan->get_name()));
+                return;
             }
         }
-        else if (chan->get_key() == "")
+        else if (chan->get_flag(MODE_i))
         {
                 if (chan->is_on_invite())
                 {
@@ -175,6 +176,9 @@ void join_handler(User &user, Message const &message, ServerCore &core)
                 else
                     chan->join(user);
         }
+        else
+            chan->join(user);
+        
     }
 }
 int check_mode(std::string str)
@@ -187,14 +191,96 @@ int check_mode(std::string str)
     return (1);
 }
 
-int remaining_mode(std::string str)
+int check_params(Message const &message)
 {
-    for (size_t i = 0; i < str.size(); i++)
+    int nbpar = 0;
+    int k = 0;
+    int o = 0;
+    int l = 0;
+    int signe;
+    std::string str = message.get_params()[1];
+    if (str[0] == '-')
+        signe = -1;
+    else
+        signe = 1;
+    for (int i = 0; i < str.size() ; i++)
     {
-        if (str[i] == 'i' || str[i] == 'k' || str[i] == 'o' || str[i] == 'l' || str[i] == 't')
-            return (1);
+        if (str[i] == '+')
+        {
+            signe = 1;
+            k = 0;
+            o = 0;
+            l = 0;
+        }
+        if (str[i] == '-')
+        {
+            signe = -1;
+            k = 0;
+            o = 0;
+            l = 0;
+        }
+        if (str[i] == 'o' && o == 0)
+        {
+            nbpar += 1;
+            o = 1;
+        }
+        if (str[i] == 'k' && k == 0)
+        {
+            nbpar += 1;
+            k = 1;
+        }
+        if (str[i] == 'l' && l == 0 && signe == 1)
+        {
+            nbpar += 1;
+            l = 1;
+        }
     }
-    return (0);
+    if (nbpar < message.get_params().size() - 2)
+        return (0);
+    return (1);
+}
+
+
+std::string finalmodestr(std::string str)
+{
+    int o = 0;
+    int k = 0;
+    int l = 0;
+    std::string str2;
+    for (int i = 0; i < str.size(); i++)
+    {
+        if (str[i] == '+')
+        {
+            k = 0;
+            o = 0;
+            l = 0;
+        }
+        else if (str[i] == '-')
+        {
+            k = 0;
+            o = 0;
+            l = 0;
+        }
+        else if (str[i] = 'o' && o == 0)
+        {
+            str2 += str[i];
+            o = 1;
+        }
+        else if (str[i] = 'k' && k == 0)
+        {
+            str2 += str[i];
+            k = 1;
+        }
+        else if (str[i] = 'l' && l == 0)
+        {
+            str2 += str[i];
+            l = 1;
+        }
+        else{
+            str2 += str[i];
+        }
+    }
+    return str2;
 }
 
 void mode_handler(User &user, Message const &message, ServerCore &core) {
@@ -206,89 +292,129 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
         std::string str = message.get_params()[1];
         int i = 1;
         int k = 2;
+        std::string addmode;
+        std::string addopt = " ";
         std::cout << message.get_command() << " " << message.get_params()[0] << message.get_params()[1] <<  std::endl;
         UserManager    &user_man = core.get_userManager();
         ChannelManager &chan_man = core.get_channelManager();
         Channel *chan = chan_man.get_channel(message.get_params()[0]);
+        if (check_params(message) == 0)
+            return; //erreur pas assez de params
         if (message.get_params()[0][0] != '#' && message.get_params()[0][0] != '&')
             return;
         if (check_mode(message.get_params()[1]) == 0)
-            return;
-        while(remaining_mode(str) == 1)
+            return;//erreur opt inconnue
+        for (int j = 0; j < str.size(); j++)
         {
-            for (size_t j = 0; j < str.size(); j++)
+            if (str[j] == '-')
             {
-                if (str[j] == '+')
-                    i = 1;
-                if (str[j] == '-')
-                    i = -1;
-                if (str[j] == 'k')
+                i == -1;
+                if (str[j + 1] != '+' && str[j + 1] != '-')
+                    addmode += '-';
+            }
+            if (str[j] == '+')
+            {
+                i == 1;
+                if (str[j + 1] != '+' && str[j + 1] != '-')
+                    addmode += '+';
+            }
+            if (str[j] == 'k')
+            {
+                if (i == 1)
                 {
-                    if (i == 1)
-                    {
-                        chan->set_flags(MODE_k);
-                        chan->set_key(message.get_params()[k]);
-                    }
-                    if (i == -1 && chan->get_key() == message.get_params()[k])
-                    {
-                        chan->remove_flag(MODE_k);
-                        chan->set_key("");
-                    }
+                    chan->set_flags(MODE_k);
+                    chan->set_key(message.get_params()[k]);
+                    addmode += 'k';
+                    addopt += message.get_params()[k] + ' ';
                     k++;
-                    str = str.substr(j + 1, str.size() - j);
-                    break;
                 }
-                if (str[j] == 'o')
+                if (i == -1 && chan->get_flag(MODE_k) == 1)
                 {
-                    User *user = user_man.get_user(message.get_params()[k]);
-                    if (i == 1)
-                    {
-                        chan->add_OP(*user);
-                    }
-                    if (i == -1)
-                    {
-                        chan->remove_OP(*user);
-                    }
+                    chan->remove_flag(MODE_k);
+                    chan->set_key("");
+                    addmode += 'k';
+                    addopt += "* ";
                     k++;
-                    str = str.substr(j + 1, str.size() - j);
-                    break;
                 }
-                if (str[j] == 'i')
+            }
+            if (str[j] == 'l')
+            {
+                if (i == 1)
                 {
-                    if (i == 1)
-                        chan->set_flags(MODE_i);
-                    if (i == -1)
-                        chan->remove_flag(MODE_i);
-                    str = str.substr(j + 1, str.size() - j);
-                    break;
+                    chan->set_flags(MODE_l);
+                    chan->set_userlimit(atoi(message.get_params()[k].c_str()));
+                    addmode += 'l';
+                    addopt += message.get_params()[k] + ' ';
+                    k++;
                 }
-                if (str[i] == 't')
+                if (i == -1 && chan->get_flag(MODE_l) == 1)
                 {
-                    if (i == 1)
-                        chan->set_flags(MODE_t);
-                    if (i == -1)
-                        chan->remove_flag(MODE_t);
-                    str = str.substr(j + 1, str.size() - j);
-                    break;
+                    chan->remove_flag(MODE_l);
+                    chan->set_userlimit(-1);
+                    addmode += 'l';
                 }
-                if (str[i] == 'l')
+            }
+            if (str[j] == 'o')
+            {
+                if (i == 1)
                 {
-                    if (i == 1)
+                    if (chan->is_user_present(message.get_params()[k]) == 1)
                     {
-                        chan->set_userlimit(atoi(message.get_params()[k].c_str()));
-                        chan->set_flags(MODE_l);
+                        chan->add_OP(*user_man.get_user(message.get_params()[k]));
+                        addmode += 'o';
+                        addopt += message.get_params()[k] + ' ';
                         k++;
                     }
-                    if (i == -1)
+                    else
                     {
-                        chan->set_userlimit(-1);
-                        chan->remove_flag(MODE_l);
+                        user.send_messsage(bld_err_usernotinchannel(message.get_params()[k], *chan));
                     }
-                    str = str.substr(j + 1, str.size() - j);
-                    break;
+                }
+                if (i == -1)
+                {
+                    if (chan->is_user_present(message.get_params()[k]) == 1)
+                    {
+                        chan->remove_OP(*user_man.get_user(message.get_params()[k]));
+                        addmode += 'o';
+                        addopt += message.get_params()[k] + ' ';
+                        k++;
+                    }
+                    else
+                    {
+                        user.send_messsage(bld_err_usernotinchannel(message.get_params()[k], *chan));
+                    }
+                    
+                }
+            }
+            if (str[j] == 't')
+            {
+                if (i == 1 && chan->get_flag(MODE_t) == 0)
+                {
+                    chan->set_flags(MODE_t);
+                    addmode += 't';
+                }
+                if (i == -1 && chan->get_flag(MODE_t) == 1)
+                {
+                    chan->remove_flag(MODE_t);
+                    addmode += 't';
+                }
+            }
+            if (str[j] == 'i')
+            {
+                if (i == 1 && chan->get_flag(MODE_i) == 0)
+                {
+                    chan->set_flags(MODE_t);
+                    addmode += 'i';
+                }
+                if (i == -1 && chan->get_flag(MODE_i) == 1)
+                {
+                    chan->remove_flag(MODE_i);
+                    addmode += 'i';
                 }
             }
         }
+        std::string final = finalmodestr(addmode) + addopt;
+        user.send_messsage();
     }
 }
 void part_handler(User &user, Message const &message, ServerCore &core)

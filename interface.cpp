@@ -148,7 +148,7 @@ const std::string bld_err_erroneusnickname(const std::string &nick) {
 
 const std::string bld_err_badchannelkey(const std::string &chan)
 {
-    return ("475" + chan + " :Cannot join channel (+k)" "\r\n");
+    return ("475 " + chan + " :Cannot join channel (+k)" "\r\n");
 }
 
 const std::string bld_err_nosuchchannel(const std::string &chan) {
