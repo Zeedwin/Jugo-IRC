@@ -1,7 +1,7 @@
 #include "Channel.h"
 #include "message_builder.h"
 #include <iostream>
-Channel::Channel(std::string const &channel_name) : channel_name(channel_name), key(""), user_limit(-1){
+Channel::Channel(std::string const &channel_name) : channel_name(channel_name), key(""),flags(0), user_limit(-1){
 }
 
 bool Channel::operator==(Channel const &channel)
@@ -290,7 +290,7 @@ void Channel::set_userlimit(int i){
     this->user_limit = i;
 }
 
-int const &Channel::get_userlimit(void) const{
+const size_t &Channel::get_userlimit(void) const{
     return(this->user_limit);
 }
 

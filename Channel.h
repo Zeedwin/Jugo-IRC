@@ -21,7 +21,7 @@ class Channel
         std::string         modes;
         int                 flags;
         time_t              t_changed_at;
-        int                 user_limit;
+        size_t                 user_limit;
         
     public:
         Channel(std::string const &channel_name);
@@ -37,7 +37,7 @@ class Channel
         std::string const &get_topic_changer_prefix(void) const;
         std::string const &get_member_names(void) const;
         time_t      get_t_changed_at(void) const;
-        int const   &get_userlimit(void) const;
+        const size_t   &get_userlimit(void) const;
         User        get_invited(void);
         std::string const &get_chanmodes(void);
 

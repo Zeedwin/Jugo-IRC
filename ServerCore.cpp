@@ -7,6 +7,8 @@
 #include <netinet/in.h>
 #include <limits.h>
 #include <string.h>
+#include <unistd.h>
+#include <signal.h>
 
 
 #include "ServerCore.h"
@@ -30,6 +32,14 @@ UserManager &ServerCore::get_userManager(void){
     return (this->_user_manager);
 }
 
+int quit = 0;
+void  bshandler(int bs){
+    (void)bs;
+    quit = 1;
+    
+    return;
+}
+
 void ServerCore::loop(int port)
 {
     std::vector<pollfd_t> pfds;
@@ -38,6 +48,7 @@ void ServerCore::loop(int port)
     int fd = 0;
     int ret = 0;
     int setsock = 1;
+    signal(SIGINT, bshandler);
     ipv4.sin_family = AF_INET;
     ipv4.sin_port = htons(port);
     ipv4.sin_addr.s_addr = INADDR_ANY;
@@ -58,7 +69,7 @@ void ServerCore::loop(int port)
         pfds.push_back(tmpfd);
         //pfds.push_back(*(pollfd[]){{ .fd = fd, .events = POLLIN}});
     }
-    while ("fisabil al-etan")
+    while (quit == 0)
     {
         poll(pfds.data(), pfds.size(), 10000);
 
@@ -86,6 +97,7 @@ void ServerCore::loop(int port)
                 {
                     client->recvu();
                     std::cout << "1er pos ?"  << std::endl;
+                    //sleep(5);
                     while (client->is_message_buffered())
                     {
                         Message msg;

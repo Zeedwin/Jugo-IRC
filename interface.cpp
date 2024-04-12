@@ -18,7 +18,11 @@ const std::string bld_rpl_welcome(const User &user) {
 }
 
 const std::string bld_rpl_umodeis(const User &user) {
-	return "221 " + user.get_prefix() + " +" + "@" + "\r\n";
+	return "221 " + user.get_nickname() + " " + user.get_mode() + "\r\n";
+}
+
+const std::string bld_rpl_currentmodestateusr(const User &user, std::string mode){
+    return ":" + user.get_nickname() + " MODE " + user.get_nickname() + " :" + mode + "\r\n";
 }
 
 const std::string bld_rpl_topic(const Channel &chan, const std::string &nickname) {
@@ -49,7 +53,7 @@ const std::string bld_rpl_topic_changer(const Channel &chan){
 } 
 
 const std::string bld_rpl_userstatus(const User &user, Channel &chan){
-    std::string str;
+    std::string str = "";
     if (chan.get_flag(MODE_i))
         str += "i";
     if (chan.get_flag(MODE_t))
@@ -98,10 +102,6 @@ const std::string bld_rpl_endofnames(const Channel &chan, User &user) {
 #include <iostream>
 const std::string bld_join_msg(const User &user, const Channel &chan) {
     return  ":" + user.get_prefix() + " JOIN :" + chan.get_name()  + "\r\n";
-}
-
-const std::string bld_rpl_currentmodestate(const User &user, const Channel &chan, const std::string c_status){
-    return ":" + user.get_prefix() + " MODE " + chan.get_name() + " " + c_status + "\r\n";
 }
 
 const std::string bld_rpl_topic_msg(const User &user, const Channel &chan, bool i) {

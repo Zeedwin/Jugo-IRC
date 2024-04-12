@@ -22,7 +22,7 @@ const std::string bld_rpl_invite(const User &user, const Channel &chan);
 const std::string bld_rpl_invite_msg(const User &user, const Channel &chan);
 const std::string bld_rpl_modechg(const User &user, const Channel &chan, const std::string mchanges);
 const std::string bld_rpl_topic_msg(const User &user, const Channel &chan, bool i);
-const std::string bld_rpl_currentmodestate(const User &user, const Channel &chan);
+const std::string bld_rpl_currentmodestateusr(const User &user, std::string mode);
 const std::string bld_join_msg(const User &user, const Channel &chan);
 const std::string bld_privmsg_msg(const User &user, const Channel &chan, const std::string &message);
 const std::string bld_privmsg_msg(const User &user, const User &target, const std::string &message);

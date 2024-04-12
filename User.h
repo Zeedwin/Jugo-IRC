@@ -54,7 +54,7 @@ class User
         int is_state(user_state_t state)       const; /* return this->state == state */
 
 		int		check_flag(int flag) const;
-		void	set_flag(int flag, int set_to);
+		void	set_flag(int flag);
         void    set_state(user_state_t state); /* this->state = state */
         void    set_nickname(std::string const &nickname);
         void    set_user(
@@ -63,18 +63,20 @@ class User
             std::string const &servername,
             std::string const &realname
         );
-        void    set_last_pong(void);
-        void    set_last_ping(void);
+        void               set_last_pong(void);
+        void               set_last_ping(void);
+        int                get_flag(int flag);
+        int                remove_flag(int flag);
         const user_state_t &get_state(void);
-        const std::string &get_nickname(void)   const;
-        const std::string &get_username(void)   const;
-        const std::string &get_hostname(void)   const;
-        const std::string &get_servername(void) const;
-        const std::string &get_realname(void)   const;
-        const std::string get_prefix(void)     const;
-        const std::string get_mode(void)        const;
-        time_t            get_last_ping(void)   const;
-        time_t            get_delta(void)       const;
+        const std::string  &get_nickname(void)   const;
+        const std::string  &get_username(void)   const;
+        const std::string  &get_hostname(void)   const;
+        const std::string  &get_servername(void) const;
+        const std::string  &get_realname(void)   const;
+        const std::string  get_prefix(void)     const;
+        const std::string  get_mode(void)        const;
+        time_t             get_last_ping(void)   const;
+        time_t             get_delta(void)       const;
 
         /*  throw_exception indique si tu dois faire une exception en cas d'erreur
             c'est pour éviter d'avoir une exception, si par exemple, on envoie un message

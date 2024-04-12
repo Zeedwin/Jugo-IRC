@@ -1,572 +1,244 @@
 << CAP LS
 << NICK ShowerNotGrower
 << USER jgirard- jgirard- irc.libera.chat :Julen Girard-grat
->> :osmium.libera.chat NOTICE * :*** Checking Ident
->> :osmium.libera.chat NOTICE * :*** Looking up your hostname...
->> :osmium.libera.chat NOTICE * :*** Couldn't look up your hostname
->> :osmium.libera.chat NOTICE * :*** No Ident response
->> :osmium.libera.chat CAP * LS :account-notify away-notify chghost extended-join multi-prefix sasl tls account-tag cap-notify echo-message server-time solanum.chat/identify-msg solanum.chat/oper solanum.chat/realhost
+>> :silver.libera.chat NOTICE * :*** Checking Ident
+>> :silver.libera.chat NOTICE * :*** Looking up your hostname...
+>> :silver.libera.chat NOTICE * :*** Couldn't look up your hostname
+>> :silver.libera.chat NOTICE * :*** No Ident response
+>> :silver.libera.chat CAP * LS :account-notify away-notify chghost extended-join multi-prefix sasl tls account-tag cap-notify echo-message server-time solanum.chat/identify-msg solanum.chat/oper solanum.chat/realhost
 << CAP REQ :multi-prefix
->> :osmium.libera.chat CAP ShowerNotGrower ACK :multi-prefix
+>> :silver.libera.chat CAP ShowerNotGrower ACK :multi-prefix
 << CAP END
->> :osmium.libera.chat 001 ShowerNotGrower :Welcome to the Libera.Chat Internet Relay Chat Network ShowerNotGrower
+>> :silver.libera.chat 001 ShowerNotGrower :Welcome to the Libera.Chat Internet Relay Chat Network ShowerNotGrower
 << MODE ShowerNotGrower +i
->> :osmium.libera.chat 002 ShowerNotGrower :Your host is osmium.libera.chat[188.240.145.101/6697], running version solanum-1.0-dev
->> :osmium.libera.chat 003 ShowerNotGrower :This server was created Thu Nov 9 2023 at 22:09:51 UTC
->> :osmium.libera.chat 004 ShowerNotGrower osmium.libera.chat solanum-1.0-dev DGIMQRSZaghilopsuwz CFILMPQRSTbcefgijklmnopqrstuvz bkloveqjfI
->> :osmium.libera.chat 005 ShowerNotGrower ACCOUNTEXTBAN=a WHOX FNC KNOCK SAFELIST ELIST=CMNTU CALLERID=g MONITOR=100 ETRACE CHANTYPES=# EXCEPTS INVEX :are supported by this server
->> :osmium.libera.chat 005 ShowerNotGrower CHANMODES=eIbq,k,flj,CFLMPQRSTcgimnprstuz CHANLIMIT=#:250 PREFIX=(ov)@+ MAXLIST=bqeI:100 MODES=4 NETWORK=Libera.Chat STATUSMSG=@+ CASEMAPPING=rfc1459 NICKLEN=16 MAXNICKLEN=16 CHANNELLEN=50 TOPICLEN=390 :are supported by this server
->> :osmium.libera.chat 005 ShowerNotGrower DEAF=D TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: EXTBAN=$,agjrxz :are supported by this server
->> :osmium.libera.chat 251 ShowerNotGrower :There are 71 users and 35810 invisible on 28 servers
->> :osmium.libera.chat 252 ShowerNotGrower 43 :IRC Operators online
->> :osmium.libera.chat 253 ShowerNotGrower 161 :unknown connection(s)
->> :osmium.libera.chat 254 ShowerNotGrower 23126 :channels formed
->> :osmium.libera.chat 255 ShowerNotGrower :I have 2491 clients and 1 servers
->> :osmium.libera.chat 265 ShowerNotGrower 2491 2986 :Current local users 2491, max 2986
->> :osmium.libera.chat 266 ShowerNotGrower 35881 37286 :Current global users 35881, max 37286
->> :osmium.libera.chat 250 ShowerNotGrower :Highest connection count: 2987 (2986 clients) (326583 connections received)
->> :osmium.libera.chat 375 ShowerNotGrower :- osmium.libera.chat Message of the Day - 
->> :osmium.libera.chat 372 ShowerNotGrower :- This server provided by NORDUnet/SUNET
->> :osmium.libera.chat 372 ShowerNotGrower :- Welcome to Libera Chat, the IRC network for
->> :osmium.libera.chat 372 ShowerNotGrower :- free & open-source software and peer directed projects.
->> :osmium.libera.chat 372 ShowerNotGrower :-  
->> :osmium.libera.chat 372 ShowerNotGrower :- Use of Libera Chat is governed by our network policies.
->> :osmium.libera.chat 372 ShowerNotGrower :-  
->> :osmium.libera.chat 372 ShowerNotGrower :- To reduce network abuses we perform open proxy checks
->> :osmium.libera.chat 372 ShowerNotGrower :- on hosts at connection time.
->> :osmium.libera.chat 372 ShowerNotGrower :-  
->> :osmium.libera.chat 372 ShowerNotGrower :- Please visit us in #libera for questions and support.
->> :osmium.libera.chat 372 ShowerNotGrower :-  
->> :osmium.libera.chat 372 ShowerNotGrower :- Website and documentation:  https://libera.chat
->> :osmium.libera.chat 372 ShowerNotGrower :- Webchat:                    https://web.libera.chat
->> :osmium.libera.chat 372 ShowerNotGrower :- Network policies:           https://libera.chat/policies
->> :osmium.libera.chat 372 ShowerNotGrower :- Email:                      support@libera.chat
->> :osmium.libera.chat 376 ShowerNotGrower :End of /MOTD command.
+>> :silver.libera.chat 002 ShowerNotGrower :Your host is silver.libera.chat[108.181.132.149/6697], running version solanum-1.0-dev
+>> :silver.libera.chat 003 ShowerNotGrower :This server was created Wed Nov 15 2023 at 03:39:04 UTC
+>> :silver.libera.chat 004 ShowerNotGrower silver.libera.chat solanum-1.0-dev DGIMQRSZaghilopsuwz CFILMPQRSTbcefgijklmnopqrstuvz bkloveqjfI
+>> :silver.libera.chat 005 ShowerNotGrower ACCOUNTEXTBAN=a ETRACE FNC SAFELIST ELIST=CMNTU CALLERID=g MONITOR=100 KNOCK WHOX CHANTYPES=# EXCEPTS INVEX :are supported by this server
+>> :silver.libera.chat 005 ShowerNotGrower CHANMODES=eIbq,k,flj,CFLMPQRSTcgimnprstuz CHANLIMIT=#:250 PREFIX=(ov)@+ MAXLIST=bqeI:100 MODES=4 NETWORK=Libera.Chat STATUSMSG=@+ CASEMAPPING=rfc1459 NICKLEN=16 MAXNICKLEN=16 CHANNELLEN=50 TOPICLEN=390 :are supported by this server
+>> :silver.libera.chat 005 ShowerNotGrower DEAF=D TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: EXTBAN=$,agjrxz :are supported by this server
+>> :silver.libera.chat 251 ShowerNotGrower :There are 71 users and 35489 invisible on 28 servers
+>> :silver.libera.chat 252 ShowerNotGrower 41 :IRC Operators online
+>> :silver.libera.chat 253 ShowerNotGrower 132 :unknown connection(s)
+>> :silver.libera.chat 254 ShowerNotGrower 23208 :channels formed
+>> :silver.libera.chat 255 ShowerNotGrower :I have 2526 clients and 1 servers
+>> :silver.libera.chat 265 ShowerNotGrower 2526 2884 :Current local users 2526, max 2884
+>> :silver.libera.chat 266 ShowerNotGrower 35560 37286 :Current global users 35560, max 37286
+>> :silver.libera.chat 250 ShowerNotGrower :Highest connection count: 2885 (2884 clients) (420645 connections received)
+>> :silver.libera.chat 375 ShowerNotGrower :- silver.libera.chat Message of the Day - 
+>> :silver.libera.chat 372 ShowerNotGrower :- This server is provided by Psychz Networks.
+>> :silver.libera.chat 372 ShowerNotGrower :-  
+>> :silver.libera.chat 372 ShowerNotGrower :- Welcome to Libera Chat, the IRC network for
+>> :silver.libera.chat 372 ShowerNotGrower :- free & open-source software and peer directed projects.
+>> :silver.libera.chat 372 ShowerNotGrower :-  
+>> :silver.libera.chat 372 ShowerNotGrower :- Use of Libera Chat is governed by our network policies.
+>> :silver.libera.chat 372 ShowerNotGrower :-  
+>> :silver.libera.chat 372 ShowerNotGrower :- To reduce network abuses we perform open proxy checks
+>> :silver.libera.chat 372 ShowerNotGrower :- on hosts at connection time.
+>> :silver.libera.chat 372 ShowerNotGrower :-  
+>> :silver.libera.chat 372 ShowerNotGrower :- Please visit us in #libera for questions and support.
+>> :silver.libera.chat 372 ShowerNotGrower :-  
+>> :silver.libera.chat 372 ShowerNotGrower :- Website and documentation:  https://libera.chat
+>> :silver.libera.chat 372 ShowerNotGrower :- Webchat:                    https://web.libera.chat
+>> :silver.libera.chat 372 ShowerNotGrower :- Network policies:           https://libera.chat/policies
+>> :silver.libera.chat 372 ShowerNotGrower :- Email:                      support@libera.chat
+>> :silver.libera.chat 376 ShowerNotGrower :End of /MOTD command.
 >> :ShowerNotGrower MODE ShowerNotGrower :+Ziw
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< JOIN #uteure
->> :ShowerNotGrower!~jgirard-@62.129.8.171 JOIN #uteure
->> :osmium.libera.chat MODE #uteure +Cnst
->> :osmium.libera.chat 353 ShowerNotGrower @ #uteure :@ShowerNotGrower
->> :osmium.libera.chat 366 ShowerNotGrower #uteure :End of /NAMES list.
-<< MODE #uteure
->> :osmium.libera.chat 324 ShowerNotGrower #uteure +Cnst
+<< MODE ShowerNotGrower
+>> :silver.libera.chat 221 ShowerNotGrower +Ziw
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< MODE ShowerNotGrower -i
+>> :ShowerNotGrower MODE ShowerNotGrower :-i
+--> requested usermode change
+<< MODE ShowerNotGrower +I
+>> :ShowerNotGrower MODE ShowerNotGrower :+I
+--> requested usermode change
+<< MODE ShowerNotGrower +IWEF
+>> :silver.libera.chat 501 ShowerNotGrower :Unknown MODE flag
+<< MODE ShowerNotGrower +i
+>> :ShowerNotGrower MODE ShowerNotGrower :+i
+--> requested usermode change
+<< MODE ShowerNotGrower -I
+>> :ShowerNotGrower MODE ShowerNotGrower :-I
+--> requested usermode change
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> FAILED mode user
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< JOIN #alola
+>> :ShowerNotGrower!~jgirard-@62.129.8.171 JOIN #alola
+>> :silver.libera.chat MODE #alola +Cnst
+>> :silver.libera.chat 353 ShowerNotGrower @ #alola :@ShowerNotGrower
+>> :silver.libera.chat 366 ShowerNotGrower #alola :End of /NAMES list.
+<< MODE #alola
+>> :silver.libera.chat 324 ShowerNotGrower #alola +Cnst
 --> chanquery mode
-<< WHO #uteure
->> :osmium.libera.chat 329 ShowerNotGrower #uteure 1712839643
+<< WHO #alola
+>> :silver.libera.chat 329 ShowerNotGrower #alola 1712934790
 --> event 329
->> :osmium.libera.chat 352 ShowerNotGrower #uteure ~jgirard- 62.129.8.171 osmium.libera.chat ShowerNotGrower H@ :0 Julen Girard-grat
+>> :silver.libera.chat 352 ShowerNotGrower #alola ~jgirard- 62.129.8.171 silver.libera.chat ShowerNotGrower H@ :0 Julen Girard-grat
 --> silent event who
->> :osmium.libera.chat 315 ShowerNotGrower #uteure :End of /WHO list.
+>> :silver.libera.chat 315 ShowerNotGrower #alola :End of /WHO list.
 --> chanquery who end
-<< MODE #uteure b
->> :osmium.libera.chat 368 ShowerNotGrower #uteure :End of Channel Ban List
+<< MODE #alola b
+>> :silver.libera.chat 368 ShowerNotGrower #alola :End of Channel Ban List
 --> chanquery ban end
-<< MODE #uteure +p
->> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #uteure +p 
-<< MODE #uteure +x
->> :osmium.libera.chat 472 ShowerNotGrower x :is an unknown mode char to me
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< MODE #uteure +xjva
->> :osmium.libera.chat 472 ShowerNotGrower x :is an unknown mode char to me
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+>> :ckiadoavocado!~jgirard-@62.129.8.171 JOIN #alola
+<< MODE #alola +o ckiadoavocado
+>> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #alola +o ckiadoavocado
+>> :ckiadoavocado!~jgirard-@62.129.8.171 MODE #alola -o ShowerNotGrower
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< TOPIC #alola :misbolas
+>> :silver.libera.chat 482 ShowerNotGrower #alola :You're not a channel operator
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PRIVMSG #uteure :afdf
-<< MODE #uteure +k sasa
->> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #uteure +k sasa
-<< MODE #uteure -k+l 10
->> :osmium.libera.chat 461 ShowerNotGrower MODE :Not enough parameters
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
-<< JOIN #ppeoprper
->> :ShowerNotGrower!~jgirard-@62.129.8.171 JOIN #ppeoprper
->> :osmium.libera.chat MODE #ppeoprper +Cnst
->> :osmium.libera.chat 353 ShowerNotGrower @ #ppeoprper :@ShowerNotGrower
->> :osmium.libera.chat 366 ShowerNotGrower #ppeoprper :End of /NAMES list.
-<< MODE #ppeoprper
->> :osmium.libera.chat 324 ShowerNotGrower #ppeoprper +Cnst
---> chanquery mode
-<< WHO #ppeoprper
->> :osmium.libera.chat 329 ShowerNotGrower #ppeoprper 1712841281
---> event 329
->> :osmium.libera.chat 352 ShowerNotGrower #ppeoprper ~jgirard- 62.129.8.171 osmium.libera.chat ShowerNotGrower H@ :0 Julen Girard-grat
---> silent event who
->> :osmium.libera.chat 315 ShowerNotGrower #ppeoprper :End of /WHO list.
---> chanquery who end
-<< MODE #ppeoprper b
->> :osmium.libera.chat 368 ShowerNotGrower #ppeoprper :End of Channel Ban List
---> chanquery ban end
-<< MODE #ppeoprper +o aosfuihasdoifw
->> :osmium.libera.chat 401 ShowerNotGrower aosfuihasdoifw :No such nick/channel
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PRIVMSG #uteure :fsdfsd
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< MODE #uteure +l 1
->> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #uteure +l 1
-<< MODE #uteure -k sasa
->> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #uteure -k *
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< CAP LS
-<< NICK ShowerNotGrower
-<< USER jgirard- jgirard- irc.libera.chat :Julen Girard-grat
->> :molybdenum.libera.chat NOTICE * :*** Checking Ident
->> :molybdenum.libera.chat NOTICE * :*** Looking up your hostname...
->> :molybdenum.libera.chat NOTICE * :*** Couldn't look up your hostname
->> :molybdenum.libera.chat NOTICE * :*** No Ident response
->> :molybdenum.libera.chat CAP * LS :account-notify away-notify chghost extended-join multi-prefix sasl tls account-tag cap-notify echo-message server-time solanum.chat/identify-msg solanum.chat/oper solanum.chat/realhost
-<< CAP REQ :multi-prefix
->> :molybdenum.libera.chat 433 * ShowerNotGrower :Nickname is already in use.
-<< NICK ShowerNo1Grower
->> :molybdenum.libera.chat CAP * ACK :multi-prefix
-<< CAP END
->> :molybdenum.libera.chat 001 ShowerNo1Grower :Welcome to the Libera.Chat Internet Relay Chat Network ShowerNo1Grower
-<< MODE ShowerNo1Grower +i
-<< WHOIS ShowerNotGrower
->> :molybdenum.libera.chat 002 ShowerNo1Grower :Your host is molybdenum.libera.chat[51.161.82.214/6697], running version solanum-1.0-dev
->> :molybdenum.libera.chat 003 ShowerNo1Grower :This server was created Sat Nov 11 2023 at 02:04:41 UTC
->> :molybdenum.libera.chat 004 ShowerNo1Grower molybdenum.libera.chat solanum-1.0-dev DGIMQRSZaghilopsuwz CFILMPQRSTbcefgijklmnopqrstuvz bkloveqjfI
->> :molybdenum.libera.chat 005 ShowerNo1Grower ACCOUNTEXTBAN=a WHOX KNOCK MONITOR=100 ETRACE FNC SAFELIST ELIST=CMNTU CALLERID=g CHANTYPES=# EXCEPTS INVEX :are supported by this server
->> :molybdenum.libera.chat 005 ShowerNo1Grower CHANMODES=eIbq,k,flj,CFLMPQRSTcgimnprstuz CHANLIMIT=#:250 PREFIX=(ov)@+ MAXLIST=bqeI:100 MODES=4 NETWORK=Libera.Chat STATUSMSG=@+ CASEMAPPING=rfc1459 NICKLEN=16 MAXNICKLEN=16 CHANNELLEN=50 TOPICLEN=390 :are supported by this server
->> :molybdenum.libera.chat 005 ShowerNo1Grower DEAF=D TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: EXTBAN=$,agjrxz :are supported by this server
->> :molybdenum.libera.chat 251 ShowerNo1Grower :There are 71 users and 35774 invisible on 28 servers
->> :molybdenum.libera.chat 252 ShowerNo1Grower 43 :IRC Operators online
->> :molybdenum.libera.chat 253 ShowerNo1Grower 301 :unknown connection(s)
->> :molybdenum.libera.chat 254 ShowerNo1Grower 23162 :channels formed
->> :molybdenum.libera.chat 255 ShowerNo1Grower :I have 2563 clients and 1 servers
->> :molybdenum.libera.chat 265 ShowerNo1Grower 2563 3361 :Current local users 2563, max 3361
->> :molybdenum.libera.chat 266 ShowerNo1Grower 35845 37286 :Current global users 35845, max 37286
->> :molybdenum.libera.chat 250 ShowerNo1Grower :Highest connection count: 3362 (3361 clients) (436211 connections received)
->> :molybdenum.libera.chat 375 ShowerNo1Grower :- molybdenum.libera.chat Message of the Day - 
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- -[ Molybdenum ]-[ Atomic number: 42 ]-[ Chemical symbol: Mo ]-
->> :molybdenum.libera.chat 372 ShowerNo1Grower :-  
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- Molybdenum has been known throughout history, though its
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- properties meant that it was confused with lead ores. It was
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- first identified as a distinct element in 1778, meaning our
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- modern understanding of its existence reaches about as far
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- back as American independence.
->> :molybdenum.libera.chat 372 ShowerNo1Grower :-  
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- Molybdenum has a very high melting point, 2623°C, the fifth-
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- highest temperature of any element.
->> :molybdenum.libera.chat 372 ShowerNo1Grower :-  
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- While pure molybdenum is only about as strong as tooth enamel,
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- it forms strong alloys that are resistant to corrosion and
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- stable under varying temperatures. As a result, these alloys
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- are used for metal armour plates, high-performance aircraft
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- parts, and pumps for molten metal flows.
->> :molybdenum.libera.chat 372 ShowerNo1Grower :-  
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- In its elemental form, it can be used as a fertiliser, and the
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- isotope molybdenum-99 is used as a source of technetium-99m,
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- an important medical radioisotope used for 3D bone scans and
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- the investigation of blood flow when diagnosing heart disease.
->> :molybdenum.libera.chat 372 ShowerNo1Grower :-  
->> :molybdenum.libera.chat 372 ShowerNo1Grower :-  
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- Welcome to Libera Chat, the IRC network for
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- free & open-source software and peer directed projects.
->> :molybdenum.libera.chat 372 ShowerNo1Grower :-  
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- Use of Libera Chat is governed by our network policies.
->> :molybdenum.libera.chat 372 ShowerNo1Grower :-  
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- To reduce network abuses we perform open proxy checks
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- on hosts at connection time.
->> :molybdenum.libera.chat 372 ShowerNo1Grower :-  
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- Please visit us in #libera for questions and support.
->> :molybdenum.libera.chat 372 ShowerNo1Grower :-  
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- Website and documentation:  https://libera.chat
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- Webchat:                    https://web.libera.chat
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- Network policies:           https://libera.chat/policies
->> :molybdenum.libera.chat 372 ShowerNo1Grower :- Email:                      support@libera.chat
->> :molybdenum.libera.chat 376 ShowerNo1Grower :End of /MOTD command.
->> :ShowerNo1Grower MODE ShowerNo1Grower :+Ziw
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat 311 ShowerNo1Grower ShowerNotGrower ~jgirard- 62.129.8.171 * :Julen Girard-grat
---> nickfind event whois
->> :molybdenum.libera.chat 312 ShowerNo1Grower ShowerNotGrower osmium.libera.chat :Stockholm, SE
---> event empty
->> :molybdenum.libera.chat 671 ShowerNo1Grower ShowerNotGrower :is using a secure connection
---> event empty
->> :molybdenum.libera.chat 338 ShowerNo1Grower ShowerNotGrower 62.129.8.171 :actually using host
---> event empty
->> :molybdenum.libera.chat 318 ShowerNo1Grower ShowerNotGrower :End of /WHOIS list.
---> event empty
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< JOIN #uteure
->> :molybdenum.libera.chat 471 ShowerNo1Grower #uteure :Cannot join channel (+l) - channel is full, try again later
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< MODE #uteure +i
->> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #uteure +i 
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< JOIN #uteure
->> :molybdenum.libera.chat 471 ShowerNo1Grower #uteure :Cannot join channel (+l) - channel is full, try again later
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< MODE #uteure -l
->> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #uteure -l 
-<< JOIN #uteure
->> :molybdenum.libera.chat 473 ShowerNo1Grower #uteure :Cannot join channel (+i) - you must be invited
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< MODE #uteure +k sasa
->> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #uteure +k sasa
-<< JOIN #uteure
->> :molybdenum.libera.chat 475 ShowerNo1Grower #uteure :Cannot join channel (+k) - bad key
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< MODE #uteure +l 1
->> :ShowerNotGrower!~jgirard-@62.129.8.171 MODE #uteure +l 1
-<< JOIN #uteure
->> :molybdenum.libera.chat 475 ShowerNo1Grower #uteure :Cannot join channel (+k) - bad key
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
---> lag pong
-<< PING osmium.libera.chat
->> :osmium.libera.chat PONG osmium.libera.chat :osmium.libera.chat
---> lag pong
-<< PING molybdenum.libera.chat
->> :molybdenum.libera.chat PONG molybdenum.libera.chat :molybdenum.libera.chat
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
 --> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< PING silver.libera.chat
+>> :silver.libera.chat PONG silver.libera.chat :silver.libera.chat
+--> lag pong
+<< QUIT :leaving

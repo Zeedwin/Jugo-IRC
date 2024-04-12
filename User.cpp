@@ -172,7 +172,26 @@ void	User::close_connection(void){
     close(this->_fd);
 }
 
+const std::string User::get_mode(void) const {
+    std::string str = "";
+    if(MODE_i & this->_flags)
+        str += "i";
+    return str == "" ? "" : "+" + str;
+}
 
+void	User::set_flag(int flag){
+     this->_flags |= flag;
+}
+
+int User::get_flag(int flag)
+{
+    return((this->_flags & flag) == flag);
+}
+
+int User::remove_flag(int flag)
+{
+   return this->_flags &= ~flag;
+}
 
 User::~User(void){
     

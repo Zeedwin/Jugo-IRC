@@ -56,7 +56,7 @@ int check_command(User &user, Message const &message, int i, ServerCore &core)
 
 void handle_command(User &user, Message const &message, ServerCore &core)
 {
-     std::cout << "command = " << message.get_command()<< "," << message.get_params().size() << std::endl;
+    std::cout << "command = " << message.get_command()<< "," << message.get_params().size() << std::endl;
     for (unsigned long index = 0; index < sizeof(command_table) / sizeof(command_table[0]); index++)
     {
         if (message.get_command() == command_table[index].cmd && check_command(user, message, index, core) == 1)

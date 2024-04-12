@@ -12,7 +12,7 @@ class ServerCore
         std::string const   _password;
         ChannelManager      _channel_manager;
         UserManager         _user_manager;
-
+        
 		void				disconnect_clients(std::vector<pollfd_t> &poll_fds);
 
     public:

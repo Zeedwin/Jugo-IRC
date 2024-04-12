@@ -293,8 +293,16 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
     
     (void)user;    
 
-    if (message.get_params().size())
-    {
+    if (message.get_params()[0][0] == '#' || message.get_params()[0][0] == '&') {
+        if (message.get_params().size() < 2) {
+            user.send_messsage(bld_err_needmoreparams(message.get_command(), user));
+            return;
+        }
+        if (check_mode(message.get_params()[1]) == 0)
+        {
+            user.send_messsage(bld_err_unknowmode(message.get_params()[1][0], user));
+            return;
+        }
         std::string str = message.get_params()[1];
         int i = 1;
         int k = 2;
@@ -304,20 +312,14 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
         UserManager    &user_man = core.get_userManager();
         ChannelManager &chan_man = core.get_channelManager();
         Channel *chan = chan_man.get_channel(message.get_params()[0]);
-        if (check_params(message) == 0)
-        {
-            user.send_messsage(bld_err_needmoreparams(message.get_command(), user));
+        if (chan == NULL) {
+            user.send_messsage(bld_err_nosuchchannel(message.get_params()[0]));
             return;
         }
-        if (message.get_params()[0][0] != '#' && message.get_params()[0][0] != '&')
+        if (chan->is_user_OP(user))
         {
-            user.send_messsage(bld_err_nosuchchannel(chan->get_name()));
-            return;
-        }
-        if (check_mode(message.get_params()[1]) == 0)
-        {
-            user.send_messsage(bld_err_unknowmode(message.get_params()[1][0], user));
-            return;
+            user.send_messsage(bld_err_chanoprivsneeded(*chan));
+            return ;
         }
         for (size_t j = 0; j < str.size(); j++)
         {
@@ -430,7 +432,24 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
         }
         std::string final = finalmodestr(addmode) + addopt;
         user.send_messsage(bld_rpl_modechg(user, *chan, final));
+        return;
     }
+    if (message.get_params().size() < 2) {
+        user.send_messsage(bld_rpl_umodeis(user));
+        return;
+    }
+    if (message.get_params()[1]  == "+i" || message.get_params()[1] == "i")
+    {
+        user.set_flag(MODE_i);
+        user.send_messsage(bld_rpl_currentmodestateusr(user, "+i"));
+    }
+    else if (message.get_params()[1]  == "-i")
+    {
+        user.remove_flag(MODE_i);
+        user.send_messsage(bld_rpl_currentmodestateusr(user, "-i"));
+    }
+    else
+        user.send_messsage(bld_err_umodeunknowflag());    
 }
 void part_handler(User &user, Message const &message, ServerCore &core)
 {
@@ -467,6 +486,8 @@ void ping_handler(User &user, Message const &message, ServerCore &core)
 {
     (void)core;
     user.send_messsage("PONG :" + message.get_params()[0] + "\r\n", false);
+    user.set_last_ping();
+    user.set_last_pong();
 }
 
 

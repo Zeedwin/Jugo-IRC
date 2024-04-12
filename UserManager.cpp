@@ -56,16 +56,19 @@ void UserManager::check_pings(void)
 {
     for (unsigned long i = 0; i < this->users.size(); i++)
     {        
-        if (this->users[i]->get_delta() > 300000000)
+        if (this->users[i]->get_delta() > 30)
         {
             std::cout << "2er pos ?" << std::endl;
             this->users[i]->set_state(User::WAITING_FOR_QUIT);
         }
-        else if (this->users[i]->get_last_ping() + 100000000 <= time(NULL))
+        else if (this->users[i]->get_last_ping() + 30 <= time(NULL))
         {
            this->users[i]->send_ping();
         }
     }
 }
 
-UserManager::~UserManager(void) {}
+UserManager::~UserManager(void) {
+    for (std::vector<User*>::iterator it = this->users.begin(); it < this->users.end(); it++)
+        delete *it;
+}
