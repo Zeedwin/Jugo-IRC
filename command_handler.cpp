@@ -28,6 +28,8 @@ struct command_table static const command_table[] = {
     {.cmd = "KICK",    .state_needed = User::CONNECTED,        .min_arg = 1, .max_arg = -1,.handle = kick_handler},
     {.cmd = "MODE",    .state_needed = User::CONNECTED,        .min_arg = 1, .max_arg = -1,.handle = mode_handler},
     {.cmd = "INVITE",  .state_needed = (User::CONNECTED),      .min_arg = 2, .max_arg = 2, .handle = invite_handler},
+    {.cmd = "CAP",     .state_needed = (User::CONNECTED),      .min_arg = 0, .max_arg = -1,.handle = cap_handler},
+    {.cmd = "WHOIS",   .state_needed = (User::CONNECTED),      .min_arg = 0, .max_arg = 2, .handle = whois_handler},
     {.cmd = "QUIT",    .state_needed = (User::CONNECTED),      .min_arg = 1, .max_arg = 2, .handle = quit_handler}
  };
 
@@ -47,7 +49,6 @@ int check_command(User &user, Message const &message, int i, ServerCore &core)
     }
     if ((ssize_t)(vector.size()) > (ssize_t)command_table[i].max_arg && (ssize_t)command_table[i].max_arg >= 0)
     {
-        //TODO LO MIO: error handling
         std::cout << "waaaaw" << std::endl;
         return (0);
     }
@@ -67,11 +68,11 @@ void handle_command(User &user, Message const &message, ServerCore &core)
         }
         else if (message.get_command() == command_table[index].cmd && check_command(user, message, index, core) == 2)
         {
-            user.send_messsage(bld_err_needmoreparams(message.get_command(), user), false);
+            user.send_message(bld_err_needmoreparams(message.get_command(), user), false);
             return;
         }
     }
     std::cout<< " commad = " << message.get_command() << std::endl;
-    user.send_messsage(bld_err_unknowncmd(message.get_command()));
+    user.send_message(bld_err_unknowncmd(message.get_command()));
     // std::cout << "user = " << user.get_username() << std::endl;
 }

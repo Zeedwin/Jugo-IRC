@@ -85,7 +85,7 @@ class User
 
             retour: nombre d'octet envoyé (ou -1 en cas d'erreur et throw_exception==false)    
         */
-        int     send_messsage(std::string const &message, bool throw_exception=true);
+        int     send_message(std::string const &message, bool throw_exception=true);
         //Message recv_message(void);
         void    recvu(void);
         int     is_message_buffered(void);

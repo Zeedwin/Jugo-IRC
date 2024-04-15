@@ -56,13 +56,13 @@ void UserManager::check_pings(void)
 {
     for (unsigned long i = 0; i < this->users.size(); i++)
     {        
-        if (this->users[i]->get_delta() > 30)
+        if (this->users[i]->get_last_ping() + 30 <= time(NULL))
         {
-            std::cout << "2er pos ?" << std::endl;
             this->users[i]->set_state(User::WAITING_FOR_QUIT);
         }
-        else if (this->users[i]->get_last_ping() + 30 <= time(NULL))
+        else if (this->users[i]->get_delta() >= 30)
         {
+            std::cout << "2er pos ?" << std::endl;
            this->users[i]->send_ping();
         }
     }

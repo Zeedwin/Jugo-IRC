@@ -30,7 +30,7 @@ void pass_handler(User &user, Message const &message, ServerCore &core)
 {
     if (user.is_state(User::CONNECTED))
     {
-        user.send_messsage(bld_err_alreadyregistred(), false);
+        user.send_message(bld_err_alreadyregistred(), false);
     }
     if (core.get_password() != message.get_params()[0])
     {
@@ -68,17 +68,17 @@ void nick_handler(User &user, Message const &message, ServerCore &core)
     UserManager *_user_man = &core.get_userManager();
     if (message.get_params().size() < 1)
     {
-        user.send_messsage(bld_err_nonicknamegiven(), false);
+        user.send_message(bld_err_nonicknamegiven(), false);
         return;
     }
     if (_user_man->get_user(msg) != NULL)
     {
-        user.send_messsage(bld_err_nicknameinuse(user), false);
+        user.send_message(bld_err_nicknameinuse(user), false);
         return;
     }
     if (check_nick(msg) <= 0)
     {
-        user.send_messsage(bld_err_erroneusnickname(msg), false);
+        user.send_message(bld_err_erroneusnickname(msg), false);
         return;
     }
     if (user.is_state(User::WAITING_FOR_CONN_1) || user.is_state(User::WAITING_FOR_CONN_2))
@@ -93,7 +93,7 @@ void nick_handler(User &user, Message const &message, ServerCore &core)
     }
     else if (user.is_state(User::CONNECTED))
     {
-        user.send_messsage(bld_nick_msg(user, msg), false);
+        user.send_message(bld_nick_msg(user, msg), false);
         user.set_nickname(msg);
     }
 }
@@ -104,7 +104,7 @@ void user_handler(User &user, Message const &message, ServerCore &core)
     (void)core;
     if (user.is_state(User::CONNECTED))
     {
-        user.send_messsage(bld_err_alreadyregistred(), false);
+        user.send_message(bld_err_alreadyregistred(), false);
         return;
     }
     user.set_user(message.get_params()[0], message.get_params()[1], message.get_params()[2], message.get_params()[3]);
@@ -114,7 +114,7 @@ void user_handler(User &user, Message const &message, ServerCore &core)
     {
         user.set_state(User::CONNECTED);
     }
-    user.send_messsage(bld_rpl_welcome(user) + "\r\n", true);
+    user.send_message(bld_rpl_welcome(user) + "\r\n", true);
 }
 void join_handler(User &user, Message const &message, ServerCore &core)
 {
@@ -140,7 +140,7 @@ void join_handler(User &user, Message const &message, ServerCore &core)
         else if (chan->get_flag(MODE_l))
         {
             if (chan->get_userlimit() == chan->members_count())
-                user.send_messsage(bld_err_chanfull(*chan, user));
+                user.send_message(bld_err_chanfull(*chan, user));
         }
         else if (chan->get_flag(MODE_k))
         {
@@ -159,14 +159,14 @@ void join_handler(User &user, Message const &message, ServerCore &core)
                     if (chan->is_user_invited(user))
                         chan->join(user);
                     else
-                        user.send_messsage(bld_err_inviteonlychan(*chan, user));
+                        user.send_message(bld_err_inviteonlychan(*chan, user));
                 }
                 else
                     chan->join(user);
             }
             else
             {
-                user.send_messsage(bld_err_badchannelkey(chan->get_name(), user));
+                user.send_message(bld_err_badchannelkey(chan->get_name(), user));
             }
         }
         else if (chan->get_flag(MODE_i))
@@ -176,7 +176,7 @@ void join_handler(User &user, Message const &message, ServerCore &core)
                     if (chan->is_user_invited(user))
                         chan->join(user);
                     else
-                        user.send_messsage(bld_err_inviteonlychan(*chan, user));
+                        user.send_message(bld_err_inviteonlychan(*chan, user));
                 }
                 else
                     chan->join(user);
@@ -295,12 +295,12 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
 
     if (message.get_params()[0][0] == '#' || message.get_params()[0][0] == '&') {
         if (message.get_params().size() < 2) {
-            user.send_messsage(bld_err_needmoreparams(message.get_command(), user));
+            user.send_message(bld_err_needmoreparams(message.get_command(), user));
             return;
         }
         if (check_mode(message.get_params()[1]) == 0)
         {
-            user.send_messsage(bld_err_unknowmode(message.get_params()[1][0], user));
+            user.send_message(bld_err_unknowmode(message.get_params()[1][0], user));
             return;
         }
         std::string str = message.get_params()[1];
@@ -313,12 +313,12 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
         ChannelManager &chan_man = core.get_channelManager();
         Channel *chan = chan_man.get_channel(message.get_params()[0]);
         if (chan == NULL) {
-            user.send_messsage(bld_err_nosuchchannel(message.get_params()[0]));
+            user.send_message(bld_err_nosuchchannel(message.get_params()[0]));
             return;
         }
         if (chan->is_user_OP(user))
         {
-            user.send_messsage(bld_err_chanoprivsneeded(*chan));
+            user.send_message(bld_err_chanoprivsneeded(*chan));
             return ;
         }
         for (size_t j = 0; j < str.size(); j++)
@@ -384,7 +384,7 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
                     }
                     else
                     {
-                        user.send_messsage(bld_err_nosuchnick(user.get_nickname()));
+                        user.send_message(bld_err_nosuchnick(user.get_nickname()));
                     }
                 }
                 if (i == -1)
@@ -398,7 +398,7 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
                     }
                     else
                     {
-                        user.send_messsage(bld_err_nosuchnick(user.get_nickname()));
+                        user.send_message(bld_err_nosuchnick(user.get_nickname()));
                     }
                     
                 }
@@ -431,25 +431,25 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
             }
         }
         std::string final = finalmodestr(addmode) + addopt;
-        user.send_messsage(bld_rpl_modechg(user, *chan, final));
+        user.send_message(bld_rpl_modechg(user, *chan, final));
         return;
     }
     if (message.get_params().size() < 2) {
-        user.send_messsage(bld_rpl_umodeis(user));
+        user.send_message(bld_rpl_umodeis(user));
         return;
     }
     if (message.get_params()[1]  == "+i" || message.get_params()[1] == "i")
     {
         user.set_flag(MODE_i);
-        user.send_messsage(bld_rpl_currentmodestateusr(user, "+i"));
+        user.send_message(bld_rpl_currentmodestateusr(user, "+i"));
     }
     else if (message.get_params()[1]  == "-i")
     {
         user.remove_flag(MODE_i);
-        user.send_messsage(bld_rpl_currentmodestateusr(user, "-i"));
+        user.send_message(bld_rpl_currentmodestateusr(user, "-i"));
     }
     else
-        user.send_messsage(bld_err_umodeunknowflag());    
+        user.send_message(bld_err_umodeunknowflag());    
 }
 void part_handler(User &user, Message const &message, ServerCore &core)
 {
@@ -472,7 +472,7 @@ void part_handler(User &user, Message const &message, ServerCore &core)
             _chan_man.leave(user, *chan, "No reason specified");
         }
         else
-            user.send_messsage(bld_err_nosuchchannel(channame));
+            user.send_message(bld_err_nosuchchannel(channame));
     }
 }
 
@@ -485,7 +485,7 @@ void pong_handler(User &user, Message const &message, ServerCore &core)
 void ping_handler(User &user, Message const &message, ServerCore &core)
 {
     (void)core;
-    user.send_messsage("PONG :" + message.get_params()[0] + "\r\n", false);
+    user.send_message("PONG :" + message.get_params()[0] + "\r\n", false);
     user.set_last_ping();
     user.set_last_pong();
 }
@@ -506,11 +506,11 @@ void kick_handler(User &user, Message const &message, ServerCore &core)
             chans = "";
         if (chan == NULL)
         {
-            user.send_messsage(bld_err_nosuchchannel(chans), false);
+            user.send_message(bld_err_nosuchchannel(chans), false);
         }
         else if (chan->is_user_present(user.get_nickname()) == 0)
         {
-            user.send_messsage(bld_err_notonchannel(chan->get_name()), false);
+            user.send_message(bld_err_notonchannel(chan->get_name()), false);
         }
         else if (chan->is_user_OP(user))
         {
@@ -528,7 +528,7 @@ void kick_handler(User &user, Message const &message, ServerCore &core)
                     users = "";
                 if (user_kick == NULL)
                 {
-                    user.send_messsage(bld_err_nosuchnick(user_name), false);
+                    user.send_message(bld_err_nosuchnick(user_name), false);
                     continue;
                 }
                 if (message.get_params().size() == 3)
@@ -539,7 +539,7 @@ void kick_handler(User &user, Message const &message, ServerCore &core)
         }
         else
         {
-            user.send_messsage(bld_err_chanoprivsneeded(*chan), false);
+            user.send_message(bld_err_chanoprivsneeded(*chan), false);
         }
     }
 }
@@ -548,7 +548,7 @@ void topic_handler(User &user, Message const &message, ServerCore &core) {
     ChannelManager *_chanel_man = &core.get_channelManager();
     Channel *channel = _chanel_man->get_channel(message.get_params()[0]);
     if (!channel)
-        user.send_messsage(bld_err_nosuchchannel(message.get_params()[0]));
+        user.send_message(bld_err_nosuchchannel(message.get_params()[0]));
     else if(!channel->is_user_present(user.get_nickname()))
         bld_err_notonchannel(channel->get_name());
     else if (channel->is_user_OP(user))
@@ -559,16 +559,16 @@ void topic_handler(User &user, Message const &message, ServerCore &core) {
             channel->broadcast(bld_rpl_topic_msg(user ,*channel, true), NULL);
         }
         else{
-            user.send_messsage(bld_rpl_topic(*channel, channel->get_topic_changer()));
-            user.send_messsage(bld_rpl_topic_changer(*channel));
+            user.send_message(bld_rpl_topic(*channel, channel->get_topic_changer()));
+            user.send_message(bld_rpl_topic_changer(*channel));
         }
     }
     else
     {
         if(message.get_params().size() == 2)
-            user.send_messsage(bld_err_chanoprivsneeded(*channel));
+            user.send_message(bld_err_chanoprivsneeded(*channel));
         else
-          user.send_messsage((bld_rpl_topic(*channel, user.get_nickname())));
+          user.send_message((bld_rpl_topic(*channel, user.get_nickname())));
     }
 }
 
@@ -578,7 +578,7 @@ void privmsg_handler(User &user, Message const &message, ServerCore &core)
     std::string message_;
     if (message.get_params().size() < 1)
     {
-        user.send_messsage("412 :No text to send");
+        user.send_message("412 :No text to send");
         return;
     }
     for (int i = 1; i < (int)message.get_params().size(); i++)
@@ -591,12 +591,12 @@ void privmsg_handler(User &user, Message const &message, ServerCore &core)
         std::cout << message.get_params()[0] << std::endl;
         if (!channel)
         {
-            user.send_messsage(bld_err_nosuchchannel(message.get_params()[0]));
+            user.send_message(bld_err_nosuchchannel(message.get_params()[0]));
             return ;
         }
         if (!channel->is_user_present(user.get_nickname()))
         {
-            user.send_messsage(bld_err_notonchannel(*channel));
+            user.send_message(bld_err_notonchannel(*channel));
             return ;
         }
         channel->broadcast(bld_privmsg_msg(user, *channel, message_), &user);
@@ -606,9 +606,9 @@ void privmsg_handler(User &user, Message const &message, ServerCore &core)
         UserManager *user_man = &core.get_userManager();
         User *recipient_user = user_man->get_user(message.get_params()[0]);
         if (recipient_user == NULL)
-            user.send_messsage(bld_err_nosuchnick(message.get_params()[0]), false);
+            user.send_message(bld_err_nosuchnick(message.get_params()[0]), false);
         else
-            recipient_user->send_messsage(bld_privmsg_msg(user, *recipient_user, message_), false);
+            recipient_user->send_message(bld_privmsg_msg(user, *recipient_user, message_), false);
     }
 }
 
@@ -631,21 +631,47 @@ void invite_handler(User &user, Message const &message, ServerCore &core){
     
     if (chan == NULL) {
     std::cout << "uno" << std::endl;
-        user.send_messsage(bld_err_nosuchchannel(message.get_params()[1]), false);
+        user.send_message(bld_err_nosuchchannel(message.get_params()[1]), false);
         return;
     }
     std::cout << "dos" << std::endl;
 
     if (!chan->is_user_OP(user)) {
-        user.send_messsage(bld_err_chanoprivsneeded(*chan));
+        user.send_message(bld_err_chanoprivsneeded(*chan));
         return;
     }
     std::cout << "tres" << std::endl;
     User *invd = userman.get_user(message.get_params()[0]);
     if (invd == NULL) {
-        user.send_messsage(bld_err_nosuchnick(message.get_params()[0]), false);
+        user.send_message(bld_err_nosuchnick(message.get_params()[0]), false);
         return;
     }
     chan->invite(user, invd);
     std::cout << "cuatro" << std::endl;
+}
+
+void cap_handler(User &user, Message const &message, ServerCore &core)  {
+    (void)user;
+    (void)message;
+    (void)core;
+    return;
+}
+
+void whois_handler(User &user, Message const &message, ServerCore &core){
+    if (message.get_params().size() < 2) {
+        user.send_message(bld_err_nonicknamegiven());
+        return;
+    }
+    User *target = core.get_userManager().get_user(message.get_params()[0]);
+    if (target == NULL) {
+        user.send_message(bld_err_nosuchnick(message.get_params()[0]));
+        return;
+    }
+    user.send_message(bld_rpl_whoisoperator(user));
+
+    if (target->get_flag(MODE_o))
+        user.send_message(bld_rpl_whoisuser(user));
+    user.send_message(bld_rpl_whoisidle(user));
+    user.send_message(bld_rpl_endofwhois(*target));
+
 }

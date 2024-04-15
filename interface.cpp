@@ -94,11 +94,12 @@ const std::string bld_rpl_endofnames(const Channel &chan, User &user) {
 	return "366 " + user.get_nickname() + " " + chan.get_name() + " :End of /NAMES list." + "\r\n";
 }
 
-// const std::string bld_rpl_whoisidle(const User &user) {
-//     char tmp[10] = {0};
-//     sprintf(tmp, "%ld", user.get_idle());
-//     return "317 " + user.get_nickname() + " " + user.get_username() + " " + tmp + " :seconds idle\r\n";
-// }
+const std::string bld_rpl_whoisidle(const User &user) {
+    char tmp[10] = {0};
+    sprintf(tmp, "%ld", user.get_idle());
+    return "317 " + user.get_nickname() + " " + user.get_username() + " " + tmp + " :seconds idle\r\n";
+}
+
 #include <iostream>
 const std::string bld_join_msg(const User &user, const Channel &chan) {
     return  ":" + user.get_prefix() + " JOIN :" + chan.get_name()  + "\r\n";

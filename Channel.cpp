@@ -68,10 +68,10 @@ int Channel::join(User &user){
     std::cout << user.get_nickname() << " joined " << this->channel_name << std::endl;
     this->members.push_back(&user);
     this->broadcast(bld_join_msg(user, *this), NULL);
-    user.send_messsage(bld_rpl_umodeis(user));
-    user.send_messsage(bld_rpl_userstatus(user, *this));
-    user.send_messsage(bld_rpl_namreply(*this, user));
-    user.send_messsage(bld_rpl_endofnames(*this, user));
+    user.send_message(bld_rpl_umodeis(user));
+    user.send_message(bld_rpl_userstatus(user, *this));
+    user.send_message(bld_rpl_namreply(*this, user));
+    user.send_message(bld_rpl_endofnames(*this, user));
     return 0;
 }
 
@@ -134,8 +134,8 @@ int Channel::kick(User &kicker, User &kicked, std::string const &reason)
 }
 
 int Channel::invite(User &user, User *uinvited){
-    user.send_messsage(bld_rpl_invite(*uinvited, *this));
-    uinvited->send_messsage(bld_rpl_invite_msg(user, *this));
+    user.send_message(bld_rpl_invite(*uinvited, *this));
+    uinvited->send_message(bld_rpl_invite_msg(user, *this));
     this->invited.push_back(uinvited);
     return 1;
 }
@@ -245,7 +245,7 @@ int Channel::broadcast(std::string const &message, const User *from_user){
             //std::cout << "on est dans le print" << std::endl;
             continue;
         }
-        this->members[i]->send_messsage(message, false);
+        this->members[i]->send_message(message, false);
     }
     return 0;
 }
@@ -260,7 +260,7 @@ int Channel::broadcast(std::string const &message, const User *from_user){
             //std::cout << "on est dans le print" << std::endl;
             continue;
         }
-        this->members[i]->send_messsage(message, false);
+        this->members[i]->send_message(message, false);
     }
     return 0;
 }*/

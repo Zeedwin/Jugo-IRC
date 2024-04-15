@@ -9,7 +9,7 @@
 #include "User.h"
 #include "message_builder.h"
 
-User::User(int fd) : _fd(fd), _last_ping(time(NULL)), _last_pong(time(NULL)){
+User::User(int fd) : _fd(fd), _last_ping(time(NULL)), _last_pong(time(NULL)), _idle(time(NULL)){
 
 }
 
@@ -108,7 +108,7 @@ time_t             User::get_delta(void)       const{
     
 }
 
-int     User::send_messsage(std::string const &message, bool throw_exception){
+int     User::send_message(std::string const &message, bool throw_exception){
     if (this->is_state(User::WAITING_FOR_QUIT))
         return (-1);
     int r = send(this->_fd, message.c_str(), message.size(), MSG_DONTWAIT | MSG_NOSIGNAL);
@@ -157,13 +157,11 @@ bool User::operator==(const User &user) const{
 }
 
 void    User::send_ping(void){
-    this->send_messsage("PING :" + get_nickname() + "\r\n", false);
+    this->send_message("PING :" + get_nickname() + "\r\n", false);
     this->_last_ping = time(NULL); 
 }
 
-void	User::set_idle(void){
 
-}
 
 //time_t	User::get_idle(void) const {}
 
@@ -191,6 +189,14 @@ int User::get_flag(int flag)
 int User::remove_flag(int flag)
 {
    return this->_flags &= ~flag;
+}
+
+void	User::set_idle(void){
+    this->_idle = time(NULL);
+}
+
+time_t	User::get_idle(void) const{
+    return (time(NULL) - this->_idle);
 }
 
 User::~User(void){
