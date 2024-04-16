@@ -9,7 +9,7 @@
 #include "User.h"
 #include "message_builder.h"
 
-User::User(int fd) : _fd(fd), _last_ping(time(NULL)), _last_pong(time(NULL)), _idle(time(NULL)){
+User::User(int fd) :_fd(fd), _flags(0), _last_ping(time(NULL)), _last_pong(time(NULL)), _idle(time(NULL)){
 
 }
 
@@ -198,6 +198,21 @@ void	User::set_idle(void){
 time_t	User::get_idle(void) const{
     return (time(NULL) - this->_idle);
 }
+
+// void User::update_prefix(Channel &chan){
+// std::string str = "";
+
+// if (chan.is_user_OP(this->get_nickname()) == 1)
+// {
+//     str = "@" + this->get_nickname();
+// }
+// else
+// {
+//     /* code */
+// }
+
+
+//}
 
 User::~User(void){
     

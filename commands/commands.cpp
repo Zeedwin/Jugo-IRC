@@ -466,6 +466,7 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
         return;
     }
     if (message.get_params().size() < 2) {
+        std::cout << "chui en ceinte" << std::endl;
         user.send_message(bld_rpl_umodeis(user));
         return;
     }
@@ -693,15 +694,16 @@ void whois_handler(User &user, Message const &message, ServerCore &core){
         user.send_message(bld_err_nonicknamegiven());
         return;
     }
-    User *target = core.get_userManager().get_user(message.get_params()[0]);
+    User *target = core.get_userManager().get_user(user.get_nickname());
     if (target == NULL) {
+        std::cout << "Je suis une minorite" << std::endl;
         user.send_message(bld_err_nosuchnick(message.get_params()[0]));
         return;
     }
-    user.send_message(bld_rpl_whoisoperator(user));
+    user.send_message(bld_rpl_whoisuser(user));
 
     if (target->get_flag(MODE_o))
-        user.send_message(bld_rpl_whoisuser(user));
+        user.send_message(bld_rpl_whoisoperator(user));
     user.send_message(bld_rpl_whoisidle(user));
     user.send_message(bld_rpl_endofwhois(*target));
 

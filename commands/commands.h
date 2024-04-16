@@ -21,4 +21,5 @@ void topic_handler(User &user, Message const &message, ServerCore &core);
 void whois_handler(User &user, Message const &message, ServerCore &core);
 void privmsg_handler(User &user, Message const &message, ServerCore &core);
 void invite_handler(User &user, Message const &message, ServerCore &core);
+int	 ft_str_is_numeric(char *str);
 #endif

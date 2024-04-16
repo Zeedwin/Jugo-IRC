@@ -1,0 +1,171 @@
+<< CAP LS
+<< PASS lol
+<< NICK amlo
+<< USER jgirard- jgirard- 127.0.0.1 :Julen Girard-grat
+>> 001 amlo :Welcome to the Internet Relay Network
+<< MODE amlo +i
+>> Welcome to Jugo's IRC Server
+>> 
+>> :amlo MODE amlo :+i
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< JOIN #labiblia
+>> :amlo!jgirard-@jgirard- JOIN :#labiblia
+>> 221 amlo +i
+>> 324 amlo #labiblia +t
+>> 353 amlo @ #labiblia :@samsonamlo
+>> 366 amlo #labiblia :End of /NAMES list.
+<< MODE #labiblia
+>> 461 amlo MODE :Not enough parameters
+>> :samson!jgirard-@jgirard- PRIVMSG #labiblia :senso
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> FAILED mode channel: chanquery abort
+<< MODE #labiblia
+--> lag pong
+>> 461 amlo MODE :Not enough parameters
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> FAILED mode channel: chanquery abort
+<< WHO #labiblia
+--> lag pong
+>> 421 WHO :Unknown command
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> FAILED who: chanquery abort
+<< WHO #labiblia
+--> lag pong
+>> 421 WHO :Unknown command
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> FAILED who: chanquery abort
+<< MODE #labiblia b
+--> lag pong
+>> 472 amlo b :is an unknown mode char to me
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> FAILED mode b: chanquery abort
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :amlo
+<< PONG :amlo

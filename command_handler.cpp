@@ -62,7 +62,8 @@ void handle_command(User &user, Message const &message, ServerCore &core)
     {
         if (message.get_command() == command_table[index].cmd && check_command(user, message, index, core) == 1)
         {
-             std::cout << "on lrentre dedans" << std::endl;
+             if (message.get_command() != "PING" && message.get_command() != "PONG" && message.get_command() != "WHOIS")
+                user.set_idle();
             command_table[index].handle(user, message, core);
             return;
         }

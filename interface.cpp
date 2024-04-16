@@ -116,7 +116,10 @@ const std::string bld_rpl_topic_msg(const User &user, const Channel &chan, bool 
     return ":" +user.get_prefix() + " TOPIC " + chan.get_name() + " :" + chan.get_topic() + "\r\n";
 }
 const std::string bld_privmsg_msg(const User &user, const Channel &chan, const std::string &message) {
-    return ":" + user.get_prefix() + " PRIVMSG " + chan.get_name() + " :" + message + "\r\n";
+    if (chan.is_user_OP(user.get_nickname()) == 1)
+        return ":@" + user.get_prefix() + " PRIVMSG " + chan.get_name() + " :" + message + "\r\n";
+    else
+        return ":" + user.get_prefix() + " PRIVMSG " + chan.get_name() + " :" + message + "\r\n";
 }
 
 const std::string bld_privmsg_msg(const User &user, const User &target, const std::string &message) {

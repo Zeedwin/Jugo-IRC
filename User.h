@@ -36,7 +36,7 @@ class User
 		time_t _last_pong;
 		time_t _idle;
 
-		void update_prefix(void);
+		///void update_prefix(Channel &chan);
     
     public:
         User(int fd);
