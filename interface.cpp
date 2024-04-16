@@ -161,7 +161,7 @@ const std::string bld_err_chanoprivsneeded(const Channel &chan) {
 }
 
 const std::string bld_err_nonicknamegiven(void) {
-    return "431 :No nickname given\r\n";
+    return "431 * :No nickname given\r\n";
 }
 
 const std::string bld_err_erroneusnickname(const std::string &nick) {

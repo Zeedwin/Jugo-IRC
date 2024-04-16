@@ -64,9 +64,10 @@ int check_nick(const std::string str)
 void nick_handler(User &user, Message const &message, ServerCore &core)
 {
     // std::cout << "chaneg name for :" << message.get_params()[0] << std::endl;
-    std::string msg = message.get_params()[0].substr(0, 9);
+    std::string msg = message.get_params()[0];
     UserManager *_user_man = &core.get_userManager();
-    if (message.get_params().size() < 1)
+    std::cout << "Huile d'olive " << message.get_params()[0] << std::endl;
+    if (message.get_params().size() < 1 || message.get_params()[0] == "")
     {
         user.send_message(bld_err_nonicknamegiven(), false);
         return;
@@ -90,6 +91,7 @@ void nick_handler(User &user, Message const &message, ServerCore &core)
             user.set_state(User::WAITING_FOR_CONN_2);
         else if (user.is_state(User::WAITING_FOR_CONN_2))
             user.set_state(User::CONNECTED);
+        //user.send_message(bld_nick_msg(user, msg), false);
     }
     else if (user.is_state(User::CONNECTED))
     {
@@ -690,21 +692,22 @@ void cap_handler(User &user, Message const &message, ServerCore &core)  {
 }
 
 void whois_handler(User &user, Message const &message, ServerCore &core){
-    if (message.get_params().size() < 2) {
-        user.send_message(bld_err_nonicknamegiven());
+    if (message.get_params().size() < 1) {
+        user.send_message(bld_err_nonicknamegiven(), false);
         return;
     }
-    User *target = core.get_userManager().get_user(user.get_nickname());
+    std::cout << "Params 0 |" << message.get_params()[0] << "|" << std::endl;
+    User *target = core.get_userManager().get_user(message.get_params()[0]);
     if (target == NULL) {
         std::cout << "Je suis une minorite" << std::endl;
         user.send_message(bld_err_nosuchnick(message.get_params()[0]));
         return;
     }
-    user.send_message(bld_rpl_whoisuser(user));
+    user.send_message(bld_rpl_whoisuser(*target));
 
     if (target->get_flag(MODE_o))
-        user.send_message(bld_rpl_whoisoperator(user));
-    user.send_message(bld_rpl_whoisidle(user));
+        user.send_message(bld_rpl_whoisoperator(*target));
+    user.send_message(bld_rpl_whoisidle(*target));
     user.send_message(bld_rpl_endofwhois(*target));
 
 }

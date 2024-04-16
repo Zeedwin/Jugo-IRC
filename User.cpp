@@ -50,6 +50,7 @@ void    User::set_state(user_state_t state){
 }
 #include <iostream>
 void    User::set_nickname(std::string const &nickname){
+    std::cout << "set nick " << nickname << std::endl;
     this->_nickname = nickname;
 }
 
