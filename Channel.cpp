@@ -188,6 +188,7 @@ int Channel::add_OP(User &user){
 
 int Channel::remove_OP(const User &user)
 {
+    std::cout << "Ca remve" << std::endl;
     for (std::vector<User*>::iterator it = this->OPs.begin(); it < this->OPs.end(); it++)
     {
         if (user.get_nickname() == (*it)->get_nickname())
@@ -216,6 +217,7 @@ int Channel::is_user_OP(User const &user) const{
         std::cout << this->OPs[i]->get_nickname()<< " est dans la liste d'op" << std::endl;
         if(*this->OPs[i] == user)
         {
+            std::cout << "OIUIIIII" << std::endl;
             return (1);
         }
     }

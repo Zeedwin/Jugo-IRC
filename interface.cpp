@@ -14,7 +14,7 @@
 #define NOPASS "NO PASSWORD WTF VRO"
 
 const std::string bld_rpl_welcome(const User &user) {
-	return "001 " + user.get_nickname() + " :Welcome to the Internet Relay Network\n" + SUS + "\r\n";
+	return "001 " + user.get_nickname() + " :" + SUS + "\r\n";
 }
 
 const std::string bld_rpl_umodeis(const User &user) {

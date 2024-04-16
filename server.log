@@ -201,3 +201,31 @@
 >> PING :ShowerNot
 << PONG :ShowerNot
 << QUIT :leaving
+<< CAP LS
+<< PASS e
+<< NICK hdelmann
+<< USER hdelmann hdelmann 127.0.0.1 :Hugo Delmann
+>> 001 hdelmann :Welcome to the Internet Relay Network
+<< MODE hdelmann +i
+>> Welcome to Jugo's IRC Server
+>> 
+>> :hdelmann MODE hdelmann :-i
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :hdelmann
+<< PONG :hdelmann
+>> PING :hdelmann
+<< PONG :hdelmann
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :hdelmann
+<< PONG :hdelmann
+>> PING :hdelmann
+<< PONG :hdelmann
+<< PING 127.0.0.1
+>> PONG :127.0.0.1
+--> lag pong
+>> PING :hdelmann
+<< PONG :hdelmann

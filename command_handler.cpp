@@ -26,9 +26,9 @@ struct command_table static const command_table[] = {
     {.cmd = "PONG",    .state_needed = (User::user_state_t)-1, .min_arg = 0, .max_arg = 2, .handle = pong_handler},
     {.cmd = "TOPIC",   .state_needed = (User::CONNECTED),      .min_arg = 1, .max_arg = 2, .handle = topic_handler},
     {.cmd = "KICK",    .state_needed = User::CONNECTED,        .min_arg = 1, .max_arg = -1,.handle = kick_handler},
-    {.cmd = "MODE",    .state_needed = User::CONNECTED,        .min_arg = 1, .max_arg = -1,.handle = mode_handler},
+    {.cmd = "MODE",    .state_needed = (User::user_state_t)-1,        .min_arg = 1, .max_arg = -1,.handle = mode_handler},
     {.cmd = "INVITE",  .state_needed = (User::CONNECTED),      .min_arg = 2, .max_arg = 2, .handle = invite_handler},
-    {.cmd = "CAP",     .state_needed = (User::CONNECTED),      .min_arg = 0, .max_arg = -1,.handle = cap_handler},
+    {.cmd = "CAP",     .state_needed = (User::user_state_t)-1,      .min_arg = 0, .max_arg = -1,.handle = cap_handler},
     {.cmd = "WHOIS",   .state_needed = (User::CONNECTED),      .min_arg = 0, .max_arg = 2, .handle = whois_handler},
     {.cmd = "QUIT",    .state_needed = (User::CONNECTED),      .min_arg = 1, .max_arg = 2, .handle = quit_handler}
  };

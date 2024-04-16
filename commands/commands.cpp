@@ -137,10 +137,15 @@ void join_handler(User &user, Message const &message, ServerCore &core)
         {
             _chanel_manager.create(user, cha_name);
         }
-        else if (chan->get_flag(MODE_l))
+        else{
+        if (chan->get_flag(MODE_l))
         {
             if (chan->get_userlimit() == chan->members_count())
+            {
                 user.send_message(bld_err_chanfull(*chan, user));
+                return;
+            }
+
         }
         else if (chan->get_flag(MODE_k))
         {
@@ -183,7 +188,7 @@ void join_handler(User &user, Message const &message, ServerCore &core)
         }
         else
             chan->join(user);
-        
+        }
     }
 }
 
@@ -252,17 +257,24 @@ std::string finalmodestr(std::string str)
     int o = 0;
     int k = 0;
     int l = 0;
+    int signe = 0;
     std::string str2;
     for (size_t i = 0; i < str.size(); i++)
     {
         if (str[i] == '+')
         {
+            if (signe == 0 || signe == -1)
+                str2 += '+';
+            signe = 1;
             k = 0;
             o = 0;
             l = 0;
         }
         else if (str[i] == '-')
         {
+            if (signe == 0 || signe == 1)
+                str2 += '-';
+            signe = -1;
             k = 0;
             o = 0;
             l = 0;
@@ -289,12 +301,31 @@ std::string finalmodestr(std::string str)
     return str2;
 }
 
+unsigned long int howmuchneedparam(Message const &message)
+{
+    int number = 0;
+    int signe = 1;
+    for (size_t i = 0; i < message.get_params()[1].size(); i++)
+    {
+        if (message.get_params()[1][i] == '+')
+            signe = 1;
+        if (message.get_params()[1][i] == '-')
+            signe = -1;
+        if (message.get_params()[1][i] == 'o' || message.get_params()[1][i] == 'k')
+            number++;
+        if (message.get_params()[1][i] == 'l' && signe == 1)
+            number++;
+
+    }
+    return (number);
+}
+
 void mode_handler(User &user, Message const &message, ServerCore &core) {
     
     (void)user;    
 
-    if (message.get_params()[0][0] == '#' || message.get_params()[0][0] == '&') {
-        if (message.get_params().size() < 2) {
+    if ((message.get_params()[0][0] == '#' || message.get_params()[0][0] == '&') && user.is_state(User::CONNECTED)) {
+        if (howmuchneedparam(message) > message.get_params().size() - 2) {
             user.send_message(bld_err_needmoreparams(message.get_command(), user));
             return;
         }
@@ -308,7 +339,6 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
         int k = 2;
         std::string addmode;
         std::string addopt = " ";
-        std::cout << message.get_command() << " " << message.get_params()[0] << message.get_params()[1] <<  std::endl;
         UserManager    &user_man = core.get_userManager();
         ChannelManager &chan_man = core.get_channelManager();
         Channel *chan = chan_man.get_channel(message.get_params()[0]);
@@ -316,8 +346,9 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
             user.send_message(bld_err_nosuchchannel(message.get_params()[0]));
             return;
         }
-        if (chan->is_user_OP(user))
+        if (chan->is_user_OP(user) == 0)
         {
+            std::cout << "le nom du chan = " << chan->get_name() << std::endl;
             user.send_message(bld_err_chanoprivsneeded(*chan));
             return ;
         }
@@ -658,7 +689,7 @@ void cap_handler(User &user, Message const &message, ServerCore &core)  {
 }
 
 void whois_handler(User &user, Message const &message, ServerCore &core){
-    if (message.get_params().size() < 1) {
+    if (message.get_params().size() < 2) {
         user.send_message(bld_err_nonicknamegiven());
         return;
     }
