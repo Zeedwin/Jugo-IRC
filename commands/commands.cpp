@@ -658,7 +658,7 @@ void cap_handler(User &user, Message const &message, ServerCore &core)  {
 }
 
 void whois_handler(User &user, Message const &message, ServerCore &core){
-    if (message.get_params().size() < 2) {
+    if (message.get_params().size() < 1) {
         user.send_message(bld_err_nonicknamegiven());
         return;
     }

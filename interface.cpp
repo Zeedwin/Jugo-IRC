@@ -34,7 +34,7 @@ const std::string bld_rpl_notopic(const Channel &chan) {
 }
 
 const std::string bld_rpl_whoisuser(const User &user) {
-    return "311 " + user.get_nickname() + " " + user.get_username() + " " + user.get_hostname() + " " + user.get_servername() + " * :" + user.get_realname() + "\r\n";
+    return "311 " + user.get_nickname() + " " + user.get_nickname() + " " + user.get_username() + " " + user.get_hostname() + " * :" + user.get_realname() + "\r\n";
 }
 
 const std::string bld_rpl_whoisoperator(const User &user) {
@@ -42,7 +42,7 @@ const std::string bld_rpl_whoisoperator(const User &user) {
 }
 
 const std::string bld_rpl_endofwhois(const User &user) {
-    return "318 " + user.get_nickname() + " :End of /WHOIS list\r\n";
+    return "318 " + user.get_nickname() + " "  + user.get_nickname() + " :End of /WHOIS list\r\n";
 }
 
 
