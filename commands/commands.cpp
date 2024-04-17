@@ -8,6 +8,8 @@
 #include <string> 
 #include <algorithm>
 #include <vector>
+#include <iostream>
+#include <cstdlib>
 
 std::string get_arg(std::string str)
 {
@@ -21,11 +23,6 @@ std::string get_arg(std::string str)
     return(str2);
 }
 
-// void cap_handler(User &user, Message const &message, ServerCore &core)
-// {
-//     return;
-// }
-
 void pass_handler(User &user, Message const &message, ServerCore &core)
 {
     if (user.is_state(User::CONNECTED))
@@ -34,12 +31,10 @@ void pass_handler(User &user, Message const &message, ServerCore &core)
     }
     if (core.get_password() != message.get_params()[0])
     {
-        std::cout << "3er pos ?" << std::endl;
         user.set_state(User::WAITING_FOR_QUIT);
     }
     else
     {
-        // std::cout << "oookkkkk 1 " << std::endl;
         user.set_state(User::WAITING_FOR_CONN_1);
     }
 }
@@ -47,7 +42,9 @@ void pass_handler(User &user, Message const &message, ServerCore &core)
 int check_nick(const std::string str)
 {
     if ((str[0] < 'A' || str[0] > 'Z') && (str[0] < 'a' || str[0] > 'z'))
+    {
         return (0);
+    }
     for (int i = 0; str[i]; i++)
     {
         if (((str[0] < 'A' || str[0] > 'Z') && (str[0] < 'a' || str[0] > 'z')) && (str[i] < 0 || str[i] > 9))
@@ -61,12 +58,65 @@ int check_nick(const std::string str)
     return (1);
 }
 
+std::string same_nick(std::string str)
+{
+    std::string str2;
+    if (str[0] == '_')
+    {
+        for (size_t j = 1; j < str.size(); j++)
+        {
+            str2 += str[j];
+        }
+        return(str2);
+    }
+    return(str);
+}
+
+
+std::string itoa(int nombre) {
+    std::string chaine;
+    int temp = nombre;
+    
+    if (nombre < 0) {
+        chaine += '-';
+        temp = -nombre;
+    }
+    int temp2 = temp;
+    int digits = 0;
+    do {
+        digits++;
+    } while (temp2 /= 10);
+    chaine.resize(digits);
+    for (int i = digits - 1; i >= 0; --i) {
+        chaine[i] = '0' + temp % 10;
+        temp /= 10;
+    }
+    
+    return chaine;
+}
+
+std::string same_new_nick(std::string str, ServerCore &core)
+{
+    std::string str2 = same_nick(str);
+    UserManager *_user_man = &core.get_userManager();
+    while (1)
+    {
+        srand(time(NULL));
+
+        int random_number = rand();
+        std::string num = itoa(random_number);
+        if (_user_man->get_user(str2 + num) == NULL)
+        {
+            return(str2 + num);
+        }
+    }
+    return str2;
+}
+
 void nick_handler(User &user, Message const &message, ServerCore &core)
 {
-    // std::cout << "chaneg name for :" << message.get_params()[0] << std::endl;
     std::string msg = message.get_params()[0];
     UserManager *_user_man = &core.get_userManager();
-    std::cout << "Huile d'olive " << message.get_params()[0] << std::endl;
     if (message.get_params().size() < 1 || message.get_params()[0] == "")
     {
         user.send_message(bld_err_nonicknamegiven(), false);
@@ -74,24 +124,34 @@ void nick_handler(User &user, Message const &message, ServerCore &core)
     }
     if (_user_man->get_user(msg) != NULL)
     {
-        user.send_message(bld_err_nicknameinuse(user), false);
-        return;
+        if (user.is_state(User::CONNECTED))
+        {
+            user.send_message(bld_err_nicknameinuse(user), false);
+            return;
+        }
+        else
+        {
+            msg = '_' + message.get_params()[0];
+        }
+    }
+    if (_user_man->get_user(same_nick(msg)))
+    {
+        std::string msg1 = msg;
+        msg = same_new_nick(msg1, core);
     }
     if (check_nick(msg) <= 0)
     {
         user.send_message(bld_err_erroneusnickname(msg), false);
+        // Mettre un deco auto pls
         return;
     }
     if (user.is_state(User::WAITING_FOR_CONN_1) || user.is_state(User::WAITING_FOR_CONN_2))
     {
-        // std::cout << "username = " << user.get_nickname() << std::endl;
         user.set_nickname(msg);
-        // std::cout << "username = " << user.get_nickname() << std::endl;
         if (user.is_state(User::WAITING_FOR_CONN_1))
             user.set_state(User::WAITING_FOR_CONN_2);
         else if (user.is_state(User::WAITING_FOR_CONN_2))
             user.set_state(User::CONNECTED);
-        //user.send_message(bld_nick_msg(user, msg), false);
     }
     else if (user.is_state(User::CONNECTED))
     {
@@ -199,9 +259,24 @@ int check_mode(std::string str)
     for (size_t i = 0; i < str.size(); i++)
     {
         if (str[i] != 'i' && str[i] != 'k' && str[i] != 'o' && str[i] != 'l' && str[i] != 't' && str[i] != '+' && str[i] != '-')
+        {
             return (0);
+        }
     }
     return (1);
+}
+
+
+int check_if_mode(std::string str)
+{
+    for (size_t i = 0; i < str.size(); i++)
+    {
+        if (str[i] == 'i' || str[i] == 'k' || str[i] == 'o' || str[i] == 'l' || str[i] == 't')
+        {
+            return (1);
+        }
+    }
+    return (0);
 }
 
 int check_params(Message const &message)
@@ -326,11 +401,13 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
     
     (void)user;    
 
-    if ((message.get_params()[0][0] == '#' || message.get_params()[0][0] == '&') && user.is_state(User::CONNECTED)) {
-        if (howmuchneedparam(message) > message.get_params().size() - 2) {
+    if ((message.get_params()[0][0] == '#' || message.get_params()[0][0] == '&') && user.is_state(User::CONNECTED) && message.get_params().size() >= 2) {
+        if  (howmuchneedparam(message) > message.get_params().size() - 2) {
             user.send_message(bld_err_needmoreparams(message.get_command(), user));
             return;
         }
+        if (check_if_mode(message.get_params()[1]) == 0)
+            return;
         if (check_mode(message.get_params()[1]) == 0)
         {
             user.send_message(bld_err_unknowmode(message.get_params()[1][0], user));
@@ -350,7 +427,6 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
         }
         if (chan->is_user_OP(user) == 0)
         {
-            std::cout << "le nom du chan = " << chan->get_name() << std::endl;
             user.send_message(bld_err_chanoprivsneeded(*chan));
             return ;
         }
@@ -386,12 +462,18 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
                     addopt += "* ";
                     k++;
                 }
+                else if (i == -1 && chan->get_flag(MODE_k) == 0)
+                    k++;
             }
             if (str[j] == 'l')
             {
                 if (i == 1)
                 {
                     chan->set_flags(MODE_l);
+                    if (ft_str_is_numeric(const_cast<char *>(message.get_params()[k].c_str())))
+                    {
+                        continue;
+                    }
                     chan->set_userlimit(atoi(message.get_params()[k].c_str()));
                     addmode += 'l';
                     addopt += message.get_params()[k] + ' ';
@@ -438,12 +520,12 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
             }
             if (str[j] == 't')
             {
-                if (i == 1 && chan->get_flag(MODE_t) == 0)
+                if (i == 1)
                 {
                     chan->set_flags(MODE_t);
                     addmode += 't';
                 }
-                if (i == -1 && chan->get_flag(MODE_t) == 1)
+                if (i == -1)
                 {
                     chan->remove_flag(MODE_t);
                     addmode += 't';
@@ -451,12 +533,12 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
             }
             if (str[j] == 'i')
             {
-                if (i == 1 && chan->get_flag(MODE_i) == 0)
+                if (i == 1)
                 {
                     chan->set_flags(MODE_t);
                     addmode += 'i';
                 }
-                if (i == -1 && chan->get_flag(MODE_i) == 1)
+                if (i == -1)
                 {
                     chan->remove_flag(MODE_i);
                     addmode += 'i';
@@ -468,7 +550,6 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
         return;
     }
     if (message.get_params().size() < 2) {
-        std::cout << "chui en ceinte" << std::endl;
         user.send_message(bld_rpl_umodeis(user));
         return;
     }
@@ -552,7 +633,6 @@ void kick_handler(User &user, Message const &message, ServerCore &core)
             std::string users = message.get_params()[1];
             while (users.size() > 0)
             {
-                std::cout << "chan = " << users << std::endl;
                 UserManager &user_man = core.get_userManager();
                 User *user_kick = user_man.get_user(get_arg(users));
                 std::string user_name = get_arg(users);
@@ -622,7 +702,6 @@ void privmsg_handler(User &user, Message const &message, ServerCore &core)
     if (message.get_params()[0][0] == '#' || message.get_params()[0][0] == '&')
     {
         Channel *channel = _chanel_man.get_channel(message.get_params()[0]);
-        std::cout << message.get_params()[0] << std::endl;
         if (!channel)
         {
             user.send_message(bld_err_nosuchchannel(message.get_params()[0]));
@@ -661,27 +740,22 @@ void invite_handler(User &user, Message const &message, ServerCore &core){
     ChannelManager &_chanel_man = core.get_channelManager();
     Channel   *chan = _chanel_man.get_channel(message.get_params()[1]);
     UserManager &userman =core.get_userManager();
-     std::cout << message.get_params()[1] << std::endl;
     
     if (chan == NULL) {
-    std::cout << "uno" << std::endl;
         user.send_message(bld_err_nosuchchannel(message.get_params()[1]), false);
         return;
     }
-    std::cout << "dos" << std::endl;
 
     if (!chan->is_user_OP(user)) {
         user.send_message(bld_err_chanoprivsneeded(*chan));
         return;
     }
-    std::cout << "tres" << std::endl;
     User *invd = userman.get_user(message.get_params()[0]);
     if (invd == NULL) {
         user.send_message(bld_err_nosuchnick(message.get_params()[0]), false);
         return;
     }
     chan->invite(user, invd);
-    std::cout << "cuatro" << std::endl;
 }
 
 void cap_handler(User &user, Message const &message, ServerCore &core)  {
@@ -696,10 +770,8 @@ void whois_handler(User &user, Message const &message, ServerCore &core){
         user.send_message(bld_err_nonicknamegiven(), false);
         return;
     }
-    std::cout << "Params 0 |" << message.get_params()[0] << "|" << std::endl;
     User *target = core.get_userManager().get_user(message.get_params()[0]);
     if (target == NULL) {
-        std::cout << "Je suis une minorite" << std::endl;
         user.send_message(bld_err_nosuchnick(message.get_params()[0]));
         return;
     }

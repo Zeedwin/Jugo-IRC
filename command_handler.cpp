@@ -39,17 +39,14 @@ int check_command(User &user, Message const &message, int i, ServerCore &core)
     std::vector<std::string> const &vector = message.get_params();
     if (!user.is_state(command_table[i].state_needed) && command_table[i].state_needed != (User::user_state_t)-1)
     {
-        std::cout << " 11111111111111" << std::endl;
         return (0);
     }
     if ((int)vector.size() < command_table[i].min_arg)
     {
-        std::cout << " 111111122221111" << std::endl;
         return (2);
     }
     if ((ssize_t)(vector.size()) > (ssize_t)command_table[i].max_arg && (ssize_t)command_table[i].max_arg >= 0)
     {
-        std::cout << "waaaaw" << std::endl;
         return (0);
     }
     return (1);
@@ -57,7 +54,6 @@ int check_command(User &user, Message const &message, int i, ServerCore &core)
 
 void handle_command(User &user, Message const &message, ServerCore &core)
 {
-    std::cout << "command = " << message.get_command()<< "," << message.get_params().size() << std::endl;
     for (unsigned long index = 0; index < sizeof(command_table) / sizeof(command_table[0]); index++)
     {
         if (message.get_command() == command_table[index].cmd && check_command(user, message, index, core) == 1)
@@ -73,7 +69,5 @@ void handle_command(User &user, Message const &message, ServerCore &core)
             return;
         }
     }
-    std::cout<< " commad = " << message.get_command() << std::endl;
     user.send_message(bld_err_unknowncmd(message.get_command()));
-    // std::cout << "user = " << user.get_username() << std::endl;
 }

@@ -15,7 +15,6 @@ User::User(int fd) :_fd(fd), _flags(0), _last_ping(time(NULL)), _last_pong(time(
 
 int User::is_me(int fd) const
 {
-    // return this->_fd == fd
     if (this->_fd != fd)
         return(0);
     return(1);
@@ -35,22 +34,11 @@ int User::is_state(user_state_t state) const
     return(1);
 }
 
-// int User::check_flag(int flag) const {
-//     (void)flag;
-//     return(0);
-// }
-
-// void	User::set_flag(int flag, int set_to){
-//     (void)set_to;
-
-// }
-
 void    User::set_state(user_state_t state){
     this->_state = state;
 }
-#include <iostream>
+
 void    User::set_nickname(std::string const &nickname){
-    std::cout << "set nick " << nickname << std::endl;
     this->_nickname = nickname;
 }
 
@@ -94,16 +82,11 @@ const std::string User::get_prefix(void)     const{
     return this->get_nickname() + "!" + this->get_username() + "@" + this->get_hostname();
 }
 
-/*const std::string  User::get_mode(void)        const{
-    return(this->_mode)
-}*/
-
 time_t             User::get_last_ping(void)   const{
     return(this->_last_ping);
 }
 
 time_t             User::get_delta(void)       const{
-    //std::cout << "last ping" << this->_last_ping << " last pong" << this->_last_pong << "\n";
     
     return(time(NULL) - _last_pong);
     
@@ -115,7 +98,6 @@ int     User::send_message(std::string const &message, bool throw_exception){
     int r = send(this->_fd, message.c_str(), message.size(), MSG_DONTWAIT | MSG_NOSIGNAL);
     if (throw_exception && r < 0)
     {
-        std::cout << "PROBLEME ICI" << std::endl;
         throw DisconnectException();
     }
     return(1);
@@ -125,7 +107,6 @@ void    User::recvu(void){
     char buff[513];
     ssize_t ret = recv(this->_fd, buff, 512, MSG_DONTWAIT | MSG_NOSIGNAL);
     if (ret <= 0) {
-        std::cout << "LAAAA" << std::endl;
         throw DisconnectException();   
     } else {
         buff[ret] = 0;
@@ -134,7 +115,6 @@ void    User::recvu(void){
 }
 
 int     User::is_message_buffered(void){
-    // return this->buffer.find("\r\n") != npos;
     for (int i = 0; i <= (int)this->_buffer.size(); i++)
     {
         if (this->_buffer[i] == '\r' && this->_buffer[i + 1] == '\n')
@@ -148,7 +128,6 @@ int     User::is_message_buffered(void){
 void    User::get_message(Message &msg){
     size_t oc = this->_buffer.find("\r\n");
     std::string str;
-    //std::cout << this->_buffer << std::endl;
     str = this->_buffer.substr(0, oc);
     this->_buffer.erase(0, oc + 2);
     msg.update(str);
@@ -163,11 +142,7 @@ void    User::send_ping(void){
 }
 
 
-
-//time_t	User::get_idle(void) const {}
-
 void	User::close_connection(void){
-    std::cout << "User " << this->get_nickname() << " got disconected (Reason: Timeout)\n";
     close(this->_fd);
 }
 
@@ -199,21 +174,6 @@ void	User::set_idle(void){
 time_t	User::get_idle(void) const{
     return (time(NULL) - this->_idle);
 }
-
-// void User::update_prefix(Channel &chan){
-// std::string str = "";
-
-// if (chan.is_user_OP(this->get_nickname()) == 1)
-// {
-//     str = "@" + this->get_nickname();
-// }
-// else
-// {
-//     /* code */
-// }
-
-
-//}
 
 User::~User(void){
     

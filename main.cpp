@@ -43,11 +43,9 @@ int main(int ac, char **av)
             sv.loop(atoi(av[1]));
         else
         {
-            std::cout << "Error: Not an available port" << std::endl;
             return 1;   
         }
     }
     else
-        std::cout << "Error: <Port> <Password> " << std::endl;
     return(1);
 }

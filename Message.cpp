@@ -9,7 +9,6 @@ Message::Message(std::string const &raw_message){
 }
 
 void Message::update(const std::string &raw_message){
-    //std::cout << "raw=" << raw_message << std::endl;
     size_t i = 0;
     if (raw_message[i] == ':')
     {
@@ -25,7 +24,6 @@ void Message::update(const std::string &raw_message){
             i++;
             this->params.push_back(raw_message.substr(i, raw_message.find(' ', i) -i));
             i = raw_message.find(' ', i);
-            //std::cout << i << std::endl; 
         }
         else
         {

@@ -106,13 +106,10 @@ const std::string bld_join_msg(const User &user, const Channel &chan) {
 }
 
 const std::string bld_rpl_topic_msg(const User &user, const Channel &chan, bool i) {
-    std::cout << "Topic: " << chan.get_topic() << " name = " << chan.get_name() << std::endl;
     if (i == false)
     {
-            std::cout << "QUERY: " << time(NULL) << std::endl;
         return ":" +user.get_prefix() + " TOPIC " + chan.get_name() + "\r\n";
     }
-    std::cout << "SET: " << time(NULL) << std::endl;
     return ":" +user.get_prefix() + " TOPIC " + chan.get_name() + " :" + chan.get_topic() + "\r\n";
 }
 const std::string bld_privmsg_msg(const User &user, const Channel &chan, const std::string &message) {

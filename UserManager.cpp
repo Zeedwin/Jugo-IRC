@@ -13,7 +13,7 @@ User *UserManager::get_user(std::string const &name)
         if (users[i]->is_me(name))
             return (this->users[i]);
     }
-    return (NULL); /// a changer ATTENTION
+    return (NULL);
 }
 
 User *UserManager::get_user(int fd)
@@ -23,7 +23,7 @@ User *UserManager::get_user(int fd)
         if (this->users[i]->is_me(fd))
             return (this->users[i]);
     }
-    return (NULL); // a changer ATTENTION
+    return (NULL);
 }
 
 /*std::vector<User>::iterator UserManager::end(void){
