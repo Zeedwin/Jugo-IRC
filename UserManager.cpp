@@ -45,12 +45,12 @@ std::vector<User*>::iterator UserManager::erase(std::vector<User*>::iterator it)
 std::vector<User*>::iterator UserManager::begin(void)
 {
     return this->users.begin();
-};
+}
 
 std::vector<User*>::iterator UserManager::end(void)
 {
     return this->users.end();
-};
+}
 
 void UserManager::check_pings(void)
 {

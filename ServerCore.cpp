@@ -58,7 +58,7 @@ void ServerCore::loop(int port)
     ret |= listen(fd, SOMAXCONN);
     if (ret < 0)
     {
-        perror("Ethanol said menfou");
+        perror("Error");
         exit(1);
     }
     {

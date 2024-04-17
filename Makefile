@@ -1,6 +1,6 @@
 NAME  = ircserv
 CC    = c++
-FLAGS = -Wextra -Wall -Werror -std=c++98 -g3 -O3
+FLAGS = -Wextra -Wall -Werror -std=c++98 -g3 -O3 -pedantic
 SRCS  = Channel.cpp \
 		ChannelManager.cpp \
 	    Message.cpp \
