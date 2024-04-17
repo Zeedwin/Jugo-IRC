@@ -105,6 +105,7 @@ int Channel::quit(User &user, std::string const message)
             break;
         }
     }
+
     for (std::vector<User*>::iterator it2 = this->members.begin(); it2 < this->members.end(); it2++)
     {
     }

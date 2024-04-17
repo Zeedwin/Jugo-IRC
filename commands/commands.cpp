@@ -31,6 +31,7 @@ void pass_handler(User &user, Message const &message, ServerCore &core)
     }
     if (core.get_password() != message.get_params()[0])
     {
+        user.send_message("Error: incorrect password\r\n", true);
         user.set_state(User::WAITING_FOR_QUIT);
     }
     else
@@ -197,7 +198,12 @@ void join_handler(User &user, Message const &message, ServerCore &core)
             chans = "";
         if (chan == NULL)
         {
-            _chanel_manager.create(user, cha_name);
+            if (cha_name[0] != '#' && cha_name[0] != '&') {
+                user.send_message(bld_err_nosuchchannel(cha_name));
+                return ;
+            }
+            else
+                _chanel_manager.create(user, cha_name);
         }
         else{
         if (chan->get_flag(MODE_l))
@@ -553,18 +559,22 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
         user.send_message(bld_rpl_umodeis(user));
         return;
     }
-    if (message.get_params()[1]  == "+i" || message.get_params()[1] == "i")
+    if (!user.is_me(message.get_params()[0]) && (message.get_params()[0][0] != '#' && message.get_params()[0][0] != '&')) {
+        user.send_message(bld_err_usersdontmatch());
+        return;
+    }
+    if (message.get_params().size() >= 2 && (message.get_params()[1]  == "+i" || message.get_params()[1] == "i"))
     {
         user.set_flag(MODE_i);
         user.send_message(bld_rpl_currentmodestateusr(user, "+i"));
     }
-    else if (message.get_params()[1]  == "-i")
+    else if (message.get_params().size() >= 2 && (message.get_params()[1]  == "-i"))
     {
         user.remove_flag(MODE_i);
         user.send_message(bld_rpl_currentmodestateusr(user, "-i"));
     }
-    else
-        user.send_message(bld_err_umodeunknowflag());    
+    else if (message.get_params()[0][0] != '#' && message.get_params()[0][0] != '&')
+        user.send_message(bld_err_umodeunknowflag());
 }
 void part_handler(User &user, Message const &message, ServerCore &core)
 {
@@ -582,9 +592,12 @@ void part_handler(User &user, Message const &message, ServerCore &core)
         }
         Channel *chan = _chan_man.get_channel(channame);
         if (chan){
-            if (message.get_params()[1].size())
+            if (message.get_params().size() > 1 && message.get_params()[1].size())
+            {
                 _chan_man.leave(user, *chan, message.get_params()[1]);
-            _chan_man.leave(user, *chan, "No reason specified");
+            }
+            else
+                _chan_man.leave(user, *chan, "No reason specified");
         }
         else
             user.send_message(bld_err_nosuchchannel(channame));

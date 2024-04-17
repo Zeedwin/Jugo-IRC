@@ -191,11 +191,11 @@ const std::string bld_err_unknowmode(const char mode, const User &user) {
 }
 
 const std::string bld_err_usersdontmatch(void) {
-    return "502 :Cant change mode for other users\r\n";
+    return "502 * :Cant change mode for other users\r\n";
 }
 
 const std::string bld_err_umodeunknowflag(void) {
-    return "501 :Unknown MODE flag\r\n";
+    return "501 * :Unknown MODE flag\r\n";
 }
 
 const std::string bld_err_notexttosend(void) {
@@ -230,8 +230,6 @@ const std::string bld_err_chanfull(const Channel &chan, const User &user){
 const std::string bld_err_inviteonlychan(const Channel &chan, const User &user){
     return "473 " + user.get_nickname() + " " + chan.get_name() + " :Cannot join channel (+i) - you must be invited\r\n";
 }
-
-
 
 const std::string bld_err_unknowncmd(const std::string cmd)
 {

@@ -43,9 +43,11 @@ int main(int ac, char **av)
             sv.loop(atoi(av[1]));
         else
         {
+            std::cout << "Error: invalid port" << std::endl; 
             return 1;   
         }
     }
     else
+        std::cout << "Usage : ./irc <port> <password>" << std::endl;
     return(1);
 }
