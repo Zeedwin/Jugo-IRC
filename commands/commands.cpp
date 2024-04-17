@@ -549,7 +549,7 @@ void mode_handler(User &user, Message const &message, ServerCore &core) {
         user.send_message(bld_rpl_modechg(user, *chan, final));
         return;
     }
-    if (message.get_params().size() < 2) {
+    if (message.get_params().size() < 2 && message.get_params()[0] == user.get_nickname()) {
         user.send_message(bld_rpl_umodeis(user));
         return;
     }

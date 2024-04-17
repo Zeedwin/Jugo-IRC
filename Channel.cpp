@@ -67,7 +67,7 @@ std::string const &Channel::get_key(void) const{
 int Channel::join(User &user){
     this->members.push_back(&user);
     this->broadcast(bld_join_msg(user, *this), NULL);
-    user.send_message(bld_rpl_umodeis(user));
+    //user.send_message(bld_rpl_umodeis(user));
     user.send_message(bld_rpl_userstatus(user, *this));
     user.send_message(bld_rpl_namreply(*this, user));
     user.send_message(bld_rpl_endofnames(*this, user));
@@ -248,10 +248,10 @@ const std::string Channel::get_username_list(std::string const mode) const{
     {
         if(this->is_user_OP((*it)->get_nickname()))
         {
-            parsd_mem += mode + (*it)->get_nickname();
+            parsd_mem += mode + (*it)->get_nickname() + " ";
         }
         else
-            parsd_mem += (*it)->get_nickname();
+            parsd_mem += (*it)->get_nickname() + " ";
     }
     return parsd_mem;
 }
