@@ -23,21 +23,6 @@ int Channel::remove_flag(int flag)
 {
    return this->flags &= ~flag;
 }
-/*
-1 << 1
-0010
-
- 0000
-|0010
- 0010
-
-   0010
-& ~0010
-
-   0010
-&  1101
-   0000
-*/
 
 void Channel::set_flags(int flag)
 {
@@ -67,7 +52,6 @@ std::string const &Channel::get_key(void) const{
 int Channel::join(User &user){
     this->members.push_back(&user);
     this->broadcast(bld_join_msg(user, *this), NULL);
-    //user.send_message(bld_rpl_umodeis(user));
     user.send_message(bld_rpl_userstatus(user, *this));
     user.send_message(bld_rpl_namreply(*this, user));
     user.send_message(bld_rpl_endofnames(*this, user));

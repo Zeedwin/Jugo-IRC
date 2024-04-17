@@ -143,7 +143,7 @@ void nick_handler(User &user, Message const &message, ServerCore &core)
     if (check_nick(msg) <= 0)
     {
         user.send_message(bld_err_erroneusnickname(msg), false);
-        // Mettre un deco auto pls
+        user.set_state(User::WAITING_FOR_QUIT);
         return;
     }
     if (user.is_state(User::WAITING_FOR_CONN_1) || user.is_state(User::WAITING_FOR_CONN_2))

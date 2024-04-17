@@ -26,10 +26,6 @@ User *UserManager::get_user(int fd)
     return (NULL);
 }
 
-/*std::vector<User>::iterator UserManager::end(void){
-    return();
-}*/
-
 void UserManager::create_user(int fd)
 {
     User *user = new User (fd);

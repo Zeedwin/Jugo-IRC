@@ -81,10 +81,11 @@ void ServerCore::loop(int port)
             if (pfds[i].fd == fd)
             {
                 pollfd tmpfd;
+                sockaddr addr;
                 memset(&tmpfd, 0, sizeof(tmpfd));
                 socklen_t a;
                 memset(&a, 0, sizeof(a));
-                tmpfd.fd = accept(pfds[i].fd, (sockaddr *)0x01, &a);
+                tmpfd.fd = accept(pfds[i].fd, (sockaddr *)&addr, &a);
                 tmpfd.events = POLLIN;
                 pfds.push_back(tmpfd);
                 this->_user_manager.create_user(tmpfd.fd);

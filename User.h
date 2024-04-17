@@ -16,8 +16,6 @@ class User
             WAITING_FOR_CONN_2,
             CONNECTED,
 
-            /*  quand on a une erreur (ou que l'utilisateur se déconnectes)
-                on met son state à `WAITING_FOR_QUIT` pour gérer sa déconnexion après */
             WAITING_FOR_QUIT
         } user_state_t;
 

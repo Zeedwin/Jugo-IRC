@@ -22,7 +22,7 @@ class ServerCore
         ChannelManager    &get_channelManager(void);
         UserManager       &get_userManager(void);
 
-        void    loop(int listen_port); /* methode utilisée pour lancer le serveur (là où y'a le poll (2)) */
+        void    loop(int listen_port);
 
         ~ServerCore(void){
             
